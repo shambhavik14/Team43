@@ -10,9 +10,9 @@
         android:id="@+id/title"
         android:layout_width="242dp"
         android:layout_height="41dp"
-        android:text="Happy Hours"
+        android:text="Team 43"
         android:textAlignment="center"
-        android:textColor="#009688"
+        android:textColor="#336C98"
         android:textSize="34sp"
         android:textStyle="bold"
         android:typeface="sans"
@@ -21,12 +21,12 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <Button
         android:id="@+id/btnYourService"
-        android:layout_width="210dp"
-        android:layout_height="63dp"
+        android:layout_width="228dp"
+        android:layout_height="62dp"
         android:backgroundTint="#2B6761"
         android:fontFamily="sans-serif"
         android:text="At Your Service"
@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintVertical_bias="0.28" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
