@@ -7,12 +7,49 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/title"
+        android:layout_width="242dp"
+        android:layout_height="41dp"
+        android:text="Happy Hours"
+        android:textAlignment="center"
+        android:textColor="#009688"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:typeface="sans"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.097" />
+
+    <Button
+        android:id="@+id/btnYourService"
+        android:layout_width="210dp"
+        android:layout_height="63dp"
+        android:backgroundTint="#2B6761"
+        android:fontFamily="sans-serif"
+        android:text="At Your Service"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.278" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="696dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
