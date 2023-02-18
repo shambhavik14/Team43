@@ -7,11 +7,23 @@
 
     <TextView
         android:id="@+id/districtName"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="64dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="28dp"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="56dp"
+        android:backgroundTint="#009688"
+        android:text="Info"
+        app:layout_constraintStart_toEndOf="@+id/districtName"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

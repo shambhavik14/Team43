@@ -42,8 +42,8 @@ public class StateRecyclerViewAdapater extends RecyclerView.Adapter<StateRecycle
     public void onBindViewHolder(@NonNull StateRecyclerViewAdapater.MyViewHolder holder, int position) {
         String stateName=stateNameList.get(position);
         holder.stateName.setText(stateName);
-        ArrayList<String> districtNames = new ArrayList<>();
         holder.stateName.setOnClickListener(v->{
+            ArrayList<String> districtNames = new ArrayList<>();
             Intent districtIntent = new Intent(context,DistrictActivity.class);
             try {
                 JSONObject districtItems =(JSONObject) ((JSONObject) jsonObject.get(stateName)).get("districts");
