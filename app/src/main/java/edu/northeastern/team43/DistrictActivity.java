@@ -18,9 +18,10 @@ public class DistrictActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_district);
         recyclerView=findViewById(R.id.district_recycle);
-        setAdapter();
+
         ArrayList<String> districts = (ArrayList<String>) getIntent().getExtras().get("districts");
         districtNames = new ArrayList<>();
+        setAdapter();
         districtNames.addAll(districts);
         adapter.notifyDataSetChanged();
     }
