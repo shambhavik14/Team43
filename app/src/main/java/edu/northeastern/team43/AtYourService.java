@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -33,6 +34,13 @@ public class AtYourService extends AppCompatActivity {
 
         mURLEditText = (EditText) findViewById(R.id.URL_editText);
         mTitleTextView = (TextView) findViewById(R.id.result_textview);
+        Button btn = (Button) findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callWebserviceButtonHandler(view);
+            }
+        });
     }
 
     public void callWebserviceButtonHandler(View view) {
