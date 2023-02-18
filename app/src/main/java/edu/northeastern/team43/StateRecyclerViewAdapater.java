@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -59,7 +60,7 @@ public class StateRecyclerViewAdapater extends RecyclerView.Adapter<StateRecycle
             context.startActivity(districtIntent);
         });*/
         ArrayList<String> covidStats = new ArrayList<>();
-        holder.stateName.setOnClickListener(v -> {
+        holder.btnStats.setOnClickListener(v -> {
             Intent statsIntent = new Intent(context, CovidStats.class);
             try {
                 JSONObject statItems = (JSONObject) ((JSONObject) jsonObject.get(stateName)).get("delta7");
@@ -89,10 +90,13 @@ public class StateRecyclerViewAdapater extends RecyclerView.Adapter<StateRecycle
 
     static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView stateName;
+        Button btnStats;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             stateName=itemView.findViewById(R.id.stateName);
+            btnStats = itemView.findViewById(R.id.button2);
+
         }
     }
 }

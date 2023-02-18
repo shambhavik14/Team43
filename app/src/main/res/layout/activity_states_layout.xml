@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#009688"
     tools:context=".StatesLayoutModel">
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#009688"
+        android:text="Info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.765"
+        app:layout_constraintStart_toEndOf="@+id/stateName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
 
     <TextView
         android:id="@+id/stateName"
@@ -12,12 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="TextView"
-        android:textSize="30dp"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.127" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
