@@ -42,9 +42,9 @@ public class StateRecyclerViewAdapater extends RecyclerView.Adapter<StateRecycle
     public void onBindViewHolder(@NonNull StateRecyclerViewAdapater.MyViewHolder holder, int position) {
         String stateName = stateNameList.get(position);
         holder.stateName.setText(stateName);
-        /*ArrayList<String> districtNames = new ArrayList<>();
         holder.stateName.setOnClickListener(v->{
             Intent districtIntent = new Intent(context,DistrictActivity.class);
+            ArrayList<String> districtNames = new ArrayList<>();
             try {
                 JSONObject districtItems =(JSONObject) ((JSONObject) jsonObject.get(stateName)).get("districts");
 
@@ -58,10 +58,11 @@ public class StateRecyclerViewAdapater extends RecyclerView.Adapter<StateRecycle
             }
             districtIntent.putExtra("districts",districtNames);
             context.startActivity(districtIntent);
-        });*/
-        ArrayList<String> covidStats = new ArrayList<>();
+        });
+
         holder.btnStats.setOnClickListener(v -> {
             Intent statsIntent = new Intent(context, CovidStats.class);
+            ArrayList<String> covidStats = new ArrayList<>();
             try {
                 JSONObject statItems = (JSONObject) ((JSONObject) jsonObject.get(stateName)).get("delta7");
                 //Set<String> keyset = statItems.keySet();
