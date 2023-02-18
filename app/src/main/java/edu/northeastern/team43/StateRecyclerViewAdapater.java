@@ -25,10 +25,12 @@ public class StateRecyclerViewAdapater extends RecyclerView.Adapter<StateRecycle
     ArrayList<String> stateNameList;
     static Context context;
     static JSONObject jsonObject;
-    StateRecyclerViewAdapater(ArrayList<String> stateNameList, Context context, JSONObject jsonObject){
+    static  String data;
+    public StateRecyclerViewAdapater(ArrayList<String> stateNameList, Context context, JSONObject jsonObject, String data){
        this.stateNameList=stateNameList;
        this.context=context;
        this.jsonObject = jsonObject;
+       this.data = data;
     }
 
     @NonNull
@@ -57,6 +59,8 @@ public class StateRecyclerViewAdapater extends RecyclerView.Adapter<StateRecycle
                 e.printStackTrace();
             }
             districtIntent.putExtra("districts",districtNames);
+            districtIntent.putExtra("data",data);
+            districtIntent.putExtra("statename",stateName);
             context.startActivity(districtIntent);
         });
 

@@ -24,6 +24,7 @@ public class States extends AppCompatActivity {
     RecyclerView recyclerView;
     StateRecyclerViewAdapater stateRecyclerViewAdapater;
     ArrayList<String> stateNameList;
+    static String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class States extends AppCompatActivity {
         Thread thread = new Thread(() -> {
 
             String api = api();
+            data = api;
             try {
                 jsonObject = new JSONObject(api);
             } catch (JSONException e) {
@@ -74,7 +76,7 @@ public class States extends AppCompatActivity {
     }
 
     void setAdapter() {
-        stateRecyclerViewAdapater = new StateRecyclerViewAdapater(stateNameList, this, jsonObject);
+        stateRecyclerViewAdapater = new StateRecyclerViewAdapater(stateNameList, this, jsonObject,data);
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(stateRecyclerViewAdapater);

@@ -24,10 +24,12 @@ public class DistrictRecycleAdapter extends RecyclerView.Adapter<DistrictRecycle
     ArrayList<String> districtNames;
     static Context context;
     static JSONObject jsonObject;
-    public DistrictRecycleAdapter(ArrayList<String> districtNames,Context context){
+    static String stateName;
+    public DistrictRecycleAdapter(ArrayList<String> districtNames,Context context,JSONObject jsonObject,String stateName){
         this.districtNames = districtNames;
         this.context= context;
         this.jsonObject = jsonObject;
+        this.stateName = stateName;
     }
 
     @NonNull
@@ -47,7 +49,8 @@ public class DistrictRecycleAdapter extends RecyclerView.Adapter<DistrictRecycle
             ArrayList<String> covidStats = new ArrayList<>();
             try {
                 Log.println(Log.DEBUG, "", districtName);
-                JSONObject statItems = (JSONObject) ((JSONObject) jsonObject.get(districtName)).get("delta7");
+
+                JSONObject statItems = (JSONObject)((JSONObject)((JSONObject)((JSONObject) jsonObject.get(stateName)).get("districts")).get(districtName)).get("delta7");
                 //Set<String> keyset = statItems.keySet();
                 Iterator<String> statsIterator = statItems.keys();
                 System.out.println(statsIterator);
