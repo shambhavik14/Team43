@@ -18,12 +18,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -34,7 +38,7 @@ public class States extends AppCompatActivity {
     RecyclerView recyclerView;
     StateRecyclerViewAdapater stateRecyclerViewAdapater;
     ArrayList<String> stateNameList;
-    JSONObject jsonObject;
+    static JSONObject jsonObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +55,12 @@ public class States extends AppCompatActivity {
             }
             Log.println(Log.DEBUG,"",api);
             stateNameList =new ArrayList<>();
-            Iterator<String> keysIterator = jsonObject.keys();
-            while (keysIterator.hasNext()){
-                String key = keysIterator.next();
-                stateNameList.add(key);
+            if (jsonObject!=null){
+                Iterator<String> keysIterator = jsonObject.keys();
+                while (keysIterator.hasNext()){
+                    String key = keysIterator.next();
+                    stateNameList.add(key);
+                }
             }
             runOnUiThread(()->{
                 setAdapter();
@@ -66,7 +72,7 @@ public class States extends AppCompatActivity {
         thread.start();
     }
 
-    String api() {
+    private String api() {
         String data = "";
         try {
             URL url=new URL("https://data.covid19india.org/v4/min/data.min.json");
@@ -79,10 +85,17 @@ public class States extends AppCompatActivity {
                 data=data+line;
             }
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+
+//            try {
+//                List<String> strings = Files.readAllLines(Paths.get("/Users/amitsk/AndroidStudioProjects/Team43/app/src/main/java/edu/northeastern/team43/data.min.json"));
+//                for (String s : strings){
+//                    data+=s;
+//                }
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+
         }
 
         return data;
