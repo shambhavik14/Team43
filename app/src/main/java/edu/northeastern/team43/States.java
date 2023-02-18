@@ -1,6 +1,8 @@
 package edu.northeastern.team43;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,11 +64,6 @@ public class States extends AppCompatActivity {
 
         });
         thread.start();
-
-//        stateNameList.add("Pragya");
-//        stateNameList.add("Prashar");
-//        stateNameList.add("I am the best");
-
     }
 
     String api() {
@@ -90,7 +89,7 @@ public class States extends AppCompatActivity {
     }
 
     void setAdapter(){
-        stateRecyclerViewAdapater=new StateRecyclerViewAdapater(stateNameList, this);
+        stateRecyclerViewAdapater=new StateRecyclerViewAdapater(stateNameList, this,jsonObject);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(stateRecyclerViewAdapater);
