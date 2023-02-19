@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
         android:layout_marginTop="76dp"
+        android:backgroundTint="#175597"
         android:text="Info"
+        android:textColor="#FFC107"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toEndOf="@+id/stateName"
@@ -26,7 +28,9 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="76dp"
         android:text="TextView"
+        android:textColor="#1F6E66"
         android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

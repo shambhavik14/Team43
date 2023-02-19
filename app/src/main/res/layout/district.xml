@@ -12,7 +12,9 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="64dp"
         android:text="TextView"
+        android:textColor="#1F6E66"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
         android:layout_marginTop="56dp"
+        android:backgroundTint="#175597"
         android:text="Info"
+        android:textColor="#FFC107"
         app:layout_constraintStart_toEndOf="@+id/districtName"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
