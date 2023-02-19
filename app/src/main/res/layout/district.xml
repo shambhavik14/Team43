@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
         android:layout_marginTop="56dp"
-        android:backgroundTint="#009688"
         android:text="Info"
         app:layout_constraintStart_toEndOf="@+id/districtName"
         app:layout_constraintTop_toTopOf="parent" />
