@@ -24,6 +24,14 @@ public class ProgressBarAnimation extends Animation {
         this.to = to;
         this.covidNewsApi = covidNewsApi;
     }
+    public ProgressBarAnimation(Context context,ProgressBar progressBar,TextView textView,float from,float to){
+        this.context = context;
+        this.progressBar = progressBar;
+        this.textView = textView;
+        this.from = from;
+        this.to = to;
+        this.covidNewsApi = covidNewsApi;
+    }
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation transformation){
         super.applyTransformation(interpolatedTime, transformation);
@@ -31,7 +39,7 @@ public class ProgressBarAnimation extends Animation {
         progressBar.setProgress((int)value);
         textView.setText((int)value + " %");
         if (value==to){
-            covidNewsApi.setVisibility(View.VISIBLE);
+//            covidNewsApi.setVisibility(View.VISIBLE);
 
         }
     }

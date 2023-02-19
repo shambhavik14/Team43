@@ -2,6 +2,10 @@ package edu.northeastern.team43;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,14 +30,29 @@ public class States extends AppCompatActivity {
     ArrayList<String> stateNameList;
     static String data;
 
+    private ProgressBar progressBar;
+    private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_states);
         recyclerView = findViewById(R.id.recyclerView);
         Thread thread = new Thread(() -> {
-
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            progressBar = findViewById(R.id.progressBar);
+            textView = findViewById(R.id.progressText);
+            progressBar.setMax(100);
+            progressBar.setScaleY(3f);
+            progressAnimation();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             String api = api();
+            progressBar.setVisibility(View.INVISIBLE);
+            textView.setVisibility(View.INVISIBLE);
             data = api;
             try {
                 jsonObject = new JSONObject(api);
@@ -49,13 +68,18 @@ public class States extends AppCompatActivity {
                     stateNameList.add(key);
                 }
             }
-            runOnUiThread(() -> {
-                setAdapter();
+                runOnUiThread(() -> {
+                    setAdapter();
 
-                stateRecyclerViewAdapater.notifyDataSetChanged();
-            });
+                    stateRecyclerViewAdapater.notifyDataSetChanged();
+                });
         });
         thread.start();
+    }
+    private void progressAnimation() {
+        ProgressBarAnimation animation = new ProgressBarAnimation(getApplicationContext(), progressBar, textView, 0f, 100f);
+        animation.setDuration(3000);
+        progressBar.setAnimation(animation);
     }
 
     private String api() {

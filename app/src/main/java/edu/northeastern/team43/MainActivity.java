@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import edu.northeastern.team43.R.id;
 
 public class MainActivity extends AppCompatActivity {
-    private ProgressBar progressBar;
-    private TextView textView;
     private Button covidNewsApi;
 
     @Override
@@ -23,13 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         covidNewsApi = (Button) findViewById(id.btnYourService);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        progressBar = findViewById(R.id.progressBar);
-        textView = findViewById(R.id.progressText);
-        progressBar.setMax(100);
-        progressBar.setScaleY(3f);
-        covidNewsApi.setVisibility(View.INVISIBLE);
-        progressAnimation();
         covidNewsApi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,12 +28,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    private void progressAnimation() {
-        ProgressBarAnimation animation = new ProgressBarAnimation(getApplicationContext(), progressBar, textView, 0f, 100f, covidNewsApi);
-        animation.setDuration(5000);
-        progressBar.setAnimation(animation);
     }
 }
 
