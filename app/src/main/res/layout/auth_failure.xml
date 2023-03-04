@@ -6,29 +6,26 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/districtName"
-        android:layout_width="90dp"
+        android:id="@+id/auth_failure_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="64dp"
-        android:text="TextView"
-        android:textColor="#1F6E66"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:text="Invalid username"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/close_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="45dp"
-        android:backgroundTint="#175597"
-        android:text="Info"
-        android:textColor="#FFC107"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="224dp"
+        android:text="Close"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/districtName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auth_failure_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

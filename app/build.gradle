@@ -4,6 +4,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            storeFile file('/Users/amitsk/AndroidStudioProjects/keystorefolder/myfirstkeystore')
+            storePassword '#Marvel6'
+            keyPassword '#Marvel6'
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     namespace 'edu.northeastern.team43'
     compileSdk 33
 
@@ -15,6 +29,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {

@@ -31,6 +31,7 @@ public class DistrictRecycleAdapter extends RecyclerView.Adapter<DistrictRecycle
         this.jsonObject = jsonObject;
         this.stateName = stateName;
     }
+    public DistrictRecycleAdapter(){}
 
     @NonNull
     @Override

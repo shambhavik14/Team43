@@ -1,22 +1,23 @@
 package edu.northeastern.team43;
 
-public class UserModel {
-    String userName;
-    String password;
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
+
+    private String userId;
+    private String userName;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public UserModel(String userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
+    public UserModel(){}
 
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
