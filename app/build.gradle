@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            storeFile file('/Users/amitsk/AndroidStudioProjects/keystorefolder/myfirstkeystore')
+            storePassword '#Marvel6'
+            keyPassword '#Marvel6'
+        }
+    }
     namespace 'edu.northeastern.team43'
     compileSdk 33
 
@@ -15,6 +23,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
