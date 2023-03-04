@@ -55,11 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("", children.toString());
                 Iterator<DataSnapshot> iterator = children.iterator();
                 while (iterator.hasNext()){
-
-                    Map<String,String> map = (Map<String,String>) iterator.next().getValue();
-                    Log.d("", map.entrySet().toString());
-                    if (map.containsValue(username)){
+                    UserModel userModel =iterator.next().getValue(UserModel.class);
+                    if (userModel.getUserName().equalsIgnoreCase(username)){
                         Intent intent=new Intent(getApplicationContext(),MainmenuActivity.class);
+                        intent.putExtra("currentUser",userModel);
                         startActivity(intent);
                         return;
                     }

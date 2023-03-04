@@ -1,6 +1,8 @@
 package edu.northeastern.team43;
 
-public class UserModel {
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
 
     private String userId;
     private String userName;
@@ -13,6 +15,7 @@ public class UserModel {
         this.userId = userId;
         this.userName = userName;
     }
+    public UserModel(){}
 
     public String getUserName() {
         return userName;
