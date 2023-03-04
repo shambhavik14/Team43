@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         covidNewsApi = (Button) findViewById(id.btnYourService);
         about=(Button) findViewById(R.id.aboutbttn);
-        chat=(Button) findViewById(id.chatbttn);
+        chat=(Button) findViewById(R.id.chatbttn);
 
         about.setOnClickListener(new View.OnClickListener() {
             @Override
