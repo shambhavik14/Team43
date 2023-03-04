@@ -25,15 +25,11 @@ public class MainActivity extends AppCompatActivity {
    UserModel userModel1;
    UserModel userModel2;
     DatabaseReference userDataRef;
-    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-         user= FirebaseAuth.getInstance().getCurrentUser();
-
 
 
              userModel = new UserModel();
