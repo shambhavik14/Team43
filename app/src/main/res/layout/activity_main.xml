@@ -12,7 +12,6 @@
         android:layout_height="45dp"
         android:text="Team 43"
         android:textAlignment="center"
-        android:textColor="#1F6E66"
         android:textSize="36sp"
         android:textStyle="bold"
         android:typeface="sans"
@@ -27,16 +26,14 @@
         android:id="@+id/btnYourService"
         android:layout_width="228dp"
         android:layout_height="62dp"
-        android:layout_marginBottom="488dp"
-        android:backgroundTint="#175597"
+        android:layout_marginTop="5dp"
         android:fontFamily="sans-serif"
         android:text="At Your Service"
-        android:textColor="#FFC107"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -51,5 +48,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="696dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="228dp"
+        android:layout_height="62dp"
+        android:text="About"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="154dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="228dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="5dp"
+        android:text="CHAT"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnYourService"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
