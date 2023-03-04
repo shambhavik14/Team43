@@ -1,6 +1,7 @@
 package edu.northeastern.team43;
 
 public class UserModel {
+
     private String userId;
     private String userName;
 
@@ -8,9 +9,9 @@ public class UserModel {
         return userId;
     }
 
-    public UserModel(String userId, String userName){
+    public UserModel(String userId, String userName) {
         this.userId = userId;
-        this.userName= userName;
+        this.userName = userName;
     }
 
     public String getUserName() {
