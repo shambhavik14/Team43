@@ -16,12 +16,14 @@ import java.util.stream.Stream;
 
 public class SentStickerAdapter extends RecyclerView.Adapter<SentStickerAdapter.MyViewHolder> {
     private static Context context;
-    ArrayList<SentSticker> sentStickerArrayList;
+    private ArrayList<StickerDetail> sentStickerArrayList;
+    private int displayCount  =0;
 
-    public SentStickerAdapter(Context context, ArrayList<SentSticker> sentStickerArrayList) {
+    public SentStickerAdapter(Context context, ArrayList<StickerDetail> sentStickerArrayList) {
         this.sentStickerArrayList = sentStickerArrayList;
         this.context = context;
     }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView stickerImage;
@@ -44,23 +46,16 @@ public class SentStickerAdapter extends RecyclerView.Adapter<SentStickerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SentStickerAdapter.MyViewHolder holder, int position) {
-        long oswald = sentStickerArrayList.stream().filter(sticker -> sticker.getStickerId().equalsIgnoreCase("oswald")).count();
-
-        long mickey=sentStickerArrayList.stream().filter(sticker -> sticker.getStickerId().equalsIgnoreCase("mickey")).count();
-        long spongebob=sentStickerArrayList.stream().filter(sticker -> sticker.getStickerId().equalsIgnoreCase("spongebob")).count();
-//        String stickerId=sentStickerArrayList.get(position).getStickerId();
-        if(oswald!=0){
+        StickerDetail stickerDetail = sentStickerArrayList.get(position);
+        if (stickerDetail.getStickerId().equalsIgnoreCase("oswald")){
             holder.stickerImage.setImageResource(R.drawable.oswald);
-            holder.stickerCount.setText(String.valueOf(oswald));
-        }
-        if(mickey!=0){
-            holder.stickerImage.setImageResource(R.drawable.mickey);
-            holder.stickerCount.setText(String.valueOf(mickey));
-        }
-         if(spongebob!=0){
+
+        }else if(stickerDetail.getStickerId().equalsIgnoreCase("spongebob")){
             holder.stickerImage.setImageResource(R.drawable.spongebob);
-            holder.stickerCount.setText(String.valueOf(spongebob));
+        }else if(stickerDetail.getStickerId().equalsIgnoreCase("mickey")){
+            holder.stickerImage.setImageResource(R.drawable.mickey);
         }
+        holder.stickerCount.setText(String.valueOf(stickerDetail.getCount()));
         holder.stickerImage.getLayoutParams().width=400;
         holder.stickerImage.getLayoutParams().height=400;
         holder.stickerImage.requestLayout();

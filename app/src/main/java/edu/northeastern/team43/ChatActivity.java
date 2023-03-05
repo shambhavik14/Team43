@@ -34,7 +34,6 @@ public class ChatActivity extends AppCompatActivity {
         TextView selectedUserTextView = findViewById(R.id.selected_user);
         Button sendButton = findViewById(R.id.sendButton);
         ImageView oswald = findViewById(R.id.oswald);
-//        ImageView bob = findViewById(R.id.bob);
         ImageView mickey = findViewById(R.id.mickey);
         ImageView spongebob = findViewById(R.id.spongebob);
         UserModel selectedUser = (UserModel) getIntent().getSerializableExtra("selected_user");
@@ -48,12 +47,6 @@ public class ChatActivity extends AppCompatActivity {
 
 
         });
-//        bob.setOnClickListener(v->{
-//            sentSticker = new SentSticker("bob",selectedUser.getUserName(), LocalDateTime.now().toString());
-//            receivedSticker = new ReceivedSticker("bob",loggedInUser.getUserName(), LocalDateTime.now().toString());
-//
-//
-//        });
         spongebob.setOnClickListener(v->{
             sentSticker = new SentSticker("spongebob",selectedUser.getUserName(), LocalDateTime.now().toString());
             receivedSticker = new ReceivedSticker("spongebob",loggedInUser.getUserName(), LocalDateTime.now().toString());
