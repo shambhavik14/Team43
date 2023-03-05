@@ -52,7 +52,7 @@ public class ListOfUsers extends AppCompatActivity {
     private ArrayList<UserModel> getUserModelFromDb(){
         ArrayList<UserModel> userModels = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("Users").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterable<DataSnapshot> children = snapshot.getChildren();

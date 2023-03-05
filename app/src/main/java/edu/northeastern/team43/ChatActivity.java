@@ -41,35 +41,65 @@ public class ChatActivity extends AppCompatActivity {
         selectedUserTextView.setText(selectedUser.getUserName());
         Log.d("USER",selectedUser.toString());
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
         oswald.setOnClickListener(v->{
              sentSticker = new SentSticker("oswald",selectedUser.getUserName(), LocalDateTime.now().toString());
-             receivedSticker = new ReceivedSticker("oswald",selectedUser.getUserName(), LocalDateTime.now().toString());
+             receivedSticker = new ReceivedSticker("oswald",loggedInUser.getUserName(), LocalDateTime.now().toString());
+
+
+        });
+        bob.setOnClickListener(v->{
+            sentSticker = new SentSticker("bob",selectedUser.getUserName(), LocalDateTime.now().toString());
+            receivedSticker = new ReceivedSticker("bob",loggedInUser.getUserName(), LocalDateTime.now().toString());
+
+
+        });
+        spongebob.setOnClickListener(v->{
+            sentSticker = new SentSticker("spongebob",selectedUser.getUserName(), LocalDateTime.now().toString());
+            receivedSticker = new ReceivedSticker("spongebob",loggedInUser.getUserName(), LocalDateTime.now().toString());
+
+
+        });
+        mickey.setOnClickListener(v->{
+            sentSticker = new SentSticker("mickey",selectedUser.getUserName(), LocalDateTime.now().toString());
+            receivedSticker = new ReceivedSticker("mickey",loggedInUser.getUserName(), LocalDateTime.now().toString());
 
 
         });
         sendButton.setOnClickListener(v->{
             if (sentSticker!=null && receivedSticker!=null){
-                UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
-                ArrayList<SentSticker> sentStickers = loggedInUser.getSentStickers();
-                sentStickers.add(sentSticker);
-                selectedUser.getReceivedStickers().add(receivedSticker);
-                databaseReference.orderByChild("userName").addValueEventListener(new ValueEventListener() {
+
+//                ArrayList<SentSticker> sentStickers = loggedInUser.getSentStickers();
+//                sentStickers.add(sentSticker);
+//                selectedUser.getReceivedStickers().add(receivedSticker);
+                databaseReference.orderByChild("userName").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Iterable<DataSnapshot> children = snapshot.getChildren();
                         Log.d("", children.toString());
                         Iterator<DataSnapshot> iterator = children.iterator();
+                        int  count = 0;
                         while (iterator.hasNext()){
                             UserModel userModel =iterator.next().getValue(UserModel.class);
                             if (userModel.getUserName().equalsIgnoreCase(loggedInUser.getUserName())){
+                                ArrayList<SentSticker> sentStickers = userModel.getSentStickers();
+                                sentStickers.add(sentSticker);
+                                loggedInUser.setSentStickers(sentStickers);
+                                databaseReference.child(loggedInUser.getUserId()).setValue(loggedInUser);
+                                count+=1;
 
-//                                databaseReference.child(loggedInUser.getUserName()).setValue(loggedInUser,UserModel.class);
+                            }else if(userModel.getUserName().equalsIgnoreCase(selectedUser.getUserName())){
+                                ArrayList<ReceivedSticker> receivedStickers = userModel.getReceivedStickers();
+                                receivedStickers.add(receivedSticker);
+                                selectedUser.setReceivedStickers(receivedStickers);
+                                databaseReference.child(selectedUser.getUserId()).setValue(selectedUser);
+                                count+=1;
 
-//                                Intent intent=new Intent(getApplicationContext(),MainmenuActivity.class);
-//                                intent.putExtra("LOGGED_IN_USER",userModel);
-//                                startActivity(intent);
+                            }
+                            if (count==2){
                                 return;
                             }
+
                         }
                     }
 
@@ -78,6 +108,7 @@ public class ChatActivity extends AppCompatActivity {
                         Log.d("", error.getMessage());
                     }
                 });
+                finish();
             }
 
         });

@@ -39,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-             userModel = new UserModel(FirebaseAuth.getInstance().getUid(), "amit");
+             userModel = new UserModel("0", "amit");
 
 
-             userModel1 = new UserModel(FirebaseAuth.getInstance().getUid(),"pragya");
+             userModel1 = new UserModel("1","pragya");
 
 
-             userModel2 = new UserModel(FirebaseAuth.getInstance().getUid(),"shambhavi");
+             userModel2 = new UserModel("2","shambhavi");
 
 
 
@@ -55,9 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (!snapshot.exists()){
-                        userDataRef.push().setValue(userModel);
-                        userDataRef.push().setValue(userModel1);
-                        userDataRef.push().setValue(userModel2);
+                        String key1 = userDataRef.push().getKey();
+                        userDataRef.child(key1).setValue(new UserModel( key1, "amit"));
+                        String key2 = userDataRef.push().getKey();
+                        userDataRef.child(key2).setValue(new UserModel( key2, "pragya"));
+                        String key3 = userDataRef.push().getKey();
+                        userDataRef.child(key3).setValue(new UserModel( key3, "shambhavi"));
+//                        userDataRef.push().setValue(userModel1);
+//                        userDataRef.push().setValue(userModel2);
                     }
 
                 }
