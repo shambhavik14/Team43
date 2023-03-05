@@ -31,6 +31,7 @@ public class ListOfUsersRecyclerViewAdapter extends RecyclerView.Adapter<ListOfU
         private Button chatButton;
 
 
+
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             name=itemView.findViewById(R.id.usernameTextView);

@@ -9,12 +9,14 @@ import android.widget.Button;
 
 public class MainmenuActivity extends AppCompatActivity {
     Button chat;
+    Button receivedSticker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainmenu);
     chat=(Button) findViewById(R.id.chat);
+        receivedSticker=(Button) findViewById(R.id.receivedStickerButton);
     chat.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -24,5 +26,17 @@ public class MainmenuActivity extends AppCompatActivity {
             startActivity(intent);
         }
     });
+
+
+        receivedSticker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),ReceivestickerActivity.class);
+                UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+                intent.putExtra("LOGGED_IN_USER",loggedInUser);
+                startActivity(intent);
+            }
+        });
+
     }
 }

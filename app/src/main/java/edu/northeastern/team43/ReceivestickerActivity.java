@@ -5,14 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,32 +14,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
 
-public class ListOfUsers extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private ArrayList<UserModel> userModelFromDb;
-    private  ListOfUsersRecyclerViewAdapter adapter;
+public class ReceivestickerActivity extends AppCompatActivity {
     private UserModel loggedInUser;
+    private ReceivedStickerAdapater adapter;
+    private RecyclerView recyclerView;
+    private ArrayList<ReceivedSticker> receivedStickerArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listofusers);
-
-        recyclerView=findViewById(R.id.listofusersrecyclerview);
-        userModelFromDb = new ArrayList<>();
-        loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+        setContentView(R.layout.receivesticker);
+        recyclerView=findViewById(R.id.receivedStickerRecyclerView);
+        receivedStickerArrayList=new ArrayList<>();
+        loggedInUser=(UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
         getUserModelFromDb();
-
     }
-
     private void setAdapter(){
-
-
-        adapter = new ListOfUsersRecyclerViewAdapter(userModelFromDb,this,loggedInUser);
-
+        adapter=new ReceivedStickerAdapater(this,receivedStickerArrayList);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -59,9 +44,9 @@ public class ListOfUsers extends AppCompatActivity {
                 Iterable<DataSnapshot> children = snapshot.getChildren();
                 for (DataSnapshot ds : children){
                     UserModel value = ds.getValue(UserModel.class);
-                    if (!loggedInUser.getUserName().equalsIgnoreCase(value.getUserName())){
+                    if (loggedInUser.getUserName().equalsIgnoreCase(value.getUserName())){
 
-                        userModelFromDb.add(value);
+                        receivedStickerArrayList.addAll(value.getReceivedStickers());
                     }
 //                    adapter.notifyDataSetChanged();
 
