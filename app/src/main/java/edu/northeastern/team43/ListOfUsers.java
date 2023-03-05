@@ -28,6 +28,7 @@ public class ListOfUsers extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<UserModel> userModelFromDb;
     private  ListOfUsersRecyclerViewAdapter adapter;
+    private UserModel loggedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +36,14 @@ public class ListOfUsers extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.listofusersrecyclerview);
         userModelFromDb = new ArrayList<>();
-
+        loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
         getUserModelFromDb();
 
     }
 
     private void setAdapter(){
 
-        UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+
         adapter = new ListOfUsersRecyclerViewAdapter(userModelFromDb,this,loggedInUser);
 
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
@@ -58,7 +59,10 @@ public class ListOfUsers extends AppCompatActivity {
                 Iterable<DataSnapshot> children = snapshot.getChildren();
                 for (DataSnapshot ds : children){
                     UserModel value = ds.getValue(UserModel.class);
-                    userModelFromDb.add(value);
+                    if (!loggedInUser.getUserName().equalsIgnoreCase(value.getUserName())){
+
+                        userModelFromDb.add(value);
+                    }
 //                    adapter.notifyDataSetChanged();
 
                 }
