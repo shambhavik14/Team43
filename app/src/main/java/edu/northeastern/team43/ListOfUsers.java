@@ -34,19 +34,10 @@ public class ListOfUsers extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.listofusersrecyclerview);
         setAdapter();
-        /*
-        1. adapter
-        2. list of usernames
-        3.
 
-         */
     }
 
     private void setAdapter(){
-//        ArrayList<String> users = new ArrayList<>();
-//        users.add("pragya");
-//        users.add("shambhavi");
-//        users.add("amit");
         ArrayList<UserModel> userModelFromDb = getUserModelFromDb();
         ListOfUsersRecyclerViewAdapter adapter = new ListOfUsersRecyclerViewAdapter(userModelFromDb,this);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
@@ -63,32 +54,15 @@ public class ListOfUsers extends AppCompatActivity {
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-
-                    DataSnapshot dataSnapshot=task.getResult();
-                    Object object = dataSnapshot.getValue();
-
-                    Log.d("firebase1",  object.toString());
-
-
-
-//                    Map<String, UserModel> map = ((Map<String, UserModel>) task.getResult().getValue());
-//                    Log.d("firebase1",  map.toString());
-//                    Log.d("firebase3",  map.values().toString());
-//                    for (UserModel u : map.values()){
-//                        userModels.add(u);
-//                    }
-//                    Log.d("firebase",  values.toString());
-//                    Iterable<DataSnapshot> children = task.getResult().getChildren();
-//                    Log.d("", children.toString());
-//                    Iterator<DataSnapshot> iterator = children.iterator();
-//                    while (iterator.hasNext()){
-//                        UserModel userModel =iterator.next().getValue(UserModel.class);
-//                        userModels.add(userModel);
-//                    }
+                    Iterable<DataSnapshot> children = task.getResult().getChildren();
+                    Iterator<DataSnapshot> iterator = children.iterator();
+                    while (iterator.hasNext()){
+                        UserModel userModel = iterator.next().getValue(UserModel.class);
+                        userModels.add(userModel);
+                    }
                 }
             }
         });
-        Log.d("firebase2", userModels.toString());
         return userModels;
     }
 }
