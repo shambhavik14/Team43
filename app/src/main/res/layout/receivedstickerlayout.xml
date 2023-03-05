@@ -12,6 +12,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:text="username"
+        android:textColor="#219191"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,6 +24,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:text="time"
+        android:textColor="#1592CA"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/senderusername" />
 
