@@ -20,7 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 
 public class ListOfUsers extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -54,35 +56,39 @@ public class ListOfUsers extends AppCompatActivity {
     private ArrayList<UserModel> getUserModelFromDb(){
         ArrayList<UserModel> userModels = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-//        databaseReference.orderByChild("userName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                Iterable<DataSnapshot> children = task.getResult().getChildren();
-//                Log.d("", children.toString());
-//                Iterator<DataSnapshot> iterator = children.iterator();
-//                while (iterator.hasNext()){
-//                    UserModel userModel =iterator.next().getValue(UserModel.class);
-//                    userModels.add(userModel);
-//                }
-//            }
-//        });
-        databaseReference.orderByChild("userName").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Users").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterable<DataSnapshot> children = snapshot.getChildren();
-                Log.d("", children.toString());
-                Iterator<DataSnapshot> iterator = children.iterator();
-                while (iterator.hasNext()){
-                    UserModel userModel =iterator.next().getValue(UserModel.class);
-                    userModels.add(userModel);
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+
+                    DataSnapshot dataSnapshot=task.getResult();
+                    Object object = dataSnapshot.getValue();
+
+                    Log.d("firebase1",  object.toString());
+
+
+
+//                    Map<String, UserModel> map = ((Map<String, UserModel>) task.getResult().getValue());
+//                    Log.d("firebase1",  map.toString());
+//                    Log.d("firebase3",  map.values().toString());
+//                    for (UserModel u : map.values()){
+//                        userModels.add(u);
+//                    }
+//                    Log.d("firebase",  values.toString());
+//                    Iterable<DataSnapshot> children = task.getResult().getChildren();
+//                    Log.d("", children.toString());
+//                    Iterator<DataSnapshot> iterator = children.iterator();
+//                    while (iterator.hasNext()){
+//                        UserModel userModel =iterator.next().getValue(UserModel.class);
+//                        userModels.add(userModel);
+//                    }
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("", error.getMessage());
-            }
         });
+        Log.d("firebase2", userModels.toString());
         return userModels;
     }
 }

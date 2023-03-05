@@ -21,7 +21,7 @@
         android:id="@+id/button6"
         android:layout_width="350dp"
         android:layout_height="62dp"
-        android:text="Sent Sticker History"
+        android:text="Sent Sticker Count"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
