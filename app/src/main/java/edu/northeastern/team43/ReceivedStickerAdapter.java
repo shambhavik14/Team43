@@ -1,5 +1,7 @@
 package edu.northeastern.team43;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
 public class ReceivedStickerAdapter extends RecyclerView.Adapter<ReceivedStickerAdapter.MyViewHolder> {
@@ -43,7 +48,10 @@ public class ReceivedStickerAdapter extends RecyclerView.Adapter<ReceivedSticker
     @Override
     public void onBindViewHolder(@NonNull ReceivedStickerAdapter.MyViewHolder holder, int position) {
        holder.senderUsername.setText(receivedStickerArrayList.get(position).getReceivedFromUsername());
-       holder.sentTime.setText(receivedStickerArrayList.get(position).getTime());
+        String time = receivedStickerArrayList.get(position).getTime();
+        LocalDateTime dateTime = LocalDateTime.parse(time);
+        String formattedDate = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM).format(dateTime);
+        holder.sentTime.setText(formattedDate);
        String stickerId=receivedStickerArrayList.get(position).getStickerId();
        if(stickerId.equalsIgnoreCase("oswald")){
           holder.sentSticker.setImageResource(R.drawable.oswald);
@@ -54,6 +62,9 @@ public class ReceivedStickerAdapter extends RecyclerView.Adapter<ReceivedSticker
        else if(stickerId.equalsIgnoreCase("spongebob")){
            holder.sentSticker.setImageResource(R.drawable.spongebob);
        }
+        holder.sentSticker.getLayoutParams().width=400;
+        holder.sentSticker.getLayoutParams().height=400;
+        holder.sentSticker.requestLayout();
     }
 
     @Override
