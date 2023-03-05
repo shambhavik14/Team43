@@ -7,6 +7,14 @@ public class UserModel implements Serializable {
     private String userId;
     private String userName;
 
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
+
     public String getUserId() {
         return userId;
     }

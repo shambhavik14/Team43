@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ListOfUsersRecyclerViewAdapter extends RecyclerView.Adapter<ListOfUsersRecyclerViewAdapter.MyViewHolder> {
     private ArrayList<UserModel> users;
-    private Context context;
+    private static Context context;
 
     public ListOfUsersRecyclerViewAdapter(ArrayList<UserModel> users, Context context){
         this.context=context;

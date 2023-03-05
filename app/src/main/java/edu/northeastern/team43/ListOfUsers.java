@@ -25,21 +25,26 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ListOfUsers extends AppCompatActivity {
-    RecyclerView recyclerView;
-
+    private RecyclerView recyclerView;
+    private ArrayList<UserModel> userModelFromDb;
+    private  ListOfUsersRecyclerViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listofusers);
 
         recyclerView=findViewById(R.id.listofusersrecyclerview);
-        setAdapter();
+        userModelFromDb = new ArrayList<>();
+
+        getUserModelFromDb();
 
     }
 
     private void setAdapter(){
-        ArrayList<UserModel> userModelFromDb = getUserModelFromDb();
-        ListOfUsersRecyclerViewAdapter adapter = new ListOfUsersRecyclerViewAdapter(userModelFromDb,this);
+
+
+        adapter = new ListOfUsersRecyclerViewAdapter(userModelFromDb,this);
+
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -47,22 +52,51 @@ public class ListOfUsers extends AppCompatActivity {
     private ArrayList<UserModel> getUserModelFromDb(){
         ArrayList<UserModel> userModels = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("Users").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        databaseReference.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterable<DataSnapshot> children = snapshot.getChildren();
+                for (DataSnapshot ds : children){
+                    UserModel value = ds.getValue(UserModel.class);
+                    userModelFromDb.add(value);
+//                    adapter.notifyDataSetChanged();
+
                 }
-                else {
-                    Iterable<DataSnapshot> children = task.getResult().getChildren();
-                    Iterator<DataSnapshot> iterator = children.iterator();
-                    while (iterator.hasNext()){
-                        UserModel userModel = iterator.next().getValue(UserModel.class);
-                        userModels.add(userModel);
-                    }
-                }
+                setAdapter();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+//                .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.e("firebase", "Error getting data", task.getException());
+//                }
+//                else {
+//                    Iterable<DataSnapshot> children = task.getResult().getChildren();
+//                    for (DataSnapshot ds : children){
+//                        UserModel value = ds.getValue(UserModel.class);
+//                        userModels.add(value);
+//                    }
+//                    Iterator<DataSnapshot> iterator = children.iterator();
+//                    while (iterator!=null && iterator.hasNext()){
+//                        DataSnapshot next = iterator.next();
+//                        if (next !=null){
+//
+//
+//                            UserModel userModel = next.getValue(UserModel.class);
+//                            Log.d("usersssss",userModel.toString());
+//                            userModels.add(userModel);
+//                        }
+//                    }
+//                }
+//            }
+//        });
         return userModels;
     }
 }
