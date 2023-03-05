@@ -16,10 +16,12 @@ import java.util.ArrayList;
 public class ListOfUsersRecyclerViewAdapter extends RecyclerView.Adapter<ListOfUsersRecyclerViewAdapter.MyViewHolder> {
     private ArrayList<UserModel> users;
     private static Context context;
+    private UserModel loggedInUser;
 
-    public ListOfUsersRecyclerViewAdapter(ArrayList<UserModel> users, Context context){
+    public ListOfUsersRecyclerViewAdapter(ArrayList<UserModel> users, Context context,UserModel loggedInUser){
         this.context=context;
         this.users=users;
+        this.loggedInUser=loggedInUser;
 
     }
 
@@ -45,9 +47,12 @@ public class ListOfUsersRecyclerViewAdapter extends RecyclerView.Adapter<ListOfU
 
     @Override
     public void onBindViewHolder(@NonNull ListOfUsersRecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.name.setText(users.get(position).getUserName());
+        UserModel userModel = users.get(position);
+        holder.name.setText(userModel.getUserName());
         holder.chatButton.setOnClickListener(v->{
             Intent intent = new Intent(context,ChatActivity.class);
+            intent.putExtra("selected_user",userModel);
+            intent.putExtra("LOGGED_IN_USER",loggedInUser);
             context.startActivity(intent);
         });
 

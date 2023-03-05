@@ -42,8 +42,8 @@ public class ListOfUsers extends AppCompatActivity {
 
     private void setAdapter(){
 
-
-        adapter = new ListOfUsersRecyclerViewAdapter(userModelFromDb,this);
+        UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+        adapter = new ListOfUsersRecyclerViewAdapter(userModelFromDb,this,loggedInUser);
 
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);

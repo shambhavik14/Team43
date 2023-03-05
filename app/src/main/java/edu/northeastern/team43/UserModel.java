@@ -7,8 +7,8 @@ public class UserModel implements Serializable {
 
     private String userId;
     private String userName;
-    private ArrayList<SentSticker> sentStickers;
-    private ArrayList<ReceivedSticker> receivedStickers;
+    private ArrayList<SentSticker> sentStickers = new ArrayList<>();
+    private ArrayList<ReceivedSticker> receivedStickers = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -30,5 +30,21 @@ public class UserModel implements Serializable {
 
     public String getUserName() {
         return userName;
+    }
+
+    public ArrayList<SentSticker> getSentStickers() {
+        return sentStickers;
+    }
+
+    public void setSentStickers(ArrayList<SentSticker> sentStickers) {
+        this.sentStickers = sentStickers;
+    }
+
+    public ArrayList<ReceivedSticker> getReceivedStickers() {
+        return receivedStickers;
+    }
+
+    public void setReceivedStickers(ArrayList<ReceivedSticker> receivedStickers) {
+        this.receivedStickers = receivedStickers;
     }
 }

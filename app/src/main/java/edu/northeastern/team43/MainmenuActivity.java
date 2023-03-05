@@ -19,6 +19,8 @@ public class MainmenuActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent=new Intent(getApplicationContext(), ListOfUsers.class);
+            UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+            intent.putExtra("LOGGED_IN_USER",loggedInUser);
             startActivity(intent);
         }
     });

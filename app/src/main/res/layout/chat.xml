@@ -9,7 +9,7 @@
     tools:layout_editor_absoluteY="0dp">
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/selected_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -27,7 +27,7 @@
         android:text="SEND"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/selected_user" />
 
     <TextView
         android:id="@+id/textView13"
@@ -42,13 +42,46 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/oswald"
         android:layout_width="149dp"
         android:layout_height="157dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/selected_user"
         app:srcCompat="@drawable/oswald" />
+
+    <ImageView
+        android:id="@+id/mickey"
+        android:layout_width="152dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.658"
+        app:layout_constraintStart_toEndOf="@+id/oswald"
+        app:layout_constraintTop_toBottomOf="@+id/selected_user"
+        app:srcCompat="@drawable/mickey" />
+
+    <ImageView
+        android:id="@+id/spongebob"
+        android:layout_width="148dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oswald"
+        app:srcCompat="@drawable/spongebob" />
+
+    <ImageView
+        android:id="@+id/bob"
+        android:layout_width="156dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spongebob"
+        app:layout_constraintTop_toBottomOf="@+id/mickey"
+        app:srcCompat="@drawable/bob" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

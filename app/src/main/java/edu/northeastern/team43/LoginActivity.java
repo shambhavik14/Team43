@@ -56,9 +56,10 @@ public class LoginActivity extends AppCompatActivity {
                 Iterator<DataSnapshot> iterator = children.iterator();
                 while (iterator.hasNext()){
                     UserModel userModel =iterator.next().getValue(UserModel.class);
+                    Log.d("DATA_FROM_DB",userModel.toString());
                     if (userModel.getUserName().equalsIgnoreCase(username)){
                         Intent intent=new Intent(getApplicationContext(),MainmenuActivity.class);
-                        intent.putExtra("currentUser",userModel);
+                        intent.putExtra("LOGGED_IN_USER",userModel);
                         startActivity(intent);
                         return;
                     }
