@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class SentStickerAdapter extends RecyclerView.Adapter<SentStickerAdapter.MyViewHolder> {
     private static Context context;
@@ -43,25 +44,26 @@ public class SentStickerAdapter extends RecyclerView.Adapter<SentStickerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SentStickerAdapter.MyViewHolder holder, int position) {
-        int oswald=0;
-        int mickey=0;
-        int spongebob=0;
-        String stickerId=sentStickerArrayList.get(position).getStickerId();
-        if(stickerId.equalsIgnoreCase("oswald")){
+        long oswald = sentStickerArrayList.stream().filter(sticker -> sticker.getStickerId().equalsIgnoreCase("oswald")).count();
+
+        long mickey=sentStickerArrayList.stream().filter(sticker -> sticker.getStickerId().equalsIgnoreCase("mickey")).count();
+        long spongebob=sentStickerArrayList.stream().filter(sticker -> sticker.getStickerId().equalsIgnoreCase("spongebob")).count();
+//        String stickerId=sentStickerArrayList.get(position).getStickerId();
+        if(oswald!=0){
             holder.stickerImage.setImageResource(R.drawable.oswald);
-            oswald++;
             holder.stickerCount.setText(String.valueOf(oswald));
         }
-        else if(stickerId.equalsIgnoreCase("mickey")){
+        if(mickey!=0){
             holder.stickerImage.setImageResource(R.drawable.mickey);
-            mickey++;
             holder.stickerCount.setText(String.valueOf(mickey));
         }
-        if(stickerId.equalsIgnoreCase("spongebob")){
+         if(spongebob!=0){
             holder.stickerImage.setImageResource(R.drawable.spongebob);
-            spongebob++;
             holder.stickerCount.setText(String.valueOf(spongebob));
         }
+        holder.stickerImage.getLayoutParams().width=400;
+        holder.stickerImage.getLayoutParams().height=400;
+        holder.stickerImage.requestLayout();
     }
 
     @Override
