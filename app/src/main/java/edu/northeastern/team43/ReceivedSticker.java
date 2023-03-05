@@ -13,4 +13,28 @@ public class ReceivedSticker implements Serializable {
         this.receivedFromUsername=receivedFromUsername;
         this.time=time;
     }
+
+    public String getStickerId() {
+        return stickerId;
+    }
+
+    public void setStickerId(String stickerId) {
+        this.stickerId = stickerId;
+    }
+
+    public String getReceivedFromUsername() {
+        return receivedFromUsername;
+    }
+
+    public void setReceivedFromUsername(String receivedFromUsername) {
+        this.receivedFromUsername = receivedFromUsername;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

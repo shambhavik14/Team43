@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class UserModel implements Serializable {
 
-    private String userId;
-    private String userName;
-    private ArrayList<SentSticker> sentStickers = new ArrayList<>();
-    private ArrayList<ReceivedSticker> receivedStickers = new ArrayList<>();
+    public String userId;
+    public String userName;
+    public ArrayList<SentSticker> sentStickers = new ArrayList<>();
+    public ArrayList<ReceivedSticker> receivedStickers = new ArrayList<>();
 
     @Override
     public String toString() {

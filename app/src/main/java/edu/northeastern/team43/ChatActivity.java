@@ -63,6 +63,8 @@ public class ChatActivity extends AppCompatActivity {
                             UserModel userModel =iterator.next().getValue(UserModel.class);
                             if (userModel.getUserName().equalsIgnoreCase(loggedInUser.getUserName())){
 
+//                                databaseReference.child(loggedInUser.getUserName()).setValue(loggedInUser,UserModel.class);
+
 //                                Intent intent=new Intent(getApplicationContext(),MainmenuActivity.class);
 //                                intent.putExtra("LOGGED_IN_USER",userModel);
 //                                startActivity(intent);

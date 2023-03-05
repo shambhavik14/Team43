@@ -13,4 +13,28 @@ public class SentSticker implements Serializable {
         this.sentToUsername=sentToUsername;
         this.time=time;
     }
+
+    public String getStickerId() {
+        return stickerId;
+    }
+
+    public void setStickerId(String stickerId) {
+        this.stickerId = stickerId;
+    }
+
+    public String getSentToUsername() {
+        return sentToUsername;
+    }
+
+    public void setSentToUsername(String sentToUsername) {
+        this.sentToUsername = sentToUsername;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }
