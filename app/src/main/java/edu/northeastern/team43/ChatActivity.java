@@ -48,12 +48,12 @@ public class ChatActivity extends AppCompatActivity {
 
 
         });
-        bob.setOnClickListener(v->{
-            sentSticker = new SentSticker("bob",selectedUser.getUserName(), LocalDateTime.now().toString());
-            receivedSticker = new ReceivedSticker("bob",loggedInUser.getUserName(), LocalDateTime.now().toString());
-
-
-        });
+//        bob.setOnClickListener(v->{
+//            sentSticker = new SentSticker("bob",selectedUser.getUserName(), LocalDateTime.now().toString());
+//            receivedSticker = new ReceivedSticker("bob",loggedInUser.getUserName(), LocalDateTime.now().toString());
+//
+//
+//        });
         spongebob.setOnClickListener(v->{
             sentSticker = new SentSticker("spongebob",selectedUser.getUserName(), LocalDateTime.now().toString());
             receivedSticker = new ReceivedSticker("spongebob",loggedInUser.getUserName(), LocalDateTime.now().toString());
