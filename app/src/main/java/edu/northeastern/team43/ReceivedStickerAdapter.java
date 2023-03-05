@@ -11,12 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ReceivedStickerAdapater extends RecyclerView.Adapter<ReceivedStickerAdapater.MyViewHolder> {
+public class ReceivedStickerAdapter extends RecyclerView.Adapter<ReceivedStickerAdapter.MyViewHolder> {
     private static Context context;
     ArrayList<ReceivedSticker> receivedStickerArrayList;
-    public ReceivedStickerAdapater(Context context, ArrayList<ReceivedSticker> receivedStickerArrayList){
+    public ReceivedStickerAdapter(Context context, ArrayList<ReceivedSticker> receivedStickerArrayList){
         this.receivedStickerArrayList=receivedStickerArrayList;
         this.context=context;
     }
@@ -36,13 +35,13 @@ public class ReceivedStickerAdapater extends RecyclerView.Adapter<ReceivedSticke
 
     @NonNull
     @Override
-    public ReceivedStickerAdapater.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReceivedStickerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.receivedstickerlayout,null);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReceivedStickerAdapater.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReceivedStickerAdapter.MyViewHolder holder, int position) {
        holder.senderUsername.setText(receivedStickerArrayList.get(position).getReceivedFromUsername());
        holder.sentTime.setText(receivedStickerArrayList.get(position).getTime());
        String stickerId=receivedStickerArrayList.get(position).getStickerId();

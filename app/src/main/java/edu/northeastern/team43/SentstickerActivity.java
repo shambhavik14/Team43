@@ -15,44 +15,46 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ReceivestickerActivity extends AppCompatActivity {
+public class SentstickerActivity extends AppCompatActivity {
     private UserModel loggedInUser;
-    private ReceivedStickerAdapter adapter;
+    private SentStickerAdapter adapter;
     private RecyclerView recyclerView;
-    private ArrayList<ReceivedSticker> receivedStickerArrayList;
+    private ArrayList<SentSticker> sentStickerArrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.receivesticker);
-        recyclerView=findViewById(R.id.receivedStickerRecyclerView);
-        receivedStickerArrayList=new ArrayList<>();
+        setContentView(R.layout.sentsticker);
+        recyclerView=findViewById(R.id.sentstickerrecyclerview);
+        sentStickerArrayList=new ArrayList<>();
         loggedInUser=(UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
-        getUserModelFromDb();
+        getUserModelDb();
+
     }
+
     private void setAdapter(){
-        adapter=new ReceivedStickerAdapter(this,receivedStickerArrayList);
+        adapter=new SentStickerAdapter(this,sentStickerArrayList);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
     }
-    private void getUserModelFromDb(){
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private void getUserModelDb(){
+
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
         databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterable<DataSnapshot> children = snapshot.getChildren();
-                for (DataSnapshot ds : children){
-                    UserModel value = ds.getValue(UserModel.class);
-                    if (loggedInUser.getUserName().equalsIgnoreCase(value.getUserName())){
-
-                        receivedStickerArrayList.addAll(value.getReceivedStickers());
+                Iterable<DataSnapshot> children=snapshot.getChildren();
+                for(DataSnapshot ds:children){
+                    UserModel value=ds.getValue(UserModel.class);
+                    if(loggedInUser.getUserName().equalsIgnoreCase(value.getUserName())){
+                        sentStickerArrayList.addAll(value.getSentStickers());
                     }
 //                    adapter.notifyDataSetChanged();
 
                 }
                 setAdapter();
-
             }
 
             @Override
@@ -60,7 +62,6 @@ public class ReceivestickerActivity extends AppCompatActivity {
 
             }
         });
-
 
     }
 }
