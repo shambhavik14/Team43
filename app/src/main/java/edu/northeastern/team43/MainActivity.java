@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
              userDataRef = FirebaseDatabase.getInstance().getReference().child("Users");
             Query q= userDataRef.orderByChild("userName");
-            q.addValueEventListener(new ValueEventListener() {
+            q.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (!snapshot.exists()){
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+//            q.addValueEventListener();
 
 
 
