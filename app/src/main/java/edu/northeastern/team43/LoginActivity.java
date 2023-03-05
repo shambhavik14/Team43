@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(){
         String username = userNameText.getText().toString();
-        databaseReference.orderByChild("userName").addValueEventListener(new ValueEventListener() {
+            databaseReference.orderByChild("userName").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterable<DataSnapshot> children = snapshot.getChildren();
