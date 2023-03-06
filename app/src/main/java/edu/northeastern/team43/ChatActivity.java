@@ -80,6 +80,7 @@ public class ChatActivity extends AppCompatActivity {
                                 ArrayList<SentSticker> sentStickers = userModel.getSentStickers();
                                 sentStickers.add(sentSticker);
                                 loggedInUser.setSentStickers(sentStickers);
+                                loggedInUser.setReceivedStickers(userModel.getReceivedStickers());
                                 databaseReference.child(loggedInUser.getUserId()).setValue(loggedInUser);
                                 count+=1;
 
@@ -88,6 +89,7 @@ public class ChatActivity extends AppCompatActivity {
                                 ArrayList<ReceivedSticker> receivedStickers = userModel.getReceivedStickers();
                                 receivedStickers.add(receivedSticker);
                                 selectedUser.setReceivedStickers(receivedStickers);
+                                selectedUser.setSentStickers(userModel.getSentStickers());
                                 databaseReference.child(selectedUser.getUserId()).setValue(selectedUser);
                                 count+=1;
 
