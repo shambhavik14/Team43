@@ -10,6 +10,8 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -108,7 +110,8 @@ public class MainmenuActivity extends AppCompatActivity {
                 }
                 Log.d("CURRENT_LIST",currentList.toString());
                 if (previousList!=null && previousList.size()!=currentList.size()){
-                    notifyUser();
+                    String latestStickerId = currentList.get(currentList.size() - 1).getStickerId();
+                    notifyUser(latestStickerId);
                     previousList.clear();
                     Log.d("PREVIOUS_LIST CLEARED",previousList.toString());
                     previousList.addAll(currentList);
@@ -137,7 +140,7 @@ public class MainmenuActivity extends AppCompatActivity {
     }
 
 
-    private void notifyUser(){
+    private void notifyUser(String stickerId){
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             NotificationChannel notificationChannel = new NotificationChannel("my notification","my notification", NotificationManager.IMPORTANCE_HIGH);
             NotificationManager manager=getSystemService(NotificationManager.class);
@@ -148,6 +151,16 @@ public class MainmenuActivity extends AppCompatActivity {
         builder.setAutoCancel(true);
         builder.setSmallIcon(R.drawable.bob);
         builder.setContentText("Please check the sticker that you have received");
+        Bitmap largeIcon = null;
+        if (stickerId.equalsIgnoreCase("oswald")){
+            largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.oswald);
+        }else if(stickerId.equalsIgnoreCase("spongebob")){
+            largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.spongebob);
+        }else if(stickerId.equalsIgnoreCase("mickey")){
+            largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.mickey);
+        }
+
+        builder.setLargeIcon(largeIcon);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainmenuActivity.this);
         managerCompat.notify(1,builder.build());
     }
