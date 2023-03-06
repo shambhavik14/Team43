@@ -9,6 +9,7 @@ public class UserModel implements Serializable {
     public String userName;
     public ArrayList<SentSticker> sentStickers = new ArrayList<>();
     public ArrayList<ReceivedSticker> receivedStickers = new ArrayList<>();
+//    public boolean notify;
 
     @Override
     public String toString() {
@@ -39,6 +40,14 @@ public class UserModel implements Serializable {
     public void setSentStickers(ArrayList<SentSticker> sentStickers) {
         this.sentStickers = sentStickers;
     }
+
+//    public boolean isNotify() {
+//        return notify;
+//    }
+//
+//    public void setNotify(boolean notify) {
+//        this.notify = notify;
+//    }
 
     public ArrayList<ReceivedSticker> getReceivedStickers() {
         return receivedStickers;

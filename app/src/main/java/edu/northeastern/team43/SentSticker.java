@@ -3,6 +3,15 @@ package edu.northeastern.team43;
 import java.io.Serializable;
 
 public class SentSticker implements Serializable {
+    @Override
+    public String toString() {
+        return "SentSticker{" +
+                "stickerId='" + stickerId + '\'' +
+                ", sentToUsername='" + sentToUsername + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
+
     private String stickerId;
     private String sentToUsername;
     private String time;

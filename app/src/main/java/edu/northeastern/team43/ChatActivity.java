@@ -2,9 +2,14 @@ package edu.northeastern.team43;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,9 +67,6 @@ public class ChatActivity extends AppCompatActivity {
         sendButton.setOnClickListener(v->{
             if (sentSticker!=null && receivedSticker!=null){
 
-//                ArrayList<SentSticker> sentStickers = loggedInUser.getSentStickers();
-//                sentStickers.add(sentSticker);
-//                selectedUser.getReceivedStickers().add(receivedSticker);
                 databaseReference.orderByChild("userName").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -82,6 +84,7 @@ public class ChatActivity extends AppCompatActivity {
                                 count+=1;
 
                             }else if(userModel.getUserName().equalsIgnoreCase(selectedUser.getUserName())){
+
                                 ArrayList<ReceivedSticker> receivedStickers = userModel.getReceivedStickers();
                                 receivedStickers.add(receivedSticker);
                                 selectedUser.setReceivedStickers(receivedStickers);
