@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +34,12 @@ public class MainmenuActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     DataSnapshot previousSnapshot;
     ArrayList<ReceivedSticker> previousList;
+    UserModel loggedInUser;
+    @Override
+    public void onBackPressed() {
+        loggedInUser = null;
+        finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +48,12 @@ public class MainmenuActivity extends AppCompatActivity {
         sentStickerCount= (Button) findViewById(R.id.sentstickercount);
         receivedSticker = (Button) findViewById(R.id.receivedStickerButton);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ListOfUsers.class);
-                UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+
                 intent.putExtra("LOGGED_IN_USER", loggedInUser);
                 startActivity(intent);
             }
@@ -55,7 +64,7 @@ public class MainmenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(getApplicationContext(),SentstickerActivity.class);
-                UserModel loggedInUser=(UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+//                UserModel loggedInUser=(UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
                 intent.putExtra("LOGGED_IN_USER",loggedInUser);
                 startActivity(intent);
             }
@@ -66,16 +75,22 @@ public class MainmenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ReceivestickerActivity.class);
-                UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+//                UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
                 intent.putExtra("LOGGED_IN_USER", loggedInUser);
                 startActivity(intent);
             }
         });
+        if (loggedInUser==null){
+            return;
+        }
         databaseReference.orderByChild("userName").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
+                if (loggedInUser==null){
+                    return;
+                }
+//                UserModel loggedInUser = (UserModel) getIntent().getSerializableExtra("LOGGED_IN_USER");
                 Log.d("LOGGEDIN_USER",loggedInUser.toString());
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                 ArrayList<ReceivedSticker> currentList = new ArrayList<>();
@@ -120,6 +135,8 @@ public class MainmenuActivity extends AppCompatActivity {
         });
 
     }
+
+
     private void notifyUser(){
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             NotificationChannel notificationChannel = new NotificationChannel("my notification","my notification", NotificationManager.IMPORTANCE_HIGH);
