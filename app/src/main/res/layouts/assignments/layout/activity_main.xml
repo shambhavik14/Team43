@@ -72,11 +72,19 @@
         android:backgroundTint="#5852ED"
         android:text="CHAT"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnYourService"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnYourService" />
+
+    <Button
+        android:id="@+id/companion_button"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:text="COMPANION"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chatbttn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

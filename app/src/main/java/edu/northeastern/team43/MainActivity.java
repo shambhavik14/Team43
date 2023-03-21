@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import edu.northeastern.team43.R.id;
+import edu.northeastern.team43.project.Companion;
 
 public class MainActivity extends AppCompatActivity {
     private Button covidNewsApi;
@@ -114,6 +115,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
+        });
+        Button companion = findViewById(id.companion_button);
+        companion.setOnClickListener(v->{
+            Intent intent = new Intent(getApplicationContext(), Companion.class);
+            startActivity(intent);
         });
     }
 
