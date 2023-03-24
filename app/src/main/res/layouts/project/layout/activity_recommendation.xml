@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".project.Activity_Recommendation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+       <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+            <ImageView
+                android:layout_width="86dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:src="@drawable/back_icon" />
+
+            <ImageView
+                android:layout_width="152dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="-16dp"
+                android:padding="15dp"
+                android:src="@drawable/search" />
+
+
+       </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/barlow_bold"
+            android:padding="20dp"
+            android:text="Take a step Today..."
+            android:textAllCaps="true"
+            android:textColor="#0B5E56"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:background="#2C3333"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escape with your favorite tracks"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                android:padding="25dp"/>
+            
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:background="#00000000"
+                android:padding="20dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:background="#2E4F4F">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Take a few minutes to meditate"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                android:padding="25dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:background="#00000000"
+                android:padding="20dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:background="#0E8388">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Engage in meaningful conversations"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                android:padding="25dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:background="#00000000"
+                android:padding="20dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:background="#CBE4DE">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pen down your taks"
+                android:textSize="25sp"
+                android:textColor="#2C3333"
+                android:padding="25dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:background="#00000000"
+                android:padding="20dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

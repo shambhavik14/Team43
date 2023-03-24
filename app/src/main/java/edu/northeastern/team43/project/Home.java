@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import edu.northeastern.team43.AboutActivity;
 import edu.northeastern.team43.R;
 
 public class Home extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
+
     @Override
     public void onBackPressed() {
         FirebaseAuth.getInstance().signOut();
@@ -36,5 +39,13 @@ public class Home extends AppCompatActivity {
                 finish();
             });
         }
+        Button activity = (Button) findViewById(R.id.activities_button);
+        activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, Activity_Recommendation.class);
+                startActivity(intent);
+            }
+        });
     }
 }
