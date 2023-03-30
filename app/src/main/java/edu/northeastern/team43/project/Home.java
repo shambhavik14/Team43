@@ -12,6 +12,7 @@ import edu.northeastern.team43.R;
 
 public class Home extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
+    Button button;
     @Override
     public void onBackPressed() {
         FirebaseAuth.getInstance().signOut();
@@ -22,6 +23,14 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        button=findViewById(R.id.listofdoctor);
+
+        button.setOnClickListener(v->{
+            Intent intent = new Intent(getApplicationContext(),SearchDoctorActivity.class);
+            startActivity(intent);
+        });
+
+
         firebaseAuth=FirebaseAuth.getInstance();
         Button logoutButton = findViewById(R.id.logout_button);
         if (firebaseAuth.getCurrentUser()==null){
