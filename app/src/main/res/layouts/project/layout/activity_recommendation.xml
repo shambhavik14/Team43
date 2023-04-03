@@ -36,10 +36,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="openMusicApp"
+                android:padding="25dp"
                 android:text="Escape with your favorite tracks"
-                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:padding="25dp"/>
+                android:textSize="25sp" />
             
             <Button
                 android:layout_width="wrap_content"
@@ -60,10 +61,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="openMediApp"
+                android:padding="25dp"
                 android:text="Take a few minutes to meditate"
-                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:padding="25dp"/>
+                android:textSize="25sp" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -84,10 +86,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="openListApp"
+                android:padding="25dp"
                 android:text="Pen down your taks"
-                android:textSize="25sp"
                 android:textColor="@color/white"
-                android:padding="25dp"/>
+                android:textSize="25sp" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -108,10 +111,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="openChatApp"
+                android:padding="25dp"
                 android:text="Engage in meaningful conversations"
-                android:textSize="25sp"
                 android:textColor="#2C3333"
-                android:padding="25dp"/>
+                android:textSize="25sp" />
 
             <Button
                 android:layout_width="wrap_content"
