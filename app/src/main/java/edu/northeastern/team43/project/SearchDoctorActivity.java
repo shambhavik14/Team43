@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class SearchDoctorActivity extends AppCompatActivity {
         doctorNamesList.add("Dr. Ranjan Singh");
         doctorNamesList.add("Dr. Ananya Kumar");
         setAdapter();
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
     }
 
     private void setAdapter(){
@@ -35,4 +37,5 @@ public class SearchDoctorActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
     }
+
 }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,5 +45,6 @@ public class Register extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(),DoctorRegistrationActivity.class);
             startActivity(intent);
         });
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple)));
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,7 @@ public class Activity_Recommendation extends AppCompatActivity {
         meditatebtn = findViewById(R.id.meditate_button);
         todobtn = findViewById(R.id.todo_button);
         chatbtn = findViewById(R.id.chat_button);*/
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
     }
 
     public void openMusicApp(View view) {
