@@ -34,7 +34,7 @@ public class Home extends AppCompatActivity {
         }else {
             logoutButton.setOnClickListener(v->{
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(),Login.class);
+                Intent intent = new Intent(getApplicationContext(),Companion.class);
                 startActivity(intent);
                 finish();
             });
