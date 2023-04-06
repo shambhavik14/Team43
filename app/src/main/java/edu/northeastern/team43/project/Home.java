@@ -45,5 +45,14 @@ public class Home extends AppCompatActivity {
                 finish();
             });
         }
+        Button activity = (Button) findViewById(R.id.activities_button);
+        activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, Activity_Recommendation.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }
