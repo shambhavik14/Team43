@@ -1,9 +1,11 @@
 package edu.northeastern.team43.project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -20,10 +22,15 @@ public class SearchDoctorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_doctor);
         recyclerView=findViewById(R.id.recyclerViewdoctor);
         doctorNamesList=new ArrayList<>();
-        doctorNamesList.add("pragya");
-        doctorNamesList.add("amit");
-        doctorNamesList.add("shambhavi");
+        doctorNamesList.add("Dr. Pragya Prashar");
+        doctorNamesList.add("Dr. Amit Kulkarni");
+        doctorNamesList.add("Dr. Shambhavi Kulkarni");
+        doctorNamesList.add("Dr. Apoorva Chaudhary");
+        doctorNamesList.add("Dr. Ranjan Singh");
+        doctorNamesList.add("Dr. Ananya Kumar");
         setAdapter();
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(SearchDoctorActivity.this,R.color.purple));
     }
 
     private void setAdapter(){
@@ -32,4 +39,5 @@ public class SearchDoctorActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
     }
+
 }
