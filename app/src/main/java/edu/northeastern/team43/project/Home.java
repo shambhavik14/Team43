@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,7 +54,9 @@ public class Home extends AppCompatActivity {
                 while (iterator.hasNext()){
                     DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
                     if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        welcomeMsg.setText(doctorModel.getName());
+                        welcomeMsg.setText("Welcome "+doctorModel.getName());
+                        welcomeMsg.setTypeface(null, Typeface.BOLD);
+                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
                     }
                 }
             }
