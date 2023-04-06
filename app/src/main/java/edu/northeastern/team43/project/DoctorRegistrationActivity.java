@@ -125,7 +125,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Toast.makeText(getApplicationContext(),"REGISTRATION SUCCESSFUL",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),Login.class);
+                            Intent intent = new Intent(getApplicationContext(),Welcome.class);
                             startActivity(intent);
                         }
                     })
