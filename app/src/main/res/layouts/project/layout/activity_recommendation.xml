@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".project.Activity_Recommendation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/barlow_bold"
+            android:padding="20dp"
+            android:text="Take a step Today..."
+            android:textAllCaps="true"
+            android:textColor="#0B5E56"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/music_button"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"
+            android:background="#2C3333">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openMusicApp"
+                android:padding="25dp"
+                android:text="Escape with your favorite tracks"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+            
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open App"
+                android:background="#00000000"
+                android:padding="20dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/meditate_button"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"
+            android:background="#2E4F4F">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openMediApp"
+                android:padding="25dp"
+                android:text="Take a few minutes to meditate"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open App"
+                android:background="#00000000"
+                android:padding="20dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/todo_button"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"
+            android:background="#0E8388">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openListApp"
+                android:padding="25dp"
+                android:text="Embrace your day, conquer your to-do list"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open App"
+                android:background="#00000000"
+                android:padding="20dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/journal_button"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"
+            android:background="#CBE4DE">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openJournalApp"
+                android:padding="25dp"
+                android:text="Put pen to paper, and let your thoughts fly free."
+                android:textColor="#2C3333"
+                android:textSize="25sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open App"
+                android:textColor="#2C3333"
+                android:background="#00000000"
+                android:padding="20dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

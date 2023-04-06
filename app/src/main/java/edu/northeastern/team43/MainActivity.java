@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import edu.northeastern.team43.R.id;
 import edu.northeastern.team43.project.Companion;
+import edu.northeastern.team43.project.Welcome;
 
 public class MainActivity extends AppCompatActivity {
     private Button covidNewsApi;
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         });
         Button companion = findViewById(id.companion_button);
         companion.setOnClickListener(v->{
-            Intent intent = new Intent(getApplicationContext(), Companion.class);
+            Intent intent = new Intent(getApplicationContext(), Welcome.class);
             startActivity(intent);
         });
     }
