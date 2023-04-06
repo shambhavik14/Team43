@@ -1,6 +1,7 @@
 package edu.northeastern.team43.project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class Activity_Recommendation extends AppCompatActivity {
         todobtn = findViewById(R.id.todo_button);
         chatbtn = findViewById(R.id.chat_button);*/
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Activity_Recommendation.this,R.color.purple));
     }
 
     public void openMusicApp(View view) {

@@ -1,6 +1,7 @@
 package edu.northeastern.team43.project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ public class SearchDoctorActivity extends AppCompatActivity {
         doctorNamesList.add("Dr. Ananya Kumar");
         setAdapter();
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(SearchDoctorActivity.this,R.color.purple));
     }
 
     private void setAdapter(){

@@ -1,6 +1,7 @@
 package edu.northeastern.team43.project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -57,5 +58,6 @@ public class Home extends AppCompatActivity {
             }
         });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Home.this,R.color.purple));
     }
 }

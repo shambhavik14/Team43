@@ -2,6 +2,7 @@ package edu.northeastern.team43.project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -180,5 +181,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(DoctorRegistrationActivity.this,R.color.purple));
     }
 }
