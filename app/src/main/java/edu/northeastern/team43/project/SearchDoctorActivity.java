@@ -20,9 +20,12 @@ public class SearchDoctorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_doctor);
         recyclerView=findViewById(R.id.recyclerViewdoctor);
         doctorNamesList=new ArrayList<>();
-        doctorNamesList.add("pragya");
-        doctorNamesList.add("amit");
-        doctorNamesList.add("shambhavi");
+        doctorNamesList.add("Dr. Pragya Prashar");
+        doctorNamesList.add("Dr. Amit Kulkarni");
+        doctorNamesList.add("Dr. Shambhavi Kulkarni");
+        doctorNamesList.add("Dr. Apoorva Chaudhary");
+        doctorNamesList.add("Dr. Ranjan Singh");
+        doctorNamesList.add("Dr. Ananya Kumar");
         setAdapter();
     }
 
