@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,14 +20,21 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import edu.northeastern.team43.R;
+import edu.northeastern.team43.UserModel;
 
 public class DoctorRegistrationActivity extends AppCompatActivity {
 
@@ -35,12 +43,15 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
     TextView dateText;
     FirebaseAuth firebaseAuth;
+
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_registration);
         emailEditText = findViewById(R.id.reg_doc_email);
         passwordEditText=findViewById(R.id.reg_doc_pass);
+        EditText nameEditText = findViewById(R.id.reg_doc_name);
         Button submit = findViewById(R.id.reg_submit_button);
         dateText=findViewById(R.id.reg_doc_date);
         dateText.setOnClickListener(v->{
@@ -53,6 +64,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             datePickerDialog.show();
         });
         firebaseAuth= FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("doctors");
         ArrayList<String> genderArray = new ArrayList<String>();
         genderArray.add("Male");
         genderArray.add("Female");
@@ -120,12 +132,39 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         submit.setOnClickListener(v->{
             String emailId = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
+            String gender = genderSpinner.getSelectedItem().toString().trim();
+            String state = stateSpinner.getSelectedItem().toString().trim();
+            String dateOfBirth = dateText.getText().toString().trim();
+            String name= nameEditText.getText().toString().trim();
+
             firebaseAuth.createUserWithEmailAndPassword(emailId,password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Toast.makeText(getApplicationContext(),"REGISTRATION SUCCESSFUL",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(),Welcome.class);
+                            databaseReference.orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    String key1 = databaseReference.push().getKey();
+                                    DoctorModel doctor = new DoctorModel.Builder()
+                                            .doctorId(key1)
+                                            .name(name)
+                                            .email(emailId)
+                                            .password(password)
+                                            .dob(dateOfBirth)
+                                            .gender(gender)
+                                            .state(state)
+                                            .build();
+                                    databaseReference.child(key1).setValue(doctor);
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Log.d("", error.getMessage());
+                                }
+                            });
                             startActivity(intent);
                         }
                     })
@@ -135,6 +174,8 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),"REGISTRATION FAILURE",Toast.LENGTH_SHORT).show();
                         }
                     });
+
+
         });
     }
 }
