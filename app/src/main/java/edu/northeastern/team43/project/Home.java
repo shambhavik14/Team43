@@ -1,19 +1,30 @@
 package edu.northeastern.team43.project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Iterator;
 
 import edu.northeastern.team43.R;
 
 public class Home extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     Button button;
+
+    DatabaseReference databaseReference;
     @Override
     public void onBackPressed() {
         FirebaseAuth.getInstance().signOut();
@@ -25,7 +36,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         button=findViewById(R.id.listofdoctor);
-
+        TextView welcomeMsg= findViewById(R.id.welcome_msg);
         button.setOnClickListener(v->{
             Intent intent = new Intent(getApplicationContext(),SearchDoctorActivity.class);
             startActivity(intent);
@@ -33,12 +44,33 @@ public class Home extends AppCompatActivity {
 
 
         firebaseAuth=FirebaseAuth.getInstance();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                while (iterator.hasNext()){
+                    DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
+                    if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                        welcomeMsg.setText(doctorModel.getName());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         Button logoutButton = findViewById(R.id.logout_button);
         if (firebaseAuth.getCurrentUser()==null){
             Intent intent = new Intent(getApplicationContext(),Companion.class);
             startActivity(intent);
             finish();
         }else {
+            String currentLoggedInUserEmail = firebaseAuth.getCurrentUser().getEmail();
+
+            welcomeMsg.setText("Welcome "+firebaseAuth.getCurrentUser().getDisplayName());
             logoutButton.setOnClickListener(v->{
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(),Companion.class);
