@@ -45,6 +45,9 @@ public class Companion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_companion);
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null){
+            FirebaseAuth.getInstance().signOut();
+        }
         firebaseAuth= FirebaseAuth.getInstance();
         Button submit = findViewById(R.id.loginButton);
         emailEditText = findViewById(R.id.username);
