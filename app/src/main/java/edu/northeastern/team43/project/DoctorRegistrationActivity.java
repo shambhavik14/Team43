@@ -48,6 +48,11 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     @Override
+    public void onBackPressed() {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_registration);
