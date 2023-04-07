@@ -68,6 +68,26 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
+        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
+                while(iterator.hasNext()){
+                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
+                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                        welcomeMsg.setText("Welcome"+patientModel.getName());
+                        welcomeMsg.setTypeface(null,Typeface.BOLD);
+                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         Button logoutButton = findViewById(R.id.logout_button);
         if (firebaseAuth.getCurrentUser()==null){
             Intent intent = new Intent(getApplicationContext(),Companion.class);
