@@ -2,8 +2,10 @@ package edu.northeastern.team43.project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +45,9 @@ public class Companion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_companion);
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null){
+            FirebaseAuth.getInstance().signOut();
+        }
         firebaseAuth= FirebaseAuth.getInstance();
         Button submit = findViewById(R.id.loginButton);
         emailEditText = findViewById(R.id.username);
@@ -74,5 +79,7 @@ public class Companion extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Companion.this,R.color.purple));
     }
 }
