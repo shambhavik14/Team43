@@ -61,7 +61,7 @@ public class PatientRegistrationActivity extends AppCompatActivity {
             DatePickerDialog datePickerDialog=new DatePickerDialog(PatientRegistrationActivity.this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    patientDOB.setText(String.valueOf(month+1)+"/"+String.valueOf(year));
+                    patientDOB.setText(String.valueOf(month+1)+"/"+String.valueOf(dayOfMonth)+"/"+String.valueOf(year));
                 }
             },2023,0,1);
             datePickerDialog.show();
