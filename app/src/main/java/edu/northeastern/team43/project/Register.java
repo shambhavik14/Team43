@@ -40,7 +40,7 @@ public class Register extends AppCompatActivity {
             startActivity(intent);
         });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(Register.this,R.color.purple));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Register.this,R.color.darkgreen));
         regAsPatient.setOnClickListener(v->{
             Intent intent=new Intent(getApplicationContext(), PatientRegistrationActivity.class);
             startActivity(intent);

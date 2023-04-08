@@ -40,13 +40,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".project.Music_Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".project.Activity_Recommendation"
             android:exported="false">
             <meta-data
@@ -55,13 +48,6 @@
         </activity>
         <activity
             android:name=".project.Welcome"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".project.Activity_Recommendation"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

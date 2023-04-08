@@ -2,6 +2,7 @@ package edu.northeastern.team43.project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +28,7 @@ import edu.northeastern.team43.R;
 
 public class Home extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
-    Button button;
+    ConstraintLayout button;
 
     DatabaseReference databaseReference;
     @Override
@@ -39,7 +41,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        button=findViewById(R.id.listofdoctor);
+        button = findViewById(R.id.listofdoc);
         TextView welcomeMsg= findViewById(R.id.welcome_msg);
         button.setOnClickListener(v->{
             Intent intent = new Intent(getApplicationContext(),SearchDoctorActivity.class);
@@ -88,7 +90,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
-        Button logoutButton = findViewById(R.id.logout_button);
+        ImageView logoutButton = findViewById(R.id.logout_button);
         if (firebaseAuth.getCurrentUser()==null){
             Intent intent = new Intent(getApplicationContext(),Companion.class);
             startActivity(intent);
@@ -104,7 +106,7 @@ public class Home extends AppCompatActivity {
                 finish();
             });
         }
-        Button activity = (Button) findViewById(R.id.activities_button);
+        ConstraintLayout activity = (ConstraintLayout) findViewById(R.id.activities_button);
         activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +115,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(Home.this,R.color.purple));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Home.this,R.color.darkgreen));
     }
 }

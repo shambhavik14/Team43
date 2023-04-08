@@ -186,6 +186,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(DoctorRegistrationActivity.this,R.color.purple));
+        getWindow().setStatusBarColor(ContextCompat.getColor(DoctorRegistrationActivity.this,R.color.darkgreen));
     }
 }

@@ -178,7 +178,7 @@ public class PatientRegistrationActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(PatientRegistrationActivity.this,R.color.purple));
+        getWindow().setStatusBarColor(ContextCompat.getColor(PatientRegistrationActivity.this,R.color.darkgreen));
 
     }
 }

@@ -31,6 +31,6 @@ public class Welcome extends AppCompatActivity {
         });
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(Welcome.this,R.color.purple));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Welcome.this,R.color.darkgreen));
     }
 }
