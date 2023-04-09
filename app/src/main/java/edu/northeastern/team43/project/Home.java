@@ -116,7 +116,7 @@ public class Home extends AppCompatActivity {
         });
         ImageView myProfileButton = findViewById(R.id.profile);
         myProfileButton.setOnClickListener(v->{
-            Intent intent = new Intent(Home.this, DoctorEditProfile.class);
+            Intent intent = new Intent(Home.this, EditProfile.class);
             startActivity(intent);
         });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
