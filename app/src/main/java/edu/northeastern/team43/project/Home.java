@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -114,6 +113,11 @@ public class Home extends AppCompatActivity {
                 startActivity(intent);
 
             }
+        });
+        ImageView myProfileButton = findViewById(R.id.profile);
+        myProfileButton.setOnClickListener(v->{
+            Intent intent = new Intent(Home.this, DoctorEditProfile.class);
+            startActivity(intent);
         });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
         getWindow().setStatusBarColor(ContextCompat.getColor(Home.this,R.color.darkgreen));
