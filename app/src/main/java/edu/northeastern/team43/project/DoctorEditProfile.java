@@ -1,5 +1,8 @@
 package edu.northeastern.team43.project;
 
+public class DoctorEditProfile {
+}
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
