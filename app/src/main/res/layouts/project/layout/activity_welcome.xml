@@ -4,56 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#37AE91"
+    android:background="#01025C"
+    android:backgroundTint="#1A00FE"
     tools:context=".project.Welcome">
 
-    <ImageView
-        android:id="@+id/img1"
-        android:layout_width="404dp"
-        android:layout_height="297dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/welcomebkg" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bac"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="16dp">
 
-    <TextView
-        android:id="@+id/tv8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to the Companion!"
-        android:textColor="@color/purple"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img1" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="260dp"
+            android:src="@drawable/hands_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tv9"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:fontFamily="sans-serif-medium"
-        android:inputType="textMultiLine"
-        android:text="Whether you're looking to improve your mental health or simply want someone to talk to, Companion is here to help."
-        android:textAlignment="center"
-        android:textColor="#0E8388"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv8"/>
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="288dp"
+            android:text="All rights are reserved"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv8" />
 
-    <Button
-        android:id="@+id/loginbtn"
-        android:layout_width="127dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/purple"
-        android:text="Log In"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv9" />
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="@color/white"
+            android:text="Companion"
+            android:textColor="#FFFFFF"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <Button-->
+    <!--        android:id="@+id/loginbtn"-->
+    <!--        android:layout_width="127dp"-->
+    <!--        android:layout_height="49dp"-->
+    <!--        android:layout_marginTop="32dp"-->
+    <!--        android:backgroundTint="@color/purple"-->
+    <!--        android:text="Log In"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.498"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tv9" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

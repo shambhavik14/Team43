@@ -79,7 +79,7 @@ public class Companion extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(Companion.this,R.color.purple));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.blue)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Companion.this,R.color.blue));
     }
 }

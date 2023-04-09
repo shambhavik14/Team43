@@ -42,10 +42,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/loginbkg"
+        android:background="@drawable/bac"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="16dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -59,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="24dp">
 
@@ -68,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:text="Login"
                     android:textAlignment="center"
-                    android:textColor="@color/purple"
+                    android:textColor="@color/blue"
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
@@ -77,34 +80,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="40dp"
-                    android:background="@drawable/custom_edittext"
                     android:drawableLeft="@drawable/ic_baseline_person_24"
                     android:drawablePadding="8dp"
                     android:hint="Username"
                     android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background" />
+                    android:textColor="@color/white"
+                    android:textColorHighlight="@color/white"
+                    android:textColorHint="#C6C2C2" />
 
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/custom_edittext"
                     android:drawableLeft="@drawable/ic_baseline_lock_24"
                     android:drawablePadding="8dp"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background" />
+                    android:textColor="@color/white"
+                    android:textColorHighlight="@color/white"
+                    android:textColorHint="#C6C2C2" />
 
                 <Button
                     android:id="@+id/loginButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/purple"
+                    android:backgroundTint="@color/blue"
                     android:text="Login"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
@@ -120,7 +123,7 @@
             android:padding="8dp"
             android:text="Not yet registered? SignUp Now"
             android:textAlignment="center"
-            android:textColor="@color/purple"
+            android:textColor="@color/black"
             android:textSize="14sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
