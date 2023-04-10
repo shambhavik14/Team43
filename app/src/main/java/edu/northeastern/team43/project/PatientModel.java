@@ -26,7 +26,7 @@ public class PatientModel implements Serializable {
         return patientId;
     }
 
-    public void setPatientId(String doctorId) {
+    public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
     public String getName() {
