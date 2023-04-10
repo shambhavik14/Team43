@@ -64,26 +64,28 @@ FirebaseAuth firebaseAuth;
             }
         });
 
-        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-                while(iterator.hasNext()){
-                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        textView.setText("Welcome"+patientModel.getName());
-                        textView.setTypeface(null,Typeface.BOLD);
-                        textView.setTextColor(Color.rgb(0,0,0));
-                    }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        textView.setText("Welcome"+firebaseAuth.getCurrentUser().getDisplayName());
+//        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
+//                while(iterator.hasNext()){
+//                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
+//                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+//                        textView.setText("Welcome"+patientModel.getName());
+//                        textView.setTypeface(null,Typeface.BOLD);
+//                        textView.setTextColor(Color.rgb(0,0,0));
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
 
 
 

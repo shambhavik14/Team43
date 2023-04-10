@@ -2,6 +2,7 @@ package edu.northeastern.team43.project;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,6 @@ public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapte
 
     }
 
-
-
-
     @NonNull
     @Override
     public SearchDoctorAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,7 +56,9 @@ public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapte
 
     @Override
     public void onBindViewHolder(@NonNull SearchDoctorAdapter.MyViewHolder holder, int position) {
+
         String name=doctorNames.get(position);
+        Log.println(Log.DEBUG, "", name);
         holder.name.setText(name);
         holder.chatButton.setOnClickListener(v->{
             Intent intent = new Intent(context, Chat.class);
