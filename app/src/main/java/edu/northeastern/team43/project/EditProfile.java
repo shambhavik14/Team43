@@ -49,6 +49,8 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_registration);
         emailEditText = findViewById(R.id.reg_doc_email);
+        emailEditText.setEnabled(false);
+        emailEditText.setFocusable(false);
         passwordEditText=findViewById(R.id.reg_doc_pass);
         EditText nameEditText = findViewById(R.id.reg_doc_name);
         Button submit = findViewById(R.id.reg_submit_button);
@@ -207,7 +209,7 @@ public class EditProfile extends AppCompatActivity {
                                 }
                                 else{
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    AuthCredential credential = EmailAuthProvider.getCredential(doctorModel.getEmail(), doctorModel.getPassword());
+                                    AuthCredential credential = EmailAuthProvider.getCredential(emailId, password);
                                     user.reauthenticate(credential)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
@@ -269,7 +271,7 @@ public class EditProfile extends AppCompatActivity {
                                 }
                                 else{
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    AuthCredential credential = EmailAuthProvider.getCredential(patientModel.getEmail(), patientModel.getPassword());
+                                    AuthCredential credential = EmailAuthProvider.getCredential(emailId, password);
                                     user.reauthenticate(credential)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
