@@ -59,9 +59,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
         if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
             SenderViewHolder viewHolder=(SenderViewHolder) holder;
             viewHolder.txtsenderMessage.setText(chatModel.getMessage());
-        }
-       else if(chatModel.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-            ReceiverViewHolder viewHolder=(ReceiverViewHolder) holder;
+        }else{
+            ReceiverViewHolder viewHolder = (ReceiverViewHolder) holder;
             viewHolder.txtreceiverMessage.setText(chatModel.getMessage());
         }
 

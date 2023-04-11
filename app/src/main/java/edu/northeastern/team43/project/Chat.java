@@ -118,7 +118,7 @@ public class Chat extends AppCompatActivity {
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                 while (iterator.hasNext()){
                     ChatModel chatModel = iterator.next().getValue(ChatModel.class);
-                    if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())&&chatModel.getReceiverEmail().equalsIgnoreCase(doctorModel.getEmail())){
+                    if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())&&chatModel.getReceiverEmail().equalsIgnoreCase(doctorModel.getEmail()) ||chatModel.getSenderEmail().equalsIgnoreCase(doctorModel.getEmail()) &&chatModel.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
                         chatModelArrayList.add(chatModel);
                     }
                 }

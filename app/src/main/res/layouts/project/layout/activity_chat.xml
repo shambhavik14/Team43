@@ -39,10 +39,10 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/l1"
+        android:id="@+id/chatadapter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/chatadapter" />
+        android:layout_height="470dp"
+        android:layout_below="@+id/l1" />
 
     <LinearLayout
        android:orientation="horizontal"
