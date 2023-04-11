@@ -13,20 +13,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 
 
-import edu.northeastern.team43.ChatActivity;
 import edu.northeastern.team43.R;
 
 public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapter.MyViewHolder> {
-    ArrayList<String> doctorNames;
+    ArrayList<DoctorModel> doctorObject;
     static Context context;
 
-    public SearchDoctorAdapter(ArrayList<String> doctorNames, Context context){
-        this.doctorNames=doctorNames;
+    public SearchDoctorAdapter(ArrayList<DoctorModel> doctorObj, Context context){
+        this.doctorObject =doctorObj;
         this.context=context;
 
     }
@@ -57,13 +54,13 @@ public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapte
     @Override
     public void onBindViewHolder(@NonNull SearchDoctorAdapter.MyViewHolder holder, int position) {
 
-        String name=doctorNames.get(position);
-        Log.println(Log.DEBUG, "", name);
-        holder.name.setText(name);
+        DoctorModel docObj= doctorObject.get(position);
+        Log.println(Log.DEBUG, "", docObj.getName());
+        holder.name.setText(docObj.getName());
         holder.chatButton.setOnClickListener(v->{
             Intent intent = new Intent(context, Chat.class);
-            intent.putExtra("chatwithuser",name);
-            Toast.makeText(context, "" + name, Toast.LENGTH_SHORT).show();
+            intent.putExtra("chatwithuser",docObj);
+            Toast.makeText(context, "" + docObj.getName(), Toast.LENGTH_SHORT).show();
             context.startActivity(intent);
         });
 
@@ -71,6 +68,6 @@ public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapte
 
     @Override
     public int getItemCount() {
-        return doctorNames.size();
+        return doctorObject.size();
     }
 }

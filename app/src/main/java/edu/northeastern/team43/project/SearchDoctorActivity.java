@@ -26,7 +26,7 @@ import edu.northeastern.team43.R;
 public class SearchDoctorActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SearchDoctorAdapter adapter;
-    private ArrayList<String> doctorNamesList;
+    private ArrayList<DoctorModel> doctorNamesList;
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SearchDoctorActivity extends AppCompatActivity {
                 while (iterator.hasNext()){
                     DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
                     Log.println(Log.DEBUG, "", doctorModel.getName());
-                    doctorNamesList.add(doctorModel.getName());
+                    doctorNamesList.add(doctorModel);
                 }
 
                 setAdapter();
