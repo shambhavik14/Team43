@@ -15,7 +15,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/receiverimg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/profile" />
@@ -28,6 +28,7 @@
         android:background="@drawable/receiver_shape"
         android:textColor="@color/white"
         android:padding="@dimen/_7sdp"
+        android:id="@+id/receivermessage"
         android:textStyle="bold"
         android:layout_toRightOf="@id/card"
         android:layout_centerVertical="true"/>

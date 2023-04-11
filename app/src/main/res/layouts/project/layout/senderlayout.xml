@@ -15,7 +15,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/senderimg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/profile" />
@@ -24,6 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/sendermessage"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
