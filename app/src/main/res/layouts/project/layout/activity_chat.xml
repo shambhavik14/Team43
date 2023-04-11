@@ -42,7 +42,7 @@
         android:layout_below="@+id/l1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/messageadapter" />
+        android:id="@+id/chatadapter" />
 
     <LinearLayout
        android:orientation="horizontal"
