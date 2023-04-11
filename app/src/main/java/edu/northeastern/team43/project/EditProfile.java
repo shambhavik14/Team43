@@ -1,20 +1,29 @@
 package edu.northeastern.team43.project;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -26,9 +35,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.UUID;
 
 import edu.northeastern.team43.R;
 
@@ -44,6 +56,50 @@ public class EditProfile extends AppCompatActivity {
 
     boolean isDoctor = false;
     boolean isPatient = false;
+
+    ImageView profilePicture;
+
+    String profilePictureFirebasePath = "";
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1 && resultCode == RESULT_OK && data!=null){
+            Uri imagePath = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imagePath);
+            }catch (Exception e){
+                Log.println(Log.DEBUG,"",e.getMessage());
+            }
+            profilePicture.setImageBitmap(bitmap);
+            ProgressDialog progressDialog = new ProgressDialog(EditProfile.this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            FirebaseStorage.getInstance().getReference("images/"+ UUID.randomUUID().toString())
+                    .putFile(imagePath)
+                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()){
+                                task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task) {
+                                        if (task.isSuccessful()){
+                                            profilePictureFirebasePath = task.getResult().toString();
+                                            Glide.with(EditProfile.this).load(profilePictureFirebasePath).circleCrop().into(profilePicture);
+
+                                        }
+                                    }
+                                });
+                                Toast.makeText(getApplicationContext(),"Image uploaded",Toast.LENGTH_LONG).show();
+                            }
+                            progressDialog.dismiss();
+                        }
+                    });
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +110,13 @@ public class EditProfile extends AppCompatActivity {
         passwordEditText=findViewById(R.id.reg_doc_pass);
         EditText nameEditText = findViewById(R.id.reg_doc_name);
         Button submit = findViewById(R.id.reg_submit_button);
+        profilePicture = findViewById(R.id.profile_picture);
         dateText=findViewById(R.id.reg_doc_date);
+        profilePicture.setOnClickListener(v->{
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent,1);
+        });
         dateText.setOnClickListener(v->{
             DatePickerDialog datePickerDialog = new DatePickerDialog(EditProfile.this, new DatePickerDialog.OnDateSetListener() {
                 @Override
@@ -146,6 +208,10 @@ public class EditProfile extends AppCompatActivity {
                         genderSpinner.setSelection(genderPosition);
                         int statesPosition = stateSpinnerAdapter.getPosition(doctorModel.getState());
                         stateSpinner.setSelection(statesPosition);
+                        if (doctorModel.getProfilePicture()!=null && !doctorModel.getProfilePicture().isEmpty()){
+                            profilePicture.setImageURI(Uri.parse(doctorModel.getProfilePicture()));
+                            Glide.with(EditProfile.this).load(doctorModel.getProfilePicture()).circleCrop().into(profilePicture);
+                        }
 
                     }
                 }
@@ -203,6 +269,7 @@ public class EditProfile extends AppCompatActivity {
                                 databaseReference.child("doctors").child(doctorModel.getDoctorId()).child("gender").setValue(gender);
                                 databaseReference.child("doctors").child(doctorModel.getDoctorId()).child("name").setValue(name);
                                 databaseReference.child("doctors").child(doctorModel.getDoctorId()).child("state").setValue(state);
+                                databaseReference.child("doctors").child(doctorModel.getDoctorId()).child("profilePicture").setValue(profilePictureFirebasePath);
                                 if(emailId.equalsIgnoreCase(doctorModel.getEmail()) && password.equalsIgnoreCase(doctorModel.getPassword())){
                                     databaseReference.child("doctors").child(doctorModel.getDoctorId()).child("email").setValue(emailId);
                                     databaseReference.child("doctors").child(doctorModel.getDoctorId()).child("password").setValue(password);

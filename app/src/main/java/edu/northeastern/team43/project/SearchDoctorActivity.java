@@ -56,16 +56,6 @@ public class SearchDoctorActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-//        doctorNamesList.add("Dr. Pragya Prashar");
-//        doctorNamesList.add("Dr. Amit Kulkarni");
-//        doctorNamesList.add("Dr. Shambhavi Kulkarni");
-//        doctorNamesList.add("Dr. Apoorva Chaudhary");
-//        doctorNamesList.add("Dr. Ranjan Singh");
-//        doctorNamesList.add("Dr. Ananya Kumar");
-
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
         getWindow().setStatusBarColor(ContextCompat.getColor(SearchDoctorActivity.this,R.color.darkgreen));
     }

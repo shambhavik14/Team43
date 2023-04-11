@@ -11,8 +11,9 @@ public class DoctorModel implements Serializable {
     public String gender;
     public String dob;
     public String state;
+    public String profilePicture;
 
-    public DoctorModel(String doctorId,String name, String email, String password, String gender, String dob, String state){
+    public DoctorModel(String doctorId,String name, String email, String password, String gender, String dob, String state, String profilePicture){
         this.doctorId=doctorId;
         this.name=name;
         this.email=email;
@@ -20,8 +21,17 @@ public class DoctorModel implements Serializable {
         this.gender=gender;
         this.dob=dob;
         this.state=state;
+        this.profilePicture = profilePicture;
     }
     public DoctorModel(){}
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     public String getDoctorId() {
         return doctorId;
@@ -88,6 +98,8 @@ public class DoctorModel implements Serializable {
         public String dob;
         public String state;
 
+        public String profilePicture;
+
         public Builder doctorId(String doctorId){
             this.doctorId=doctorId;
             return this;
@@ -117,8 +129,12 @@ public class DoctorModel implements Serializable {
             this.state=state;
             return this;
         }
+        public Builder profilePicture(String profilePicture){
+            this.profilePicture=profilePicture;
+            return this;
+        }
         public DoctorModel build(){
-            return new DoctorModel(this.doctorId,this.name,this.email,this.password,this.gender,this.dob,this.state);
+            return new DoctorModel(this.doctorId,this.name,this.email,this.password,this.gender,this.dob,this.state,this.profilePicture);
         }
     }
 }
