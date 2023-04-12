@@ -21,9 +21,9 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/profile" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/doc" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -45,40 +45,44 @@
         android:layout_below="@+id/l1" />
 
     <LinearLayout
-       android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/_2sdp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
             android:layout_margin="@dimen/_3sdp"
             android:layout_weight="1"
-            app:cardBackgroundColor="#7AC1BA"
+            app:cardBackgroundColor="#D0D6DA"
             app:cardCornerRadius="@dimen/_540sdp">
 
             <EditText
+                android:id="@+id/chatexchanged"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/chatexchanged"
-                android:background="@null"
                 android:layout_gravity="center_vertical"
+                android:background="@null"
                 android:hint="write your message here"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingLeft="@dimen/_10sdp"
-                android:textColor="@color/darkgreen"
-                android:textColorHint="#45837D" />
+                android:textColor="#7D8584"
+                android:textColorHighlight="#B3ACAC"
+                android:textColorHint="#3C3F41" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/sendbttn"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
-            android:id="@+id/sendbttn"
             android:layout_margin="@dimen/_3sdp"
-            app:cardBackgroundColor="#7AC1BA"
+            app:cardBackgroundColor="#D0D6DA"
             app:cardCornerRadius="@dimen/_540sdp">
 
 
