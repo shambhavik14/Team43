@@ -1,6 +1,5 @@
 package edu.northeastern.team43.project;
 
-import static edu.northeastern.team43.project.SearchDoctorAdapter.context;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -34,7 +32,6 @@ public class Chat extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     ChatAdapter messageAdapter;
     DatabaseReference databaseReference;
-//    TextView textView;
     TextView chatUser;
     CardView sendButton;
     EditText chatMessage;
@@ -47,37 +44,13 @@ public class Chat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         recyclerView=findViewById(R.id.chatadapter);
-//        textView = findViewById(R.id.lgu);
         sendButton=findViewById(R.id.sendbttn);
         chatMessage=findViewById(R.id.chatexchanged);
         chatUser = findViewById(R.id.userchattingwith);
         DoctorModel doctorModel = (DoctorModel) getIntent().getSerializableExtra("chatwithuser");
-//        Toast.makeText(context, "" + doctorModel.getName(), Toast.LENGTH_SHORT).show();
         chatUser.setText("Dr " + doctorModel.getName());
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
-//        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-//                while (iterator.hasNext()) {
-//                    PatientModel patientModel = iterator.next().getValue(PatientModel.class);
-//                    if (patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())) {
-//                        textView.setText("Welcome " + doctorModel.getName());
-//                        textView.setTypeface(null, Typeface.BOLD);
-//                        textView.setTextColor(Color.rgb(0, 0, 0));
-
-//                        Toast.makeText(context, "" + patientModel.getName(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +72,6 @@ public class Chat extends AppCompatActivity {
                                 .message(msg)
                                 .build();
                         databaseReference.child(key1).setValue(chatModel);
-//                        Toast.makeText(Chat.this,"Message Successfully Sent", Toast.LENGTH_SHORT).show();
                         updateUI(doctorModel);
                     }
 
@@ -108,36 +80,9 @@ public class Chat extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
-
-
         updateUI(doctorModel);
-
-
-//        textView.setText("Welcome" + firebaseAuth.getCurrentUser().getDisplayName());
-//        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-//                while(iterator.hasNext()){
-//                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-//                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                        textView.setText("Welcome"+patientModel.getName());
-//                        textView.setTypeface(null,Typeface.BOLD);
-//                        textView.setTextColor(Color.rgb(0,0,0));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
         getWindow().setStatusBarColor(ContextCompat.getColor(Chat.this,R.color.darkgreen));
 
@@ -159,7 +104,6 @@ public class Chat extends AppCompatActivity {
                         chatModelArrayList.add(chatModel);
                     }
                 }
-
                 setAdapter();
             }
 
@@ -172,13 +116,10 @@ public class Chat extends AppCompatActivity {
 
 
     private void setAdapter(){
-//        Log.println(Log.DEBUG, "","this is adapter");
         messageAdapter=new ChatAdapter(this,chatModelArrayList);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
         messageAdapter.notifyDataSetChanged();
-
-//        Toast.makeText(Chat.this,"Call to recycler view", Toast.LENGTH_SHORT).show();
     }
 }
