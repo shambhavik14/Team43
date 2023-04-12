@@ -16,6 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".MainActivity">
+        <TextView
+            android:id="@+id/signuptitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Sign up"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="351dp"
@@ -39,6 +48,16 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="24dp">
+
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="62dp"
+                    android:layout_height="53dp"
+                    android:layout_gravity="center_horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/tv8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/image_upload" />
 
                 <EditText
                     android:id="@+id/reg_doc_name"
@@ -85,17 +104,31 @@
 
 
 
+<!--                <EditText-->
+<!--                    android:id="@+id/reg_doc_date"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:hint="Click to enter DOB"-->
+<!--                    android:paddingStart="30dp"-->
+<!--                    android:background="@drawable/custom_edittext"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/reg_state_drop" />-->
                 <EditText
                     android:id="@+id/reg_doc_date"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/reg_doc_pass"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:hint="Click to enter DOB"
-                    android:paddingStart="30dp"
                     android:background="@drawable/custom_edittext"
-                    app:layout_constraintTop_toBottomOf="@+id/reg_state_drop" />
+                    android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+                    android:drawablePadding="20dp"
+                    android:hint="Click to select DOB"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
 
                 <Spinner
                     android:id="@+id/reg_gender_drop"

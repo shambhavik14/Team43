@@ -6,83 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".project.PatientRegistrationActivity">
 
-    <!--<EditText
-        android:id="@+id/reg_pat_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/reg_pat_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_pat_name" />
-
-    <EditText
-        android:id="@+id/reg_pat_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_pat_email" />
-
-    <Spinner
-        android:id="@+id/reg_pat_gender"
-        android:layout_width="291dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_pat_password" />
-
-    <Spinner
-        android:id="@+id/reg_pat_state"
-        android:layout_width="293dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_pat_gender" />
-
-    <TextView
-        android:id="@+id/reg_pat_dob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Click to enter DOB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_pat_state" />
-
-    <Button
-        android:id="@+id/red_pat_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="SUBMIT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_pat_dob" />-->
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -91,7 +14,15 @@
         android:gravity="center"
         android:orientation="vertical"
         tools:context=".MainActivity">
-
+        <TextView
+            android:id="@+id/signuptitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Sign up"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -112,15 +43,16 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <TextView
-                android:id="@+id/signuptitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Sign up"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="62dp"
+                android:layout_height="53dp"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/tv8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/image_upload" />
 
             <EditText
                 android:id="@+id/reg_pat_name"
@@ -176,14 +108,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@id/reg_pat_state"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
                 android:drawablePadding="20dp"
+                android:hint="Click to select DOB"
                 android:padding="10dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
 
             <Spinner

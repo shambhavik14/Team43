@@ -44,7 +44,7 @@ import java.util.UUID;
 
 import edu.northeastern.team43.R;
 
-public class EditProfile extends AppCompatActivity {
+public class DoctorEditProfile extends AppCompatActivity {
 
     EditText emailEditText;
     EditText passwordEditText;
@@ -53,9 +53,6 @@ public class EditProfile extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     DatabaseReference databaseReference;
-
-    boolean isDoctor = false;
-    boolean isPatient = false;
 
     ImageView profilePicture;
 
@@ -73,7 +70,7 @@ public class EditProfile extends AppCompatActivity {
                 Log.println(Log.DEBUG,"",e.getMessage());
             }
             profilePicture.setImageBitmap(bitmap);
-            ProgressDialog progressDialog = new ProgressDialog(EditProfile.this);
+            ProgressDialog progressDialog = new ProgressDialog(DoctorEditProfile.this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
@@ -88,7 +85,7 @@ public class EditProfile extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Uri> task) {
                                         if (task.isSuccessful()){
                                             profilePictureFirebasePath = task.getResult().toString();
-                                            Glide.with(EditProfile.this).load(profilePictureFirebasePath).circleCrop().into(profilePicture);
+                                            Glide.with(DoctorEditProfile.this).load(profilePictureFirebasePath).circleCrop().into(profilePicture);
 
                                         }
                                     }
@@ -118,7 +115,7 @@ public class EditProfile extends AppCompatActivity {
             startActivityForResult(intent,1);
         });
         dateText.setOnClickListener(v->{
-            DatePickerDialog datePickerDialog = new DatePickerDialog(EditProfile.this, new DatePickerDialog.OnDateSetListener() {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(DoctorEditProfile.this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                     dateText.setText(String.valueOf(month +1)+"/"+String.valueOf(dayOfMonth)+"/"+String.valueOf(year));
@@ -199,7 +196,6 @@ public class EditProfile extends AppCompatActivity {
                 while (iterator.hasNext()){
                     DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
                     if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        isDoctor = true;
                         nameEditText.setText(doctorModel.getName());
                         emailEditText.setText(doctorModel.getEmail());
                         passwordEditText.setText(doctorModel.getPassword());
@@ -210,7 +206,7 @@ public class EditProfile extends AppCompatActivity {
                         stateSpinner.setSelection(statesPosition);
                         if (doctorModel.getProfilePicture()!=null && !doctorModel.getProfilePicture().isEmpty()){
                             profilePicture.setImageURI(Uri.parse(doctorModel.getProfilePicture()));
-                            Glide.with(EditProfile.this).load(doctorModel.getProfilePicture()).circleCrop().into(profilePicture);
+                            Glide.with(DoctorEditProfile.this).load(doctorModel.getProfilePicture()).circleCrop().into(profilePicture);
                         }
 
                     }
@@ -222,33 +218,6 @@ public class EditProfile extends AppCompatActivity {
 
             }
         });
-        if (!isDoctor){
-            databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-                    while(iterator.hasNext()){
-                        PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                        if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                            isPatient = true;
-                            nameEditText.setText(patientModel.getName());
-                            emailEditText.setText(patientModel.getEmail());
-                            passwordEditText.setText(patientModel.getPassword());
-                            dateText.setText(patientModel.getDob());
-                            int genderPosition = genderSpinnerAdapter.getPosition(patientModel.getGender());
-                            genderSpinner.setSelection(genderPosition);
-                            int statesPosition = stateSpinnerAdapter.getPosition(patientModel.getState());
-                            stateSpinner.setSelection(statesPosition);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
 
         submit.setOnClickListener(v->{
             String emailId = emailEditText.getText().toString().trim();
@@ -257,7 +226,6 @@ public class EditProfile extends AppCompatActivity {
             String state = stateSpinner.getSelectedItem().toString().trim();
             String dateOfBirth = dateText.getText().toString().trim();
             String name= nameEditText.getText().toString().trim();
-            if (isDoctor){
                 databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -314,73 +282,11 @@ public class EditProfile extends AppCompatActivity {
 
                     }
                 });
-
-            }else{
-                databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-                        while(iterator.hasNext()){
-                            PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                            if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                                isPatient = true;
-                                databaseReference.child("patients").child(patientModel.getPatientId()).child("dob").setValue(dateOfBirth);
-                                databaseReference.child("patients").child(patientModel.getPatientId()).child("email").setValue(emailId);
-                                databaseReference.child("patients").child(patientModel.getPatientId()).child("gender").setValue(gender);
-                                databaseReference.child("patients").child(patientModel.getPatientId()).child("name").setValue(name);
-                                databaseReference.child("patients").child(patientModel.getPatientId()).child("password").setValue(password);
-                                databaseReference.child("patients").child(patientModel.getPatientId()).child("state").setValue(state);
-
-
-                                if(emailId.equalsIgnoreCase(patientModel.getEmail()) && password.equalsIgnoreCase(patientModel.getPassword())){
-                                    databaseReference.child("patients").child(patientModel.getPatientId()).child("email").setValue(emailId);
-                                    databaseReference.child("patients").child(patientModel.getPatientId()).child("password").setValue(password);
-                                }
-                                else{
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    AuthCredential credential = EmailAuthProvider.getCredential(emailId, password);
-                                    user.reauthenticate(credential)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    Log.d("RE-AUTHENTICATED", "User re-authenticated.");
-                                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                                    user.updateEmail(emailId)
-                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    if (task.isSuccessful()) {
-                                                                        databaseReference.child("patients").child(patientModel.getPatientId()).child("email").setValue(emailId);
-                                                                    }
-                                                                }
-                                                            });
-                                                    user.updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                databaseReference.child("patients").child(patientModel.getPatientId()).child("password").setValue(password);
-                                                            }
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                }
-
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
             finish();
 
         });
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(EditProfile.this,R.color.darkgreen));
+        getWindow().setStatusBarColor(ContextCompat.getColor(DoctorEditProfile.this,R.color.darkgreen));
     }
 }

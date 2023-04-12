@@ -77,7 +77,7 @@ public class Home extends AppCompatActivity {
                 while(iterator.hasNext()){
                     PatientModel patientModel=iterator.next().getValue(PatientModel.class);
                     if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        welcomeMsg.setText("Welcome"+patientModel.getName());
+                        welcomeMsg.setText("Welcome "+patientModel.getName());
                         welcomeMsg.setTypeface(null,Typeface.BOLD);
                         welcomeMsg.setTextColor(Color.rgb(0,0,0));
                     }
@@ -95,7 +95,6 @@ public class Home extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else {
-            String currentLoggedInUserEmail = firebaseAuth.getCurrentUser().getEmail();
 
             welcomeMsg.setText("Welcome "+firebaseAuth.getCurrentUser().getDisplayName());
             logoutButton.setOnClickListener(v->{
@@ -116,7 +115,7 @@ public class Home extends AppCompatActivity {
         });
         ImageView myProfileButton = findViewById(R.id.profile);
         myProfileButton.setOnClickListener(v->{
-            Intent intent = new Intent(Home.this, EditProfile.class);
+            Intent intent = new Intent(Home.this, DoctorEditProfile.class);
             startActivity(intent);
         });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
