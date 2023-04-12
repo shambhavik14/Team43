@@ -9,11 +9,13 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +32,8 @@ public class Home extends AppCompatActivity {
     ConstraintLayout button;
 
     DatabaseReference databaseReference;
+
+    boolean isDoctor = false;
     @Override
     public void onBackPressed() {
         FirebaseAuth.getInstance().signOut();
@@ -115,8 +119,34 @@ public class Home extends AppCompatActivity {
         });
         ImageView myProfileButton = findViewById(R.id.profile);
         myProfileButton.setOnClickListener(v->{
-            Intent intent = new Intent(Home.this, DoctorEditProfile.class);
-            startActivity(intent);
+            databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                    while (iterator.hasNext()){
+                        DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
+                        if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                            isDoctor = true;
+                            break;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            if (isDoctor){
+                Intent intent = new Intent(Home.this, DoctorEditProfile.class);
+                startActivity(intent);
+            }else{
+                Intent intent = new Intent(Home.this, PatientEditProfile.class);
+                startActivity(intent);
+            }
+
+
+
         });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
         getWindow().setStatusBarColor(ContextCompat.getColor(Home.this,R.color.darkgreen));

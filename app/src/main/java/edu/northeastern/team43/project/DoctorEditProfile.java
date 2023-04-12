@@ -102,11 +102,14 @@ public class DoctorEditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_registration);
         emailEditText = findViewById(R.id.reg_doc_email);
+        TextView titleTextView = findViewById(R.id.signuptitle);
+        titleTextView.setText("Update Account");
         emailEditText.setEnabled(false);
         emailEditText.setFocusable(false);
         passwordEditText=findViewById(R.id.reg_doc_pass);
         EditText nameEditText = findViewById(R.id.reg_doc_name);
         Button submit = findViewById(R.id.reg_submit_button);
+        submit.setText("Update");
         profilePicture = findViewById(R.id.profile_picture);
         dateText=findViewById(R.id.reg_doc_date);
         profilePicture.setOnClickListener(v->{

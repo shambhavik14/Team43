@@ -102,12 +102,15 @@ public class PatientEditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_registration);
+        TextView titleTextView = findViewById(R.id.signuptitle);
+        titleTextView.setText("Update Account");
         emailEditText = findViewById(R.id.reg_pat_email);
         emailEditText.setEnabled(false);
         emailEditText.setFocusable(false);
         passwordEditText=findViewById(R.id.reg_pat_password);
         EditText nameEditText = findViewById(R.id.reg_pat_name);
         Button submit = findViewById(R.id.reg_pat_submit);
+        submit.setText("Update");
         profilePicture = findViewById(R.id.profile_picture);
         dateText=findViewById(R.id.reg_pat_dob);
         profilePicture.setOnClickListener(v->{
@@ -205,6 +208,10 @@ public class PatientEditProfile extends AppCompatActivity {
                             genderSpinner.setSelection(genderPosition);
                             int statesPosition = stateSpinnerAdapter.getPosition(patientModel.getState());
                             stateSpinner.setSelection(statesPosition);
+                            if (patientModel.getProfilePicture()!=null && !patientModel.getProfilePicture().isEmpty()){
+                                profilePicture.setImageURI(Uri.parse(patientModel.getProfilePicture()));
+                                Glide.with(PatientEditProfile.this).load(patientModel.getProfilePicture()).circleCrop().into(profilePicture);
+                            }
                         }
                     }
                 }
