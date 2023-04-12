@@ -56,7 +56,7 @@ public class PatientRegistrationActivity extends AppCompatActivity {
         patientDOB=findViewById(R.id.reg_pat_dob);
         patientGender=findViewById(R.id.reg_pat_gender);
         patientState=findViewById(R.id.reg_pat_state);
-        submit=findViewById(R.id.red_pat_submit);
+        submit=findViewById(R.id.reg_pat_submit);
         patientDOB.setOnClickListener(v->{
             DatePickerDialog datePickerDialog=new DatePickerDialog(PatientRegistrationActivity.this, new DatePickerDialog.OnDateSetListener() {
                 @Override
