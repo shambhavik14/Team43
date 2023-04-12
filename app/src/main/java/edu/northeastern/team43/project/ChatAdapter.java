@@ -1,7 +1,5 @@
 package edu.northeastern.team43.project;
 
-import static edu.northeastern.team43.project.SearchDoctorAdapter.context;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +17,14 @@ import java.util.ArrayList;
 import edu.northeastern.team43.R;
 
 public class ChatAdapter extends RecyclerView.Adapter {
-    Context contex;
+    Context context;
     ArrayList<ChatModel> messagesArrayList;
     int ITEM_SEND = 1;
     int ITEM_RECEIVE = 2;
     FirebaseAuth firebaseAuth;
 
-    public ChatAdapter(Context contex, ArrayList<ChatModel> messagesArrayList) {
-        this.contex = contex;
+    public ChatAdapter(Context context, ArrayList<ChatModel> messagesArrayList) {
+        this.context = context;
         this.messagesArrayList = messagesArrayList;
         firebaseAuth=FirebaseAuth.getInstance();
     }
@@ -36,11 +34,11 @@ public class ChatAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if(viewType==ITEM_SEND){
-            View view= LayoutInflater.from(context).inflate(R.layout.senderlayout,parent,false);
+            View view= LayoutInflater.from(SearchDoctorAdapter.context).inflate(R.layout.senderlayout,parent,false);
             return new SenderViewHolder(view);
         }
         else{
-            View view= LayoutInflater.from(context).inflate(R.layout.receiverlayout,parent,false);
+            View view= LayoutInflater.from(SearchDoctorAdapter.context).inflate(R.layout.receiverlayout,parent,false);
             return new ReceiverViewHolder(view);
         }
     }

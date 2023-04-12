@@ -52,37 +52,38 @@ public class Chat extends AppCompatActivity {
         chatMessage=findViewById(R.id.chatexchanged);
         chatUser = findViewById(R.id.userchattingwith);
         DoctorModel doctorModel = (DoctorModel) getIntent().getSerializableExtra("chatwithuser");
-        Toast.makeText(context, "" + doctorModel.getName(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "" + doctorModel.getName(), Toast.LENGTH_SHORT).show();
         chatUser.setText("Dr " + doctorModel.getName());
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-                while (iterator.hasNext()) {
-                    PatientModel patientModel = iterator.next().getValue(PatientModel.class);
-                    if (patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())) {
+//        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+//                while (iterator.hasNext()) {
+//                    PatientModel patientModel = iterator.next().getValue(PatientModel.class);
+//                    if (patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())) {
 //                        textView.setText("Welcome " + doctorModel.getName());
 //                        textView.setTypeface(null, Typeface.BOLD);
 //                        textView.setTextColor(Color.rgb(0, 0, 0));
 
-                        Toast.makeText(context, "" + patientModel.getName(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//                        Toast.makeText(context, "" + patientModel.getName(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String msg=chatMessage.getText().toString();
+                chatMessage.setText("");
                 if(msg.isEmpty()){
                     Toast.makeText(Chat.this,"Please enter a message", Toast.LENGTH_SHORT).show();
                     return;
@@ -98,7 +99,8 @@ public class Chat extends AppCompatActivity {
                                 .message(msg)
                                 .build();
                         databaseReference.child(key1).setValue(chatModel);
-                        Toast.makeText(Chat.this,"Message Successfully Sent", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Chat.this,"Message Successfully Sent", Toast.LENGTH_SHORT).show();
+                        updateUI(doctorModel);
                     }
 
                     @Override
@@ -112,31 +114,7 @@ public class Chat extends AppCompatActivity {
         });
 
 
-        chatModelArrayList=new ArrayList<>();
-        databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("chats").orderByChild("chatId").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-                while (iterator.hasNext()){
-                    ChatModel chatModel = iterator.next().getValue(ChatModel.class);
-                    if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())&&chatModel.getReceiverEmail().equalsIgnoreCase(doctorModel.getEmail()) ||chatModel.getSenderEmail().equalsIgnoreCase(doctorModel.getEmail()) &&chatModel.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        chatModelArrayList.add(chatModel);
-                    }
-                }
-
-                setAdapter();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-
-
+        updateUI(doctorModel);
 
 
 //        textView.setText("Welcome" + firebaseAuth.getCurrentUser().getDisplayName());
@@ -165,15 +143,42 @@ public class Chat extends AppCompatActivity {
 
     }
 
+    private void updateUI(DoctorModel doctorModel) {
+        chatModelArrayList=new ArrayList<>();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("chats").orderByChild("chatId").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                while (iterator.hasNext()){
+                    ChatModel chatModel = iterator.next().getValue(ChatModel.class);
+                    if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())
+                            && chatModel.getReceiverEmail().equalsIgnoreCase(doctorModel.getEmail())
+                            || chatModel.getSenderEmail().equalsIgnoreCase(doctorModel.getEmail())
+                            && chatModel.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                        chatModelArrayList.add(chatModel);
+                    }
+                }
+
+                setAdapter();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     private void setAdapter(){
-        Log.println(Log.DEBUG, "","this is adapter");
+//        Log.println(Log.DEBUG, "","this is adapter");
         messageAdapter=new ChatAdapter(this,chatModelArrayList);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
         messageAdapter.notifyDataSetChanged();
 
-        Toast.makeText(Chat.this,"Call to recycler view", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(Chat.this,"Call to recycler view", Toast.LENGTH_SHORT).show();
     }
 }
