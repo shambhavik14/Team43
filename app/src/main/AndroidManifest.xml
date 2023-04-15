@@ -23,6 +23,20 @@
         android:theme="@style/Theme.Team43"
         tools:targetApi="31">
         <activity
+            android:name=".AdminHome"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AdminModel"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".project.PatientEditProfile"
             android:exported="false" />
         <activity

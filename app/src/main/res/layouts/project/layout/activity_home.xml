@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homebkg"
+    android:background="@color/white"
     tools:context=".project.Home">
 
     <!--<Button
@@ -64,8 +64,8 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="40dp"
-                android:background="@drawable/white_menu_background"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/test"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -87,17 +87,17 @@
                     android:id="@+id/textView14"
                     android:layout_width="341dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/bellota_light"
                     android:padding="10dp"
-                    android:text="No matter how hard the past, you can always begin again \n \n - Gautam Buddha"
-                    android:textColor="#4E5554"
+                    android:text="No matter how hard the past, you can always begin again"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:textStyle="normal"
+                    android:textStyle="normal|bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.578"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.736" />
+                    app:layout_constraintVertical_bias="0.764" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -108,12 +108,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/listofdoc"
-        android:layout_width="330dp"
-        android:layout_height="110dp"
+        android:layout_width="160dp"
+        android:layout_height="250dp"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/banner_background"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/help"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -121,10 +121,12 @@
             android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_bold"
+            android:padding="10dp"
             android:text="Connect with trained experts "
-            android:textColor="#4F5A59"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="normal"
+            android:textStyle="normal|bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,22 +135,22 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activities_button"
-        android:layout_width="330dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="25dp"
+        android:layout_width="160dp"
+        android:layout_height="250dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="25dp"
-        android:background="@drawable/banner_background"
+        android:background="@drawable/relax"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listofdoc">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
             android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_bold"
+            android:padding="10dp"
             android:text="Ideas for mental rejuvenation"
-            android:textColor="#4F5A59"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -160,9 +162,10 @@
 
     <ImageView
         android:id="@+id/profile"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="100dp"
         android:stateListAnimator="@null"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activities_button"
@@ -170,8 +173,10 @@
 
     <ImageView
         android:id="@+id/logout_button"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activities_button"
