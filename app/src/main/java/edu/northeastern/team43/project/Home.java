@@ -148,7 +148,7 @@ public class Home extends AppCompatActivity {
 
 
         });
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkgreen)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(Home.this,R.color.darkgreen));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Home.this,R.color.darkbluelatest));
     }
 }

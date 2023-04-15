@@ -4,44 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homebkg"
+
     tools:context=".project.Home">
-
-    <!--<Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="LOGOUT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/listofdoctor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="List Of Doctors"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logout_button" />
-
-    <Button
-        android:id="@+id/activities_button"
-        android:layout_width="218dp"
-        android:layout_height="66dp"
-        android:text="Activity Recommendations"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listofdoctor"
-        app:layout_constraintVertical_bias="0.171" />
-
-    -->
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -65,7 +29,8 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/white_menu_background"
+                android:background="@drawable/banner_background"
+                android:elevation="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -77,7 +42,8 @@
                     android:id="@+id/welcome_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="71dp"
-                    android:textSize="20sp"
+                    android:textColor="#273B69"
+                    android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@+id/textView14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,15 +55,15 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="No matter how hard the past, you can always begin again \n \n - Gautam Buddha"
-                    android:textColor="#4E5554"
-                    android:textSize="18sp"
-                    android:textStyle="normal"
+                    android:textColor="#273B69"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.578"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.736" />
+                    app:layout_constraintVertical_bias="0.729" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -108,53 +74,128 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/listofdoc"
-        android:layout_width="330dp"
-        android:layout_height="110dp"
+        android:layout_width="194dp"
+        android:layout_height="241dp"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/banner_background"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:elevation="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/activities_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/nurseId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/nurse_up2"
+            app:shapeAppearanceOverlay="@style/roundImageView"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="4dp">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
         <TextView
             android:id="@+id/textView18"
+            android:layout_width="117dp"
+            android:layout_height="94dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:inputType="textMultiLine"
+            android:text="Connect with  experts "
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_wrapBehaviorInParent="included" />
+
+        <ImageButton
+            android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Connect with trained experts "
-            android:textColor="#4F5A59"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/circle_button"
+            android:clickable="true"
+            android:src="@drawable/arrow_right_alt_48px"
+            app:backgroundTint="#EA4C89"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.359"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activities_button"
-        android:layout_width="330dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/banner_background"
+        android:layout_width="194dp"
+        android:layout_height="241dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+
+        android:elevation="8dp"
+        app:layout_constraintCircleRadius="@dimen/_100sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listofdoc">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/trekId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="52dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/trek_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:shapeAppearanceOverlay="@style/roundImageView">
+
+        </com.google.android.material.imageview.ShapeableImageView>
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/get_active_title"
+            android:layout_width="116dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:inputType="textMultiLine"
+            android:text="\t Get \n Active"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_wrapBehaviorInParent="included" />
+
+        <ImageButton
+            android:id="@+id/get_active_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ideas for mental rejuvenation"
-            android:textColor="#4F5A59"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_button"
+            android:clickable="true"
+            android:src="@drawable/arrow_right_alt_48px"
+            app:backgroundTint="#EA4C89"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.359"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/get_active_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
