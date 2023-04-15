@@ -12,10 +12,13 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +32,6 @@ import edu.northeastern.team43.R;
 
 public class Home extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
-    ConstraintLayout button;
 
     DatabaseReference databaseReference;
 
@@ -44,9 +46,9 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        button = findViewById(R.id.listofdoc);
+        ImageButton connectWithExpertsBtn = findViewById(R.id.connect_expert_button);
         TextView welcomeMsg= findViewById(R.id.welcome_msg);
-        button.setOnClickListener(v->{
+        connectWithExpertsBtn.setOnClickListener(v->{
             Intent intent = new Intent(getApplicationContext(),SearchDoctorActivity.class);
             startActivity(intent);
         });
@@ -108,8 +110,8 @@ public class Home extends AppCompatActivity {
                 finish();
             });
         }
-        ConstraintLayout activity = (ConstraintLayout) findViewById(R.id.activities_button);
-        activity.setOnClickListener(new View.OnClickListener() {
+        ImageButton getActiveButton =  findViewById(R.id.get_active_button);
+        getActiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Home.this, Activity_Recommendation.class);
