@@ -2,23 +2,18 @@ package edu.northeastern.team43.project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +25,7 @@ import java.util.Iterator;
 
 import edu.northeastern.team43.R;
 
-public class Home extends AppCompatActivity {
+public class DoctorHome extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     DatabaseReference databaseReference;
@@ -45,7 +40,7 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_doctor_home);
         ImageButton connectWithExpertsBtn = findViewById(R.id.connect_expert_button);
         TextView welcomeMsg= findViewById(R.id.welcome_msg);
         connectWithExpertsBtn.setOnClickListener(v->{
@@ -56,35 +51,15 @@ public class Home extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-//        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-//                while (iterator.hasNext()){
-//                    DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
-//                    if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                        welcomeMsg.setText("Welcome "+doctorModel.getName());
-//                        welcomeMsg.setTypeface(null, Typeface.BOLD);
-//                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-                while(iterator.hasNext()){
-                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        welcomeMsg.setText("Welcome "+patientModel.getName());
-                        welcomeMsg.setTypeface(null,Typeface.BOLD);
+                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                while (iterator.hasNext()){
+                    DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
+                    if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                        welcomeMsg.setText("Welcome "+doctorModel.getName());
+                        welcomeMsg.setTypeface(null, Typeface.BOLD);
                         welcomeMsg.setTextColor(Color.rgb(0,0,0));
                     }
                 }
@@ -95,6 +70,26 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
+//        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
+//                while(iterator.hasNext()){
+//                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
+//                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+//                        welcomeMsg.setText("Welcome "+patientModel.getName());
+//                        welcomeMsg.setTypeface(null,Typeface.BOLD);
+//                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         ImageView logoutButton = findViewById(R.id.logout_button);
         if (firebaseAuth.getCurrentUser()==null){
             Intent intent = new Intent(getApplicationContext(),Companion.class);
@@ -114,7 +109,7 @@ public class Home extends AppCompatActivity {
         getActiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home.this, Activity_Recommendation.class);
+                Intent intent = new Intent(DoctorHome.this, Activity_Recommendation.class);
                 startActivity(intent);
 
             }
@@ -140,18 +135,18 @@ public class Home extends AppCompatActivity {
 //                }
 //            });
 //            if (isDoctor){
-//                Intent intent = new Intent(Home.this, DoctorEditProfile.class);
-//                startActivity(intent);
+                Intent intent = new Intent(DoctorHome.this, DoctorEditProfile.class);
+                startActivity(intent);
 //            }
 //            else{
-                Intent intent = new Intent(Home.this, PatientEditProfile.class);
-                startActivity(intent);
+//                Intent intent = new Intent(DoctorHome.this, PatientEditProfile.class);
+//                startActivity(intent);
 //            }
 
 
 
         });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(Home.this,R.color.darkbluelatest));
+        getWindow().setStatusBarColor(ContextCompat.getColor(DoctorHome.this,R.color.darkbluelatest));
     }
 }

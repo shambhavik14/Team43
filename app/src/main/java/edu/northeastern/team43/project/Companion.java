@@ -12,13 +12,20 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Iterator;
+
 import edu.northeastern.team43.R;
 
 public class Companion extends AppCompatActivity {
@@ -27,6 +34,10 @@ public class Companion extends AppCompatActivity {
     EditText passwordEditText;
     Button registerButton;
     FirebaseAuth firebaseAuth;
+
+    Intent homeIntent;
+
+    DatabaseReference databaseReference;
     @Override
     public void onBackPressed() {
         FirebaseAuth.getInstance().signOut();
@@ -69,8 +80,47 @@ public class Companion extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(getApplicationContext(),"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),Home.class);
-                            startActivity(intent);
+                            databaseReference= FirebaseDatabase.getInstance().getReference();
+
+                            databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                                    while (iterator.hasNext()){
+                                        DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
+                                        if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                                            homeIntent = new Intent(getApplicationContext(),DoctorHome.class);
+                                            startActivity(homeIntent);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+                            databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
+                                    while(iterator.hasNext()){
+                                        PatientModel patientModel=iterator.next().getValue(PatientModel.class);
+                                        if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                                            homeIntent = new Intent(getApplicationContext(),Home.class);
+                                            startActivity(homeIntent);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
