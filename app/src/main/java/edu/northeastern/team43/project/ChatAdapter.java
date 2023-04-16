@@ -34,11 +34,13 @@ public class ChatAdapter extends RecyclerView.Adapter {
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     String userProfilePic = "";
+    boolean isDoctor;
 
-    public ChatAdapter(Context context, ArrayList<ChatModel> messagesArrayList) {
+    public ChatAdapter(Context context, ArrayList<ChatModel> messagesArrayList,boolean isDoctor) {
         this.context = context;
         this.messagesArrayList = messagesArrayList;
         firebaseAuth=FirebaseAuth.getInstance();
+        this.isDoctor = isDoctor;
     }
 
     @NonNull
@@ -46,12 +48,24 @@ public class ChatAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if(viewType==ITEM_SEND){
-            View view= LayoutInflater.from(SearchDoctorAdapter.context).inflate(R.layout.senderlayout,parent,false);
-            return new SenderViewHolder(view);
+            if (isDoctor){
+                View view= LayoutInflater.from(SearchDoctorAdapter.context).inflate(R.layout.senderlayout,parent,false);
+                return new SenderViewHolder(view);
+            }else {
+                View view= LayoutInflater.from(SearchPatientAdapter.context).inflate(R.layout.senderlayout,parent,false);
+                return new SenderViewHolder(view);
+            }
+
         }
         else{
-            View view= LayoutInflater.from(SearchDoctorAdapter.context).inflate(R.layout.receiverlayout,parent,false);
-            return new ReceiverViewHolder(view);
+            if (isDoctor){
+                View view= LayoutInflater.from(SearchDoctorAdapter.context).inflate(R.layout.receiverlayout,parent,false);
+                return new ReceiverViewHolder(view);
+            }else {
+                View view= LayoutInflater.from(SearchPatientAdapter.context).inflate(R.layout.receiverlayout,parent,false);
+                return new ReceiverViewHolder(view);
+            }
+
         }
     }
 

@@ -44,7 +44,7 @@ public class DoctorHome extends AppCompatActivity {
         ImageButton connectWithExpertsBtn = findViewById(R.id.connect_expert_button);
         TextView welcomeMsg= findViewById(R.id.welcome_msg);
         connectWithExpertsBtn.setOnClickListener(v->{
-            Intent intent = new Intent(getApplicationContext(),SearchDoctorActivity.class);
+            Intent intent = new Intent(getApplicationContext(),SearchPatientActivity.class);
             startActivity(intent);
         });
 

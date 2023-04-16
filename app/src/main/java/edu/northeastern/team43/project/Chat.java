@@ -42,7 +42,8 @@ public class Chat extends AppCompatActivity {
     EditText chatMessage;
     RecyclerView recyclerView;
     ArrayList<ChatModel> chatModelArrayList;
-
+    PatientModel patientModel = null;
+    DoctorModel doctorModel = null;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +54,28 @@ public class Chat extends AppCompatActivity {
         chatMessage=findViewById(R.id.chatexchanged);
         chatUser = findViewById(R.id.userchattingwith);
         ImageView receiverPic = findViewById(R.id.receiverpic);
-        DoctorModel doctorModel = (DoctorModel) getIntent().getSerializableExtra("chatwithuser");
-        Glide.with(getApplicationContext()).load(doctorModel.getProfilePicture()).circleCrop().into(receiverPic);
-        chatUser.setText("Dr " + doctorModel.getName());
+//        PatientModel patientModel = null;
+//        DoctorModel doctorModel = null;
+        try {
+
+            doctorModel= (DoctorModel) getIntent().getSerializableExtra("chatwithuser");
+        }catch (Exception e){
+            patientModel= (PatientModel) getIntent().getSerializableExtra("chatwithuser");
+        }
+        if (doctorModel!=null){
+            Glide.with(getApplicationContext()).load(doctorModel.getProfilePicture()).circleCrop().into(receiverPic);
+            chatUser.setText("Dr " + doctorModel.getName());
+        }else {
+            Glide.with(getApplicationContext()).load(patientModel.getProfilePicture()).circleCrop().into(receiverPic);
+            chatUser.setText(patientModel.getName());
+        }
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+//        DoctorModel finalDoctorModel = doctorModel;
+//        PatientModel finalPatientModel = patientModel;
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +92,16 @@ public class Chat extends AppCompatActivity {
                         ChatModel chatModel=new ChatModel.Builder()
                                 .chatId(key1)
                                 .senderEmail(firebaseAuth.getCurrentUser().getEmail())
-                                .receiverEmail(doctorModel.getEmail())
+                                .receiverEmail(doctorModel!=null ?doctorModel.getEmail():patientModel.getEmail())
                                 .message(msg)
                                 .date(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(LocalDateTime.now()))
                                 .build();
                         databaseReference.child(key1).setValue(chatModel);
-                        updateUI(doctorModel);
+                        if (doctorModel!=null){
+                            updateUIForDoctor(doctorModel);
+                        }else {
+                            updateUIForPatient(patientModel);
+                        }
                     }
 
                     @Override
@@ -90,13 +111,18 @@ public class Chat extends AppCompatActivity {
                 });
             }
         });
-        updateUI(doctorModel);
+        if (doctorModel!=null){
+            updateUIForDoctor(doctorModel);
+        }else {
+            updateUIForPatient(patientModel);
+        }
+
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
         getWindow().setStatusBarColor(ContextCompat.getColor(Chat.this,R.color.darkgreen));
 
     }
 
-    private void updateUI(DoctorModel doctorModel) {
+    private void updateUIForDoctor(DoctorModel doctorModel) {
         chatModelArrayList=new ArrayList<>();
         databaseReference= FirebaseDatabase.getInstance().getReference();
         databaseReference.child("chats").orderByChild("chatId").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -121,10 +147,40 @@ public class Chat extends AppCompatActivity {
             }
         });
     }
+    private void updateUIForPatient(PatientModel patientModel) {
+        chatModelArrayList=new ArrayList<>();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("chats").orderByChild("chatId").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                while (iterator.hasNext()){
+                    ChatModel chatModel = iterator.next().getValue(ChatModel.class);
+                    if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())
+                            && chatModel.getReceiverEmail().equalsIgnoreCase(patientModel.getEmail())
+                            || chatModel.getSenderEmail().equalsIgnoreCase(patientModel.getEmail())
+                            && chatModel.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                        chatModelArrayList.add(chatModel);
+                    }
+                }
+                setAdapter();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
     private void setAdapter(){
-        messageAdapter=new ChatAdapter(this,chatModelArrayList);
+        if (doctorModel!=null){
+            messageAdapter=new ChatAdapter(this,chatModelArrayList,true);
+        }else {
+            messageAdapter=new ChatAdapter(this,chatModelArrayList,false);
+        }
+
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
