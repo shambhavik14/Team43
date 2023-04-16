@@ -114,7 +114,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
                     Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
                     while(iterator.hasNext()){
                         PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                        if(patientModel.getEmail().equalsIgnoreCase(chatModel.getReceiverEmail())){
+                        if(patientModel.getEmail().equalsIgnoreCase(chatModel.getSenderEmail())){
                             Glide.with(context).load( patientModel.getProfilePicture()).circleCrop().into(viewHolder.senderImage);
                             break;
                         }
@@ -168,7 +168,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
                     Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
                     while(iterator.hasNext()){
                         PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                        if(patientModel.getEmail().equalsIgnoreCase(chatModel.getReceiverEmail())){
+                        if(patientModel.getEmail().equalsIgnoreCase(chatModel.getSenderEmail())){
                             Glide.with(context).load(patientModel.getProfilePicture()).circleCrop().into(viewHolder.receiverImage);
                             break;
                         }
