@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -29,12 +33,14 @@ public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
+        ImageView profilePic;
         private TextView name;
-        private Button chatButton;
+        private ConstraintLayout chatButton;
     public MyViewHolder(@NonNull View itemView){
         super(itemView);
         name=itemView.findViewById(R.id.doctorName);
         chatButton=itemView.findViewById(R.id.chatButton);
+        profilePic = itemView.findViewById(R.id.chat_profile_pic);
 
 
 
@@ -56,6 +62,7 @@ public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapte
 
         DoctorModel docObj= doctorObject.get(position);
         Log.println(Log.DEBUG, "", docObj.getName());
+        Glide.with(context).load(docObj.getProfilePicture()).circleCrop().into(holder.profilePic);
         holder.name.setText(docObj.getName());
         holder.chatButton.setOnClickListener(v->{
             Intent intent = new Intent(context, Chat.class);

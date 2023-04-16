@@ -13,9 +13,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -47,7 +52,9 @@ public class Chat extends AppCompatActivity {
         sendButton=findViewById(R.id.sendbttn);
         chatMessage=findViewById(R.id.chatexchanged);
         chatUser = findViewById(R.id.userchattingwith);
+        ImageView receiverPic = findViewById(R.id.receiverpic);
         DoctorModel doctorModel = (DoctorModel) getIntent().getSerializableExtra("chatwithuser");
+        Glide.with(getApplicationContext()).load(doctorModel.getProfilePicture()).circleCrop().into(receiverPic);
         chatUser.setText("Dr " + doctorModel.getName());
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -70,6 +77,7 @@ public class Chat extends AppCompatActivity {
                                 .senderEmail(firebaseAuth.getCurrentUser().getEmail())
                                 .receiverEmail(doctorModel.getEmail())
                                 .message(msg)
+                                .date(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(LocalDateTime.now()))
                                 .build();
                         databaseReference.child(key1).setValue(chatModel);
                         updateUI(doctorModel);
