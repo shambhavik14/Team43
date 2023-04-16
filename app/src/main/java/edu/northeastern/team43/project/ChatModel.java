@@ -6,8 +6,6 @@ public class ChatModel implements Serializable{
     public String receiverEmail;
     public String senderEmail;
 
-
-
     public String message;
     public String date;
     public String chatId;
