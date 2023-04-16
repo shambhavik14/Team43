@@ -19,6 +19,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import edu.northeastern.team43.R;
 
 public class Companion extends AppCompatActivity {
@@ -27,6 +30,7 @@ public class Companion extends AppCompatActivity {
     EditText passwordEditText;
     Button registerButton;
     FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
     @Override
     public void onBackPressed() {
         FirebaseAuth.getInstance().signOut();
@@ -58,6 +62,7 @@ public class Companion extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
         }
         firebaseAuth= FirebaseAuth.getInstance();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
         Button submit = findViewById(R.id.loginButton);
         emailEditText = findViewById(R.id.username);
         passwordEditText=findViewById(R.id.password);
@@ -69,8 +74,11 @@ public class Companion extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(getApplicationContext(),"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),Home.class);
-                            startActivity(intent);
+                            if(firebaseAuth.getCurrentUser().getEmail().equalsIgnoreCase("admin@gmail.com")) {
+                                Intent intent = new Intent(getApplicationContext(),AdminHome.class);
+                                startActivity(intent);
+                            }
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
