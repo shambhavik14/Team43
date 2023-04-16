@@ -209,7 +209,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Toast.makeText(getApplicationContext(),"REGISTRATION SUCCESSFUL",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),Welcome.class);
+                            Intent intent = new Intent(getApplicationContext(),Companion.class);
                             databaseReference.orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {

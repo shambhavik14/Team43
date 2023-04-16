@@ -73,13 +73,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".project.Welcome"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".project.Register"
             android:exported="false">
             <meta-data
