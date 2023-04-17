@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login"
     tools:context=".project.DoctorRegistrationActivity">
 
     <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="728dp"
+        android:layout_width="421dp"
+        android:layout_height="741dp"
+        android:background="@drawable/login"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,15 +18,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".MainActivity">
+
         <TextView
             android:id="@+id/signuptitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Sign up"
-            android:textColor="@color/black"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+            android:textColor="@color/white"
+            android:textSize="30dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="351dp"
@@ -63,8 +65,8 @@
                     android:id="@+id/reg_doc_name"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/custom_edittext"
                     android:drawableLeft="@drawable/ic_baseline_person_outline_24"
@@ -72,19 +74,20 @@
                     android:hint="Name"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background" /> />
+                    android:textColorHighlight="@color/cardview_dark_background" />
+                />
 
                 <EditText
                     android:id="@+id/reg_doc_email"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/custom_edittext"
-                    android:hint="Email"
                     android:drawableLeft="@drawable/ic_baseline_email_24"
                     android:drawablePadding="8dp"
+                    android:hint="Email"
                     android:padding="10dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
@@ -95,18 +98,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_below="@+id/reg_pat_email"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/custom_edittext"
-                    android:hint="Password"
-                    android:inputType="textPassword"
                     android:drawableLeft="@drawable/ic_baseline_info_24"
                     android:drawablePadding="8dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
                     android:padding="10dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
                     app:layout_constraintTop_toBottomOf="@+id/reg_doc_email" />
+
                 <EditText
                     android:id="@+id/reg_doc_date"
                     android:layout_width="match_parent"
@@ -150,10 +154,10 @@
                     android:id="@+id/reg_submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:backgroundTint="@color/darkgreen"
+                    android:backgroundTint="@color/darkbluelatest"
                     android:text="SUBMIT"
                     app:cornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
