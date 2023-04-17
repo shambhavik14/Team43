@@ -10,10 +10,13 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +30,7 @@ import edu.northeastern.team43.R;
 
 public class DoctorHome extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
+    ImageView doctorProfile;
 
     DatabaseReference databaseReference;
 
@@ -40,9 +44,17 @@ public class DoctorHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
+
+
         setContentView(R.layout.activity_doctor_home);
         ImageButton connectWithExpertsBtn = findViewById(R.id.connect_expert_button);
         TextView welcomeMsg= findViewById(R.id.welcome_msg);
+        doctorProfile=findViewById(R.id.docim);
         connectWithExpertsBtn.setOnClickListener(v->{
             Intent intent = new Intent(getApplicationContext(),SearchPatientActivity.class);
             startActivity(intent);
@@ -58,9 +70,10 @@ public class DoctorHome extends AppCompatActivity {
                 while (iterator.hasNext()){
                     DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
                     if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        welcomeMsg.setText("Welcome "+doctorModel.getName());
-                        welcomeMsg.setTypeface(null, Typeface.BOLD);
-                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
+                        welcomeMsg.setText("Welcome Dr. "+doctorModel.getName());
+//                        welcomeMsg.setTypeface(null, Typeface.BOLD);
+//                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
+                        Glide.with(getApplicationContext()).load( doctorModel.getProfilePicture()).circleCrop().into(doctorProfile);
                     }
                 }
             }
@@ -105,15 +118,15 @@ public class DoctorHome extends AppCompatActivity {
                 finish();
             });
         }
-        ImageButton getActiveButton =  findViewById(R.id.get_active_button);
-        getActiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DoctorHome.this, Activity_Recommendation.class);
-                startActivity(intent);
-
-            }
-        });
+//        ImageButton getActiveButton =  findViewById(R.id.get_active_button);
+//        getActiveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(DoctorHome.this, Activity_Recommendation.class);
+//                startActivity(intent);
+//
+//            }
+//        });
         ImageView myProfileButton = findViewById(R.id.profile);
         myProfileButton.setOnClickListener(v->{
 //            databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
