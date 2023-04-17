@@ -129,8 +129,9 @@ public class SearchPatientActivity extends AppCompatActivity {
                 if (o1.getMostRecentMsgDate() ==null || o2.getMostRecentMsgDate()==null){
                     return 0;
                 }
-                LocalDateTime date1 =  LocalDateTime.parse(o1.getMostRecentMsgDate(), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
-                LocalDateTime date2 =  LocalDateTime.parse(o2.getMostRecentMsgDate(),DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd h:m a");
+                LocalDateTime date1 =  LocalDateTime.parse(o1.getMostRecentMsgDate(), formatter);
+                LocalDateTime date2 =  LocalDateTime.parse(o2.getMostRecentMsgDate(),formatter);
 
                 if( date1.isAfter(date2)){
                     return -1;

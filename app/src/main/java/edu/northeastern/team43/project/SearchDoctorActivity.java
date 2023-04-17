@@ -109,8 +109,12 @@ public class SearchDoctorActivity extends AppCompatActivity {
         doctorNamesList.sort(new Comparator<DoctorModel>() {
             @Override
             public int compare(DoctorModel o1, DoctorModel o2) {
-                LocalDateTime date1 =  LocalDateTime.parse(o1.getMostRecentMsgDate(), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
-                LocalDateTime date2 =  LocalDateTime.parse(o2.getMostRecentMsgDate(),DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+                if (o1.getMostRecentMsgDate() ==null || o2.getMostRecentMsgDate()==null){
+                    return 0;
+                }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd h:m a");
+                LocalDateTime date1 =  LocalDateTime.parse(o1.getMostRecentMsgDate(), formatter);
+                LocalDateTime date2 =  LocalDateTime.parse(o2.getMostRecentMsgDate(),formatter);
 
                 if( date1.isAfter(date2)){
                     return -1;

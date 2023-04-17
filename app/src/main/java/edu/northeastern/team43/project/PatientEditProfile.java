@@ -57,7 +57,7 @@ public class PatientEditProfile extends AppCompatActivity {
 
     ImageView profilePicture;
 
-    String profilePictureFirebasePath = "";
+    String profilePictureFirebasePath = "https://firebasestorage.googleapis.com/v0/b/team43-d5a15.appspot.com/o/images%2Ffda5ec56-55e6-47c3-a463-7f25acba0f1c?alt=media&token=d7f381a7-1628-4cf5-b4ae-aa4e6ed82fd5";
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -242,7 +242,7 @@ public class PatientEditProfile extends AppCompatActivity {
                                 databaseReference.child("patients").child(patientModel.getPatientId()).child("name").setValue(name);
                                 databaseReference.child("patients").child(patientModel.getPatientId()).child("password").setValue(password);
                                 databaseReference.child("patients").child(patientModel.getPatientId()).child("state").setValue(state);
-
+                                databaseReference.child("patients").child(patientModel.getPatientId()).child("profilePicture").setValue(profilePictureFirebasePath);
 
                                 if(emailId.equalsIgnoreCase(patientModel.getEmail()) && password.equalsIgnoreCase(patientModel.getPassword())){
                                     databaseReference.child("patients").child(patientModel.getPatientId()).child("email").setValue(emailId);

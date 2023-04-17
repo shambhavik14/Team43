@@ -7,9 +7,11 @@ import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,7 +60,7 @@ public class PatientRegistrationActivity extends AppCompatActivity {
 
     ImageView profilePicture;
 
-    String profilePictureFirebasePath = "";
+    String profilePictureFirebasePath = "https://firebasestorage.googleapis.com/v0/b/team43-d5a15.appspot.com/o/images%2Ffda5ec56-55e6-47c3-a463-7f25acba0f1c?alt=media&token=d7f381a7-1628-4cf5-b4ae-aa4e6ed82fd5";
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -205,47 +207,63 @@ public class PatientRegistrationActivity extends AppCompatActivity {
             Log.d("dob",dateOfBirth);
             String gender=patientGender.getSelectedItem().toString().trim();
             String state=patientState.getSelectedItem().toString().trim();
-           firebaseAuth.createUserWithEmailAndPassword(email,password)
-                   .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                       @Override
-                       public void onComplete(@NonNull Task<AuthResult> task) {
-                           Toast.makeText(getApplicationContext(),"REGISTRATION SUCCESSFUL",Toast.LENGTH_SHORT).show();
-                           Intent intent=new Intent(getApplicationContext(), Companion.class);
-                           databaseReference.orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-                               @Override
-                               public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                   String key1=databaseReference.push().getKey();
-                                   PatientModel patient=new PatientModel.Builder()
-                                           .patientId(key1)
-                                           .name(name)
-                                           .email(email)
-                                           .password(password)
-                                           .dob(dateOfBirth)
-                                           .gender(gender)
-                                           .state(state)
-                                           .profilePicture(profilePictureFirebasePath)
-                                           .build();
-                                   databaseReference.child(key1).setValue(patient);
-                               }
+            try {
+                firebaseAuth.createUserWithEmailAndPassword(email,password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                Intent intent=new Intent(getApplicationContext(), Companion.class);
+                                databaseReference.orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String key1=databaseReference.push().getKey();
+                                        PatientModel patient=new PatientModel.Builder()
+                                                .patientId(key1)
+                                                .name(name)
+                                                .email(email)
+                                                .password(password)
+                                                .dob(dateOfBirth)
+                                                .gender(gender)
+                                                .state(state)
+                                                .profilePicture(profilePictureFirebasePath)
+                                                .build();
+                                        databaseReference.child(key1).setValue(patient);
+                                    }
 
-                               @Override
-                               public void onCancelled(@NonNull DatabaseError error) {
-                                   Log.d("",error.getMessage());
-                               }
-                           });
-                       startActivity(intent);
-                       }
-                   }).addOnFailureListener(new OnFailureListener() {
-                       @Override
-                       public void onFailure(@NonNull Exception e) {
-                           Toast.makeText(getApplicationContext(),"REGISTRATION FAILURE",Toast.LENGTH_SHORT).show();
-                       }
-                   });
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.d("",error.getMessage());
+                                    }
+                                });
+                                startActivity(intent);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                showErrorDialog();
+                            }
+                        });
+            }catch (Exception e){
+                showErrorDialog();
+            }
+
 
         });
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
         getWindow().setStatusBarColor(ContextCompat.getColor(PatientRegistrationActivity.this,R.color.darkgreen));
 
+    }
+    private void showErrorDialog() {
+        Dialog dialog = new Dialog(PatientRegistrationActivity.this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(R.layout.error_dialog);
+
+        dialog.show();
+        Button closeButton = dialog.findViewById(R.id.cancel_button);
+        closeButton.setOnClickListener(v1->{
+            dialog.dismiss();
+        });
     }
 }

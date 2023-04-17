@@ -92,7 +92,10 @@ public class Chat extends AppCompatActivity {
                 databaseReference.orderByChild("chatId").addListenerForSingleValueEvent(new ValueEventListener(){
                     public void onDataChange(@NonNull DataSnapshot snapshot){
                         String key1=databaseReference.push().getKey();
-                        String currentDate = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(LocalDateTime.now());
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd h:m a");
+                        String currentDate = formatter.format(LocalDateTime.now());
+//                        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+//                        String currentDate = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(LocalDateTime.now());
                         ChatModel chatModel=new ChatModel.Builder()
                                 .chatId(key1)
                                 .senderEmail(firebaseAuth.getCurrentUser().getEmail())
@@ -250,6 +253,7 @@ public class Chat extends AppCompatActivity {
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
+        recyclerView.scrollToPosition(chatModelArrayList.size() - 1);
         messageAdapter.notifyDataSetChanged();
     }
 }

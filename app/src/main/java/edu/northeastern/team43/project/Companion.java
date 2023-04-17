@@ -83,7 +83,6 @@ public class Companion extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
-                                Toast.makeText(getApplicationContext(),"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
                                 databaseReference= FirebaseDatabase.getInstance().getReference();
 
                                 databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,7 +91,7 @@ public class Companion extends AppCompatActivity {
                                         Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                                         while (iterator.hasNext()){
                                             DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
-                                            if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                                            if (doctorModel.getEmail().equalsIgnoreCase(emailId)){
                                                 homeIntent = new Intent(getApplicationContext(),DoctorHome.class);
                                                 startActivity(homeIntent);
                                             }
@@ -111,7 +110,7 @@ public class Companion extends AppCompatActivity {
                                         Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
                                         while(iterator.hasNext()){
                                             PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                                            if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                                            if(patientModel.getEmail().equalsIgnoreCase(emailId)){
                                                 homeIntent = new Intent(getApplicationContext(),Home.class);
                                                 startActivity(homeIntent);
                                             }
