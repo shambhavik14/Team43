@@ -62,8 +62,6 @@ public class Chat extends AppCompatActivity {
         chatMessage=findViewById(R.id.chatexchanged);
         chatUser = findViewById(R.id.userchattingwith);
         ImageView receiverPic = findViewById(R.id.receiverpic);
-//        PatientModel patientModel = null;
-//        DoctorModel doctorModel = null;
         try {
 
             doctorModel= (DoctorModel) getIntent().getSerializableExtra("chatwithuser");
@@ -82,8 +80,6 @@ public class Chat extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-//        DoctorModel finalDoctorModel = doctorModel;
-//        PatientModel finalPatientModel = patientModel;
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +95,6 @@ public class Chat extends AppCompatActivity {
                         String key1=databaseReference.push().getKey();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd h:m a");
                         String currentDate = formatter.format(LocalDateTime.now());
-//                        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-//                        String currentDate = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(LocalDateTime.now());
                         ChatModel chatModel=new ChatModel.Builder()
                                 .chatId(key1)
                                 .senderEmail(firebaseAuth.getCurrentUser().getEmail())
@@ -110,7 +104,6 @@ public class Chat extends AppCompatActivity {
                                 .build();
                         databaseReference.child(key1).setValue(chatModel);
                         if (doctorModel!=null){
-//                            notifyUser(doctorModel.getName(),doctorModel.getProfilePicture(),msg);
 
                             databaseReference = FirebaseDatabase.getInstance().getReference();
                             databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -133,7 +126,6 @@ public class Chat extends AppCompatActivity {
                             });
                             updateUIForDoctor(doctorModel);
                         }else {
-//                            notifyUser(patientModel.getName(),patientModel.getProfilePicture(),msg);
                             databaseReference = FirebaseDatabase.getInstance().getReference();
                             databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -206,7 +198,7 @@ public class Chat extends AppCompatActivity {
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                 while (iterator.hasNext()){
                     ChatModel chatModel = iterator.next().getValue(ChatModel.class);
-                    if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())
+                    if(firebaseAuth.getCurrentUser()!=null && chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())
                             && chatModel.getReceiverEmail().equalsIgnoreCase(doctorModel.getEmail())
                             || chatModel.getSenderEmail().equalsIgnoreCase(doctorModel.getEmail())
                             && chatModel.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
@@ -261,38 +253,5 @@ public class Chat extends AppCompatActivity {
         recyclerView.setAdapter(messageAdapter);
         recyclerView.scrollToPosition(chatModelArrayList.size() - 1);
         messageAdapter.notifyDataSetChanged();
-    }
-    private void notifyUser(String name,String profilePicture, String msg){
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            NotificationChannel notificationChannel = new NotificationChannel("my notification","my notification", NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager manager=getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(notificationChannel);
-        }
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(Chat.this,"my notification");
-        builder.setContentTitle(name);
-        builder.setAutoCancel(true);
-        builder.setSmallIcon(R.drawable.bob);
-        builder.setContentText(msg);
-//        Bitmap largeIcon = null;
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(profilePicture);
-                    Bitmap largeIcon = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    builder.setLargeIcon(largeIcon);
-                } catch(IOException e) {
-                    System.out.println(e);
-                }
-            }
-        });
-
-        thread.start();
-
-
-
-        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Chat.this);
-        managerCompat.notify(1,builder.build());
     }
 }

@@ -170,7 +170,7 @@ public class Home extends AppCompatActivity {
                     prev = iterator.next().getValue(ChatModel.class);
                 }
                 ChatModel finalPrev = prev;
-                if (prev.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                if (firebaseAuth.getCurrentUser()!=null && prev.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
 
                     databaseReference.child("doctors").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
