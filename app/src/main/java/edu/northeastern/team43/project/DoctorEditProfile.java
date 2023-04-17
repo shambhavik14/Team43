@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -105,6 +107,11 @@ public class DoctorEditProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_doctor_registration);
         emailEditText = findViewById(R.id.reg_doc_email);
         TextView titleTextView = findViewById(R.id.signuptitle);
@@ -297,8 +304,7 @@ public class DoctorEditProfile extends AppCompatActivity {
 
         });
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(DoctorEditProfile.this,R.color.darkbluelatest));
+
     }
     private boolean validateEmailAndPassword(String email, String password){
         boolean isValid = true;
