@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -213,50 +215,66 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             String state = stateSpinner.getSelectedItem().toString().trim();
             String dateOfBirth = dateText.getText().toString().trim();
             String name= nameEditText.getText().toString().trim();
+            try {
 
-            firebaseAuth.createUserWithEmailAndPassword(emailId,password)
-                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(getApplicationContext(),"REGISTRATION SUCCESSFUL",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),Companion.class);
-                            databaseReference.orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    String key1 = databaseReference.push().getKey();
-                                    DoctorModel doctor = new DoctorModel.Builder()
-                                            .doctorId(key1)
-                                            .name(name)
-                                            .email(emailId)
-                                            .password(password)
-                                            .dob(dateOfBirth)
-                                            .gender(gender)
-                                            .state(state)
-                                            .profilePicture(profilePictureFirebasePath)
-                                            .build();
-                                    databaseReference.child(key1).setValue(doctor);
+                firebaseAuth.createUserWithEmailAndPassword(emailId,password)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                Toast.makeText(getApplicationContext(),"REGISTRATION SUCCESSFUL",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(),Companion.class);
+                                databaseReference.orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String key1 = databaseReference.push().getKey();
+                                        DoctorModel doctor = new DoctorModel.Builder()
+                                                .doctorId(key1)
+                                                .name(name)
+                                                .email(emailId)
+                                                .password(password)
+                                                .dob(dateOfBirth)
+                                                .gender(gender)
+                                                .state(state)
+                                                .profilePicture(profilePictureFirebasePath)
+                                                .build();
+                                        databaseReference.child(key1).setValue(doctor);
 
-                                }
+                                    }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-                                    Log.d("", error.getMessage());
-                                }
-                            });
-                            startActivity(intent);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(),"REGISTRATION FAILURE",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.d("", error.getMessage());
+                                    }
+                                });
+                                startActivity(intent);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                showErrorDialog();
+                            }
+                        });
+            }catch (Exception e){
+                showErrorDialog();
+            }
+
 
 
         });
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
         getWindow().setStatusBarColor(ContextCompat.getColor(DoctorRegistrationActivity.this,R.color.darkbluelatest));
+    }
+    private void showErrorDialog() {
+        Dialog dialog = new Dialog(DoctorRegistrationActivity.this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(R.layout.error_dialog);
+
+        dialog.show();
+        Button closeButton = dialog.findViewById(R.id.cancel_button);
+        closeButton.setOnClickListener(v1->{
+            dialog.dismiss();
+        });
     }
 }

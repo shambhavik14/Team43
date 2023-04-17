@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -75,60 +77,65 @@ public class Companion extends AppCompatActivity {
         submit.setOnClickListener(v->{
             String emailId = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
-            firebaseAuth.signInWithEmailAndPassword(emailId,password)
-                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(getApplicationContext(),"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
-                            databaseReference= FirebaseDatabase.getInstance().getReference();
+            try {
 
-                            databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-                                    while (iterator.hasNext()){
-                                        DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
-                                        if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                                            homeIntent = new Intent(getApplicationContext(),DoctorHome.class);
-                                            startActivity(homeIntent);
+                firebaseAuth.signInWithEmailAndPassword(emailId,password)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                Toast.makeText(getApplicationContext(),"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
+                                databaseReference= FirebaseDatabase.getInstance().getReference();
+
+                                databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                                        while (iterator.hasNext()){
+                                            DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
+                                            if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                                                homeIntent = new Intent(getApplicationContext(),DoctorHome.class);
+                                                startActivity(homeIntent);
+                                            }
                                         }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
+                                    }
+                                });
 
-                            databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-                                    while(iterator.hasNext()){
-                                        PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                                        if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                                            homeIntent = new Intent(getApplicationContext(),Home.class);
-                                            startActivity(homeIntent);
+                                databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
+                                        while(iterator.hasNext()){
+                                            PatientModel patientModel=iterator.next().getValue(PatientModel.class);
+                                            if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                                                homeIntent = new Intent(getApplicationContext(),Home.class);
+                                                startActivity(homeIntent);
+                                            }
                                         }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
+                                    }
+                                });
 
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(),"LOGIN FAILURE",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                showErrorDialog();
+                            }
+                        });
+            }catch (Exception e){
+                showErrorDialog();
+            }
         });
         registerButton = (Button) findViewById(R.id.signupText);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -140,5 +147,17 @@ public class Companion extends AppCompatActivity {
         });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.blue)));
         getWindow().setStatusBarColor(ContextCompat.getColor(Companion.this,R.color.blue));
+    }
+
+    private void showErrorDialog() {
+        Dialog dialog = new Dialog(Companion.this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(R.layout.error_dialog);
+
+        dialog.show();
+        Button closeButton = dialog.findViewById(R.id.cancel_button);
+        closeButton.setOnClickListener(v1->{
+            dialog.dismiss();
+        });
     }
 }

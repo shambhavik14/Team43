@@ -43,7 +43,7 @@ public class Register extends AppCompatActivity {
 
 
         firebaseAuth=FirebaseAuth.getInstance();
-        Button regAsDoctor = findViewById(R.id.reg_doc_button);
+        Button regAsDoctor = findViewById(R.id.cancel_button);
         Button regAsPatient = findViewById(R.id.reg_pat_button);
         button=findViewById(R.id.loginregisterUser);
 

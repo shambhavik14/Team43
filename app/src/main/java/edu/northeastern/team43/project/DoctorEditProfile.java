@@ -6,14 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -41,6 +44,8 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import edu.northeastern.team43.R;
 
@@ -225,6 +230,9 @@ public class DoctorEditProfile extends AppCompatActivity {
         submit.setOnClickListener(v->{
             String emailId = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
+            if (!validateEmailAndPassword(emailId,password)){
+                return;
+            }
             String gender = genderSpinner.getSelectedItem().toString().trim();
             String state = stateSpinner.getSelectedItem().toString().trim();
             String dateOfBirth = dateText.getText().toString().trim();
@@ -291,5 +299,26 @@ public class DoctorEditProfile extends AppCompatActivity {
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
         getWindow().setStatusBarColor(ContextCompat.getColor(DoctorEditProfile.this,R.color.darkbluelatest));
+    }
+    private boolean validateEmailAndPassword(String email, String password){
+        boolean isValid = true;
+
+        if (password==null || password.isEmpty() || password.length()<6){
+            isValid = false;
+            Dialog dialog = new Dialog(DoctorEditProfile.this);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setContentView(R.layout.error_dialog);
+            TextView errorTextView = dialog.findViewById(R.id.error_msg);
+            errorTextView.setText("Password is incorrect.\n\n Password should be atleast 8 characters");
+            errorTextView.setTextSize(20);
+            errorTextView.setHeight(190);
+            dialog.show();
+            Button closeButton = dialog.findViewById(R.id.cancel_button);
+            closeButton.setOnClickListener(v1->{
+                dialog.dismiss();
+            });
+        }
+        return isValid;
+
     }
 }
