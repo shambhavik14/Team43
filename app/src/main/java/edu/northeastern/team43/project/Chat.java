@@ -117,8 +117,8 @@ public class Chat extends AppCompatActivity {
             updateUIForPatient(patientModel);
         }
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(Chat.this,R.color.darkgreen));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Chat.this,R.color.darkbluelatest));
 
     }
 

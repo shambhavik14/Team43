@@ -44,11 +44,11 @@
                     android:id="@+id/docim"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
                     android:elevation="@dimen/_30sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/welcome_msg" />
 
                 <TextView
                     android:id="@+id/welcome_msg"
@@ -59,9 +59,8 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/docim" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -170,18 +169,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/listofdoc"
-        android:layout_width="321dp"
-        android:layout_height="207dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="318dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="4dp"
         android:elevation="30dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/nurseId"
-            android:layout_width="276dp"
-            android:layout_height="171dp"
+            android:layout_width="285dp"
+            android:layout_height="182dp"
             android:layout_margin="5dp"
 
             android:adjustViewBounds="true"
@@ -190,7 +190,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:shapeAppearanceOverlay="@style/roundImageView"
-            tools:layout_editor_absoluteY="32dp">
+            tools:layout_editor_absoluteY="21dp">
 
         </com.google.android.material.imageview.ShapeableImageView>
 
