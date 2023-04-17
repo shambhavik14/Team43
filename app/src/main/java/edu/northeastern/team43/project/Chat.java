@@ -4,14 +4,19 @@ package edu.northeastern.team43.project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -27,11 +32,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 
 import edu.northeastern.team43.R;
@@ -105,6 +110,7 @@ public class Chat extends AppCompatActivity {
                                 .build();
                         databaseReference.child(key1).setValue(chatModel);
                         if (doctorModel!=null){
+//                            notifyUser(doctorModel.getName(),doctorModel.getProfilePicture(),msg);
 
                             databaseReference = FirebaseDatabase.getInstance().getReference();
                             databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -127,7 +133,7 @@ public class Chat extends AppCompatActivity {
                             });
                             updateUIForDoctor(doctorModel);
                         }else {
-
+//                            notifyUser(patientModel.getName(),patientModel.getProfilePicture(),msg);
                             databaseReference = FirebaseDatabase.getInstance().getReference();
                             databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -255,5 +261,38 @@ public class Chat extends AppCompatActivity {
         recyclerView.setAdapter(messageAdapter);
         recyclerView.scrollToPosition(chatModelArrayList.size() - 1);
         messageAdapter.notifyDataSetChanged();
+    }
+    private void notifyUser(String name,String profilePicture, String msg){
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel notificationChannel = new NotificationChannel("my notification","my notification", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager manager=getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(notificationChannel);
+        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(Chat.this,"my notification");
+        builder.setContentTitle(name);
+        builder.setAutoCancel(true);
+        builder.setSmallIcon(R.drawable.bob);
+        builder.setContentText(msg);
+//        Bitmap largeIcon = null;
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(profilePicture);
+                    Bitmap largeIcon = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    builder.setLargeIcon(largeIcon);
+                } catch(IOException e) {
+                    System.out.println(e);
+                }
+            }
+        });
+
+        thread.start();
+
+
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Chat.this);
+        managerCompat.notify(1,builder.build());
     }
 }

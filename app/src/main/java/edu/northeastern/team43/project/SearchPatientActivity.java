@@ -22,7 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
@@ -129,9 +132,9 @@ public class SearchPatientActivity extends AppCompatActivity {
                 if (o1.getMostRecentMsgDate() ==null || o2.getMostRecentMsgDate()==null){
                     return 0;
                 }
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd h:m a");
-                LocalDateTime date1 =  LocalDateTime.parse(o1.getMostRecentMsgDate(), formatter);
-                LocalDateTime date2 =  LocalDateTime.parse(o2.getMostRecentMsgDate(),formatter);
+
+                LocalDateTime date1 =  convertToLocalDateTime(o1.getMostRecentMsgDate());
+                LocalDateTime date2 =  convertToLocalDateTime(o2.getMostRecentMsgDate());
 
                 if( date1.isAfter(date2)){
                     return -1;
@@ -146,6 +149,18 @@ public class SearchPatientActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+    private LocalDateTime convertToLocalDateTime(String dateToConvert){
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern("yyyy-MM-dd h:mm a");
+        LocalDateTime localDateTime = null;
+        try {
+            localDateTime = sdf.parse(dateToConvert).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+        return localDateTime;
     }
 
 }
