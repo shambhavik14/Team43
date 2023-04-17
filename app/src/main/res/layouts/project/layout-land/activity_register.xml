@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/land_register"
+    tools:context=".project.Register">
+
+
+    <TextView
+        android:id="@+id/error_msg"
+        android:layout_width="185dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="40dp"
+        android:text="SignUp"
+        android:textColor="@color/darkbluelatest"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="249dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/darkbluelatest"
+        android:elevation="@dimen/_90sdp"
+        android:text="REGISTER AS DOCTOR"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.728"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/error_msg" />
+
+    <Button
+        android:id="@+id/reg_pat_button"
+        android:layout_width="249dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/darkbluelatest"
+        android:elevation="@dimen/_90sdp"
+        android:text="REGISTER AS PATIENT"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.728"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cancel_button" />
+
+    <Button
+        android:id="@+id/loginregisterUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="Already registered?  Login Now"
+        android:textColor="@color/darkbluelatest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.746"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_pat_button"
+        app:layout_constraintVertical_bias="0.523" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

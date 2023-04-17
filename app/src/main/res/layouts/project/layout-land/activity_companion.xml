@@ -10,22 +10,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/loginbkg"
+        android:background="@drawable/login"
         android:gravity="center"
         android:orientation="vertical"
         tools:context=".MainActivity">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="400dp"
-            android:layout_height="240dp"
+            android:layout_width="350dp"
+            android:layout_height="272dp"
             android:layout_margin="20dp"
             android:background="@drawable/custom_edittext"
             app:cardCornerRadius="30dp"
             app:cardElevation="20dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="335dp"
+                android:layout_height="283dp"
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="24dp">
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:text="Login"
                     android:textAlignment="center"
-                    android:textColor="@color/darkgreen"
+                    android:textColor="@color/darkbluelatest"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/darkgreen"
+                    android:backgroundTint="@color/darkbluelatest"
                     android:text="Login"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
@@ -88,7 +88,7 @@
             android:padding="8dp"
             android:text="Not yet registered? SignUp Now"
             android:textAlignment="center"
-            android:textColor="@color/darkgreen"
+            android:textColor="@color/darkbluelatest"
             android:textSize="10sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
