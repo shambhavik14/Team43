@@ -67,7 +67,7 @@ public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapte
         holder.chatButton.setOnClickListener(v->{
             Intent intent = new Intent(context, Chat.class);
             intent.putExtra("chatwithuser",docObj);
-            Toast.makeText(context, "" + docObj.getName(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "" + docObj.getName(), Toast.LENGTH_SHORT).show();
             context.startActivity(intent);
         });
 
