@@ -291,7 +291,7 @@ public class PatientEditProfile extends AppCompatActivity {
 
         });
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(PatientEditProfile.this,R.color.darkgreen));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(PatientEditProfile.this,R.color.darkbluelatest));
     }
 }

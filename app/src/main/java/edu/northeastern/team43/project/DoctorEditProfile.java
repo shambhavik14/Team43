@@ -289,7 +289,7 @@ public class DoctorEditProfile extends AppCompatActivity {
 
         });
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(DoctorEditProfile.this,R.color.darkgreen));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
+        getWindow().setStatusBarColor(ContextCompat.getColor(DoctorEditProfile.this,R.color.darkbluelatest));
     }
 }
