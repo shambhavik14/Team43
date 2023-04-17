@@ -6,8 +6,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,19 +31,19 @@ import java.util.Iterator;
 
 import edu.northeastern.team43.R;
 
-public class SearchDoctorActivity extends AppCompatActivity {
+public class SearchPatientActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView loggedInUserName;
     private ImageView loggedInUserImage;
-    private SearchDoctorAdapter adapter;
-    private ArrayList<DoctorModel> doctorNamesList;
+    private SearchPatientAdapter adapter;
+    private ArrayList<PatientModel> patientNamesList;
     private FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_search_doctor);
+        setContentView(R.layout.activity_search_patient);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         firebaseAuth=FirebaseAuth.getInstance();
@@ -56,16 +54,15 @@ public class SearchDoctorActivity extends AppCompatActivity {
 
 
         databaseReference= FirebaseDatabase.getInstance().getReference();
-
-        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-                while(iterator.hasNext()){
-                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        loggedInUserName.setText(patientModel.getName());
-                        Glide.with(getApplicationContext()).load(patientModel.getProfilePicture()).circleCrop().into(loggedInUserImage);
+                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                while (iterator.hasNext()){
+                    DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
+                    if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                        loggedInUserName.setText(doctorModel.getName());
+                        Glide.with(getApplicationContext()).load(doctorModel.getProfilePicture()).circleCrop().into(loggedInUserImage);
                     }
                 }
             }
@@ -76,18 +73,38 @@ public class SearchDoctorActivity extends AppCompatActivity {
             }
         });
 
-        doctorNamesList=new ArrayList<>();
+//        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
+//                while(iterator.hasNext()){
+//                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
+//                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+//                        loggedInUserName.setText(patientModel.getName());
+//                        Glide.with(getApplicationContext()).load(patientModel.getProfilePicture()).circleCrop().into(loggedInUserImage);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+
+        patientNamesList =new ArrayList<>();
 
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                 while (iterator.hasNext()){
-                    DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
-                    Log.println(Log.DEBUG, "", doctorModel.getName());
-                    if (!doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        doctorNamesList.add(doctorModel);
+                    PatientModel patientModel = iterator.next().getValue(PatientModel.class);
+                    Log.println(Log.DEBUG, "", patientModel.getName());
+                    if (!patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                        patientNamesList.add(patientModel);
                     }
                 }
 
@@ -101,14 +118,17 @@ public class SearchDoctorActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
-        getWindow().setStatusBarColor(ContextCompat.getColor(SearchDoctorActivity.this,R.color.darkgreen));
+        getWindow().setStatusBarColor(ContextCompat.getColor(SearchPatientActivity.this,R.color.darkgreen));
     }
 
     private void setAdapter(){
         Log.println(Log.DEBUG, "","this is adapter");
-        doctorNamesList.sort(new Comparator<DoctorModel>() {
+        patientNamesList.sort(new Comparator<PatientModel>() {
             @Override
-            public int compare(DoctorModel o1, DoctorModel o2) {
+            public int compare(PatientModel o1, PatientModel o2) {
+                if (o1.getMostRecentMsgDate() ==null || o2.getMostRecentMsgDate()==null){
+                    return 0;
+                }
                 LocalDateTime date1 =  LocalDateTime.parse(o1.getMostRecentMsgDate(), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
                 LocalDateTime date2 =  LocalDateTime.parse(o2.getMostRecentMsgDate(),DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
 
@@ -120,7 +140,7 @@ public class SearchDoctorActivity extends AppCompatActivity {
                 return 0;
             }
         });
-        adapter=new SearchDoctorAdapter(doctorNamesList, this);
+        adapter=new SearchPatientAdapter(patientNamesList, this);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);

@@ -13,7 +13,9 @@ public class DoctorModel implements Serializable {
     public String state;
     public String profilePicture;
 
-    public DoctorModel(String doctorId,String name, String email, String password, String gender, String dob, String state, String profilePicture){
+    public String mostRecentMsgDate;
+
+    public DoctorModel(String doctorId,String name, String email, String password, String gender, String dob, String state, String profilePicture,String mostRecentMsgDate){
         this.doctorId=doctorId;
         this.name=name;
         this.email=email;
@@ -22,8 +24,17 @@ public class DoctorModel implements Serializable {
         this.dob=dob;
         this.state=state;
         this.profilePicture = profilePicture;
+        this.mostRecentMsgDate=mostRecentMsgDate;
     }
     public DoctorModel(){}
+
+    public String getMostRecentMsgDate() {
+        return mostRecentMsgDate;
+    }
+
+    public void setMostRecentMsgDate(String mostRecentMsgDate) {
+        this.mostRecentMsgDate = mostRecentMsgDate;
+    }
 
     public String getProfilePicture() {
         return profilePicture;
@@ -99,6 +110,7 @@ public class DoctorModel implements Serializable {
         public String state;
 
         public String profilePicture;
+        public String mostRecentMsgDate;
 
         public Builder doctorId(String doctorId){
             this.doctorId=doctorId;
@@ -133,8 +145,12 @@ public class DoctorModel implements Serializable {
             this.profilePicture=profilePicture;
             return this;
         }
+        public Builder mostRecentMsgDate(String mostRecentMsgDate){
+            this.mostRecentMsgDate=mostRecentMsgDate;
+            return this;
+        }
         public DoctorModel build(){
-            return new DoctorModel(this.doctorId,this.name,this.email,this.password,this.gender,this.dob,this.state,this.profilePicture);
+            return new DoctorModel(this.doctorId,this.name,this.email,this.password,this.gender,this.dob,this.state,this.profilePicture,this.mostRecentMsgDate);
         }
     }
 }

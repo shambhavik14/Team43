@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundoc"
     tools:context=".project.DoctorHome">
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -16,101 +18,195 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="94dp"
+            tools:layout_editor_absoluteY="127dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="310dp"
+                android:layout_height="106dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/banner_background"
+                android:background="@drawable/dochomeback"
                 android:elevation="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.487"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintVertical_bias="0.55">
+
+                <ImageView
+                    android:id="@+id/docim"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:elevation="@dimen/_30sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/welcome_msg" />
 
                 <TextView
                     android:id="@+id/welcome_msg"
                     android:layout_width="wrap_content"
-                    android:layout_height="71dp"
-                    android:textColor="#273B69"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView14"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/darkbluelatest"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="341dp"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Whole of science is a refinement of everyday thinking.\n \n - Albert Einstein"
-                    android:textColor="#273B69"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.729" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/logout_button"
+                android:layout_width="76dp"
+                android:layout_height="67dp"
+                android:layout_marginStart="116dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+                app:srcCompat="@drawable/ic_launcher_logout_foreground" />
+
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="73dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="112dp"
+                android:stateListAnimator="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+                app:srcCompat="@drawable/ic_launcher_profilepic_foreground" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/profile"
+                app:layout_constraintHorizontal_bias="0.393"
+                app:layout_constraintStart_toEndOf="@+id/logout_button"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/activities_button"-->
+    <!--        android:layout_width="202dp"-->
+    <!--        android:layout_height="251dp"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        android:layout_marginEnd="12dp"-->
+
+    <!--        android:elevation="8dp"-->
+    <!--        app:layout_constraintCircleRadius="@dimen/_100sdp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout">-->
+
+    <!--        <com.google.android.material.imageview.ShapeableImageView-->
+    <!--            android:id="@+id/trekId"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="5dp"-->
+    <!--            android:layout_marginStart="4dp"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:layout_marginBottom="52dp"-->
+    <!--            android:adjustViewBounds="true"-->
+    <!--            android:scaleType="fitCenter"-->
+    <!--            android:src="@drawable/trek_up"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintVertical_bias="0.0"-->
+    <!--            app:shapeAppearanceOverlay="@style/roundImageView">-->
+
+    <!--        </com.google.android.material.imageview.ShapeableImageView>-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/get_active_title"-->
+    <!--            android:layout_width="116dp"-->
+    <!--            android:layout_height="68dp"-->
+    <!--            android:layout_marginStart="8dp"-->
+    <!--            android:layout_marginTop="28dp"-->
+    <!--            android:layout_marginEnd="8dp"-->
+    <!--            android:inputType="textMultiLine"-->
+    <!--            android:text="\t Get \n Active"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textSize="24sp"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="0.482"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_wrapBehaviorInParent="included" />-->
+
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/get_active_button"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:background="@drawable/circle_button"-->
+    <!--            android:clickable="true"-->
+    <!--            android:src="@drawable/arrow_right_alt_48px"-->
+    <!--            app:backgroundTint="#EA4C89"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="0.359"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/get_active_title" />-->
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/listofdoc"
-        android:layout_width="194dp"
-        android:layout_height="241dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:elevation="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/activities_button"
+        android:layout_width="318dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="4dp"
+        android:elevation="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/nurseId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="285dp"
+            android:layout_height="182dp"
             android:layout_margin="5dp"
+
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/nurse_up2"
+            android:src="@drawable/doctalk"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:shapeAppearanceOverlay="@style/roundImageView"
-            tools:layout_editor_absoluteX="9dp"
-            tools:layout_editor_absoluteY="4dp">
+            tools:layout_editor_absoluteY="21dp">
 
         </com.google.android.material.imageview.ShapeableImageView>
 
         <TextView
             android:id="@+id/textView18"
-            android:layout_width="117dp"
-            android:layout_height="94dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="191dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="84dp"
             android:inputType="textMultiLine"
             android:text="Connect with  patients "
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/connect_expert_button"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/nurseId"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_wrapBehaviorInParent="included" />
 
@@ -118,102 +214,32 @@
             android:id="@+id/connect_expert_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/circle_button"
             android:clickable="true"
             android:src="@drawable/arrow_right_alt_48px"
             app:backgroundTint="#EA4C89"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.359"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activities_button"
-        android:layout_width="194dp"
-        android:layout_height="241dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-
-        android:elevation="8dp"
-        app:layout_constraintCircleRadius="@dimen/_100sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/trekId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="52dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/trek_up"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/nurseId"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:shapeAppearanceOverlay="@style/roundImageView">
-
-        </com.google.android.material.imageview.ShapeableImageView>
-
-        <TextView
-            android:id="@+id/get_active_title"
-            android:layout_width="116dp"
-            android:layout_height="68dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:inputType="textMultiLine"
-            android:text="\t Get \n Active"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_wrapBehaviorInParent="included" />
-
-        <ImageButton
-            android:id="@+id/get_active_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/circle_button"
-            android:clickable="true"
-            android:src="@drawable/arrow_right_alt_48px"
-            app:backgroundTint="#EA4C89"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.359"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/get_active_title" />
+            app:layout_constraintVertical_bias="0.628" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/profile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:stateListAnimator="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="354dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="264dp"
+        android:padding="10dp"
+        android:text="Whole of science is a refinement of everyday thinking.\n \n - Albert Einstein"
+        android:textAlignment="center"
+        android:textColor="@color/darkbluelatest"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activities_button"
-        app:srcCompat="@drawable/ic_launcher_profilepic_foreground" />
-
-    <ImageView
-        android:id="@+id/logout_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activities_button"
-        app:srcCompat="@drawable/ic_launcher_logout_foreground" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

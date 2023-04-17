@@ -13,7 +13,9 @@ public class PatientModel implements Serializable {
 
     public String profilePicture;
 
-    public PatientModel(String patientId,String name, String email, String password,String gender,  String dob, String state, String profilePicture){
+    public String mostRecentMsgDate;
+
+    public PatientModel(String patientId,String name, String email, String password,String gender,  String dob, String state, String profilePicture,String mostRecentMsgDate){
         this.patientId=patientId;
         this.name=name;
         this.email=email;
@@ -22,9 +24,18 @@ public class PatientModel implements Serializable {
         this.state=state;
         this.dob=dob;
         this.profilePicture =profilePicture;
+        this.mostRecentMsgDate = mostRecentMsgDate;
     }
 
     public PatientModel(){}
+
+    public String getMostRecentMsgDate() {
+        return mostRecentMsgDate;
+    }
+
+    public void setMostRecentMsgDate(String mostRecentMsgDate) {
+        this.mostRecentMsgDate = mostRecentMsgDate;
+    }
 
     public String getProfilePicture() {
         return profilePicture;
@@ -99,6 +110,8 @@ public class PatientModel implements Serializable {
         public String dob;
         public String state;
         public String profilePicture;
+
+        public String mostRecentMsgDate;
         public PatientModel.Builder patientId(String patientId){
             this.patientId=patientId;
             return this;
@@ -132,8 +145,12 @@ public class PatientModel implements Serializable {
             this.profilePicture=profilePicture;
             return this;
         }
+        public PatientModel.Builder mostRecentMsgDate(String mostRecentMsgDate){
+            this.mostRecentMsgDate=mostRecentMsgDate;
+            return this;
+        }
         public PatientModel build(){
-            return new PatientModel(this.patientId,this.name,this.email,this.password,this.gender,this.dob,this.state,this.profilePicture);
+            return new PatientModel(this.patientId,this.name,this.email,this.password,this.gender,this.dob,this.state,this.profilePicture,this.mostRecentMsgDate);
         }
     }
 }
