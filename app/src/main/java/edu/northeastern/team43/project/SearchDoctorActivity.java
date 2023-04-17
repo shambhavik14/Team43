@@ -24,7 +24,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import edu.northeastern.team43.R;
@@ -52,24 +56,6 @@ public class SearchDoctorActivity extends AppCompatActivity {
 
 
         databaseReference= FirebaseDatabase.getInstance().getReference();
-//        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-//                while (iterator.hasNext()){
-//                    DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
-//                    if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                        loggedInUserName.setText(doctorModel.getName());
-//                        Glide.with(getApplicationContext()).load(doctorModel.getProfilePicture()).circleCrop().into(loggedInUserImage);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
         databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -120,6 +106,20 @@ public class SearchDoctorActivity extends AppCompatActivity {
 
     private void setAdapter(){
         Log.println(Log.DEBUG, "","this is adapter");
+        doctorNamesList.sort(new Comparator<DoctorModel>() {
+            @Override
+            public int compare(DoctorModel o1, DoctorModel o2) {
+                LocalDateTime date1 =  LocalDateTime.parse(o1.getMostRecentMsgDate(), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+                LocalDateTime date2 =  LocalDateTime.parse(o2.getMostRecentMsgDate(),DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+
+                if( date1.isAfter(date2)){
+                    return -1;
+                }else if(date1.isBefore(date2)){
+                    return 1;
+                }
+                return 0;
+            }
+        });
         adapter=new SearchDoctorAdapter(doctorNamesList, this);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);

@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -214,9 +215,9 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
             String name= nameEditText.getText().toString().trim();
 
             firebaseAuth.createUserWithEmailAndPassword(emailId,password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+                        public void onSuccess(AuthResult authResult) {
                             Toast.makeText(getApplicationContext(),"REGISTRATION SUCCESSFUL",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(),Companion.class);
                             databaseReference.orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +31,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import edu.northeastern.team43.R;
@@ -89,17 +92,58 @@ public class Chat extends AppCompatActivity {
                 databaseReference.orderByChild("chatId").addListenerForSingleValueEvent(new ValueEventListener(){
                     public void onDataChange(@NonNull DataSnapshot snapshot){
                         String key1=databaseReference.push().getKey();
+                        String currentDate = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(LocalDateTime.now());
                         ChatModel chatModel=new ChatModel.Builder()
                                 .chatId(key1)
                                 .senderEmail(firebaseAuth.getCurrentUser().getEmail())
                                 .receiverEmail(doctorModel!=null ?doctorModel.getEmail():patientModel.getEmail())
                                 .message(msg)
-                                .date(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(LocalDateTime.now()))
+                                .date(currentDate)
                                 .build();
                         databaseReference.child(key1).setValue(chatModel);
                         if (doctorModel!=null){
+
+                            databaseReference = FirebaseDatabase.getInstance().getReference();
+                            databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                                    while (iterator.hasNext()){
+                                        PatientModel pm = iterator.next().getValue(PatientModel.class);
+                                        if (pm.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+//                                            pm.setMostRecentMsgDate(currentDate);
+                                            databaseReference.child("patients").child(pm.getPatientId()).child("mostRecentMsgDate").setValue(currentDate);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                             updateUIForDoctor(doctorModel);
                         }else {
+
+                            databaseReference = FirebaseDatabase.getInstance().getReference();
+                            databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                                    while (iterator.hasNext()){
+                                        DoctorModel dm = iterator.next().getValue(DoctorModel.class);
+                                        if (dm.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                                            dm.setMostRecentMsgDate(currentDate);
+                                            databaseReference.child("doctors").child(dm.getDoctorId()).child("mostRecentMsgDate").setValue(currentDate);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                             updateUIForPatient(patientModel);
                         }
                     }
@@ -112,9 +156,31 @@ public class Chat extends AppCompatActivity {
             }
         });
         if (doctorModel!=null){
-            updateUIForDoctor(doctorModel);
+
+            databaseReference.child("doctors").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    updateUIForDoctor(doctorModel);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }else {
-            updateUIForPatient(patientModel);
+
+            databaseReference.child("patients").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    updateUIForPatient(patientModel);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
