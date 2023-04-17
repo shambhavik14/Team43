@@ -81,6 +81,7 @@ public class Companion extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
         }
         firebaseAuth= FirebaseAuth.getInstance();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
         Button submit = findViewById(R.id.loginButton);
         emailEditText = findViewById(R.id.username);
         passwordEditText=findViewById(R.id.password);
@@ -94,7 +95,10 @@ public class Companion extends AppCompatActivity {
                             @Override
                             public void onSuccess(AuthResult authResult) {
                                 databaseReference= FirebaseDatabase.getInstance().getReference();
-
+                                if(firebaseAuth.getCurrentUser().getEmail().equalsIgnoreCase("admin@gmail.com")) {
+                                    homeIntent = new Intent(getApplicationContext(),AdminHome.class);
+                                    startActivity(homeIntent);
+                                }
                                 databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {

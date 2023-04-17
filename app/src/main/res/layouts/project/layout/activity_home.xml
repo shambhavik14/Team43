@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/white"
     tools:context=".project.Home">
 
     <LinearLayout
@@ -53,8 +53,9 @@
                     android:id="@+id/textView14"
                     android:layout_width="341dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/bellota_light"
                     android:padding="10dp"
-                    android:text="No matter how hard the past, you can always begin again \n \n - Gautam Buddha"
+                    android:text="No matter how hard the past, you can always begin again"
                     android:textColor="#273B69"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -94,7 +95,8 @@
             android:src="@drawable/nurse_up2"
             app:shapeAppearanceOverlay="@style/roundImageView"
             tools:layout_editor_absoluteX="9dp"
-            tools:layout_editor_absoluteY="4dp">
+            tools:layout_editor_absoluteY="4dp"
+            tools:ignore="MissingConstraints">
 
         </com.google.android.material.imageview.ShapeableImageView>
 
@@ -201,9 +203,10 @@
 
     <ImageView
         android:id="@+id/profile"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="100dp"
         android:stateListAnimator="@null"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activities_button"
@@ -211,8 +214,10 @@
 
     <ImageView
         android:id="@+id/logout_button"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activities_button"
