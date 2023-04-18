@@ -119,7 +119,7 @@ public class DoctorHome extends AppCompatActivity {
                     prev = iterator.next().getValue(ChatModel.class);
                 }
                 ChatModel finalPrev = prev;
-                if (firebaseAuth.getCurrentUser()!=null && prev.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
+                if (prev!=null && firebaseAuth.getCurrentUser()!=null && prev.getReceiverEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
 
                     databaseReference.child("patients").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
