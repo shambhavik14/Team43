@@ -289,8 +289,20 @@ public class DoctorEditProfile extends AppCompatActivity {
         submit.setOnClickListener(v->{
             String emailId = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
-            if (!validateEmailAndPassword(emailId,password)){
+            if (password.length() <6 || !isDigit(password)){
+                Dialog dialog = new Dialog(DoctorEditProfile.this);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.error_dialog);
+                TextView errorTextView = dialog.findViewById(R.id.error_msg);
+                errorTextView.setText("\tPassword should contain only numbers \n and should contain minimum 6 numbers");
+                errorTextView.setTextSize(16);
+                dialog.show();
+                Button closeButton = dialog.findViewById(R.id.cancel_button);
+                closeButton.setOnClickListener(v1->{
+                    dialog.dismiss();
+                });
                 return;
+
             }
             String gender = genderSpinner.getSelectedItem().toString().trim();
             String state = stateSpinner.getSelectedItem().toString().trim();
@@ -378,5 +390,13 @@ public class DoctorEditProfile extends AppCompatActivity {
         }
         return isValid;
 
+    }
+    private boolean isDigit(String password){
+        for (int i=0;i<password.length();i++){
+            if (!Character.isDigit(password.charAt(i))){
+                return false;
+            }
+        }
+        return true;
     }
 }

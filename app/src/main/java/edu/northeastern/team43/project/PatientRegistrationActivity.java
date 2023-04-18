@@ -255,6 +255,21 @@ public class PatientRegistrationActivity extends AppCompatActivity {
 
             String email=patientEmailId.getText().toString().trim();
             String password=patientPassword.getText().toString().trim();
+            if (password.length() <6 || !isDigit(password)){
+                Dialog dialog = new Dialog(PatientRegistrationActivity.this);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.error_dialog);
+                TextView errorTextView = dialog.findViewById(R.id.error_msg);
+                errorTextView.setText("\tPassword should contain only numbers \n and should contain minimum 6 numbers");
+                errorTextView.setTextSize(16);
+                dialog.show();
+                Button closeButton = dialog.findViewById(R.id.cancel_button);
+                closeButton.setOnClickListener(v1->{
+                    dialog.dismiss();
+                });
+                return;
+
+            }
             String dateOfBirth=patientDOB.getText().toString().trim();
             Log.d("dob",dateOfBirth);
             String gender=patientGender.getSelectedItem().toString().trim();
@@ -317,5 +332,13 @@ public class PatientRegistrationActivity extends AppCompatActivity {
         closeButton.setOnClickListener(v1->{
             dialog.dismiss();
         });
+    }
+    private boolean isDigit(String password){
+        for (int i=0;i<password.length();i++){
+            if (!Character.isDigit(password.charAt(i))){
+                return false;
+            }
+        }
+        return true;
     }
 }
