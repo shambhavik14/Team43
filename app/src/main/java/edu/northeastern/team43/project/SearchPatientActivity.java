@@ -32,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import edu.northeastern.team43.R;
@@ -42,6 +43,7 @@ public class SearchPatientActivity extends AppCompatActivity {
     private ImageView loggedInUserImage;
     private SearchPatientAdapter adapter;
     private ArrayList<PatientModel> patientNamesList;
+    private HashSet<String> visited;
     private FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     RecyclerView.LayoutManager linearLayoutManager;
@@ -82,22 +84,45 @@ public class SearchPatientActivity extends AppCompatActivity {
 
 
         patientNamesList =new ArrayList<>();
+        visited=new HashSet<>();
 
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("patients").orderByChild("patientId").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("chats").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                patientNamesList.clear();
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                patientNamesList.clear();
+                visited.clear();
                 while (iterator.hasNext()){
-                    PatientModel patientModel = iterator.next().getValue(PatientModel.class);
-                    Log.println(Log.DEBUG, "", patientModel.getName());
-                    if (!patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        patientNamesList.add(patientModel);
-                    }
-                }
+                    ChatModel chatModel = iterator.next().getValue(ChatModel.class);
+                    if (firebaseAuth.getCurrentUser()!=null
+                            && firebaseAuth.getCurrentUser().getEmail().equalsIgnoreCase(chatModel.getReceiverEmail())){
+                        databaseReference.child("patients").orderByChild("patientId").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                setAdapter();
+                                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
+                                while (iterator.hasNext()){
+                                    PatientModel patientModel = iterator.next().getValue(PatientModel.class);
+                                    Log.println(Log.DEBUG, "", patientModel.getName());
+                                    if (!visited.contains(patientModel.getEmail()) &&patientModel.getEmail().equalsIgnoreCase(chatModel.getSenderEmail())){
+                                        patientNamesList.add(patientModel);
+                                        visited.add(patientModel.getEmail());
+                                    }
+                                }
+
+                                setAdapter();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+
+                }
             }
 
             @Override
@@ -105,6 +130,7 @@ public class SearchPatientActivity extends AppCompatActivity {
 
             }
         });
+
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
         getWindow().setStatusBarColor(ContextCompat.getColor(SearchPatientActivity.this,R.color.darkgreen));
     }
