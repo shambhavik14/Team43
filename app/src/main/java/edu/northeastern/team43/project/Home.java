@@ -19,6 +19,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,6 +45,7 @@ public class Home extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     DatabaseReference databaseReference;
+    ImageView patientImage;
 
     boolean isDoctor = false;
     @Override
@@ -54,7 +57,14 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_home);
+
+        patientImage=findViewById(R.id.patientim);
         ImageButton connectWithExpertsBtn = findViewById(R.id.connect_expert_button);
         TextView welcomeMsg= findViewById(R.id.welcome_msg);
         connectWithExpertsBtn.setOnClickListener(v->{
@@ -93,8 +103,7 @@ public class Home extends AppCompatActivity {
                     PatientModel patientModel=iterator.next().getValue(PatientModel.class);
                     if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
                         welcomeMsg.setText("Welcome "+patientModel.getName());
-                        welcomeMsg.setTypeface(null,Typeface.BOLD);
-                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
+                        Glide.with(getApplicationContext()).load(patientModel.getProfilePicture()).circleCrop().into(patientImage);
                     }
                 }
             }
