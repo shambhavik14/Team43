@@ -72,7 +72,7 @@ public class DoctorHome extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("doctors").orderByChild("doctorId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
@@ -80,8 +80,6 @@ public class DoctorHome extends AppCompatActivity {
                     DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
                     if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
                         welcomeMsg.setText("Welcome Dr. "+doctorModel.getName());
-//                        welcomeMsg.setTypeface(null, Typeface.BOLD);
-//                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
                         Glide.with(getApplicationContext()).load( doctorModel.getProfilePicture()).circleCrop().into(doctorProfile);
                     }
                 }
@@ -92,26 +90,6 @@ public class DoctorHome extends AppCompatActivity {
 
             }
         });
-
-//        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-//                while(iterator.hasNext()){
-//                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-//                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                        welcomeMsg.setText("Welcome "+patientModel.getName());
-//                        welcomeMsg.setTypeface(null,Typeface.BOLD);
-//                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
         ImageView logoutButton = findViewById(R.id.logout_button);
         if (firebaseAuth.getCurrentUser()==null){
             Intent intent = new Intent(getApplicationContext(),Companion.class);
@@ -119,7 +97,6 @@ public class DoctorHome extends AppCompatActivity {
             finish();
         }else {
 
-//            welcomeMsg.setText("Welcome "+firebaseAuth.getCurrentUser().getDisplayName());
             logoutButton.setOnClickListener(v->{
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(),Companion.class);
@@ -127,46 +104,10 @@ public class DoctorHome extends AppCompatActivity {
                 finish();
             });
         }
-//        ImageButton getActiveButton =  findViewById(R.id.get_active_button);
-//        getActiveButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(DoctorHome.this, Activity_Recommendation.class);
-//                startActivity(intent);
-//
-//            }
-//        });
         ImageView myProfileButton = findViewById(R.id.profile);
         myProfileButton.setOnClickListener(v->{
-//            databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-//                    while (iterator.hasNext()){
-//                        DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
-//                        if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                            isDoctor = true;
-//                            break;
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            });
-//            if (isDoctor){
                 Intent intent = new Intent(DoctorHome.this, DoctorEditProfile.class);
                 startActivity(intent);
-//            }
-//            else{
-//                Intent intent = new Intent(DoctorHome.this, PatientEditProfile.class);
-//                startActivity(intent);
-//            }
-
-
-
         });
         databaseReference= FirebaseDatabase.getInstance().getReference();
         databaseReference.child("chats").addValueEventListener(new ValueEventListener() {

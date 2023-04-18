@@ -3,12 +3,17 @@ package edu.northeastern.team43.project;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,6 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
@@ -99,6 +105,34 @@ public class PatientEditProfile extends AppCompatActivity {
                         }
                     });
         }
+        else if(requestCode==101){
+            Bitmap bitmap=(Bitmap) data.getExtras().get("data");
+            profilePicture.setImageBitmap(bitmap);
+            ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+
+            FirebaseStorage.getInstance().getReference("images/"+ UUID.randomUUID().toString())
+                    .putBytes(bytes)
+                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()){
+                                task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task) {
+                                        if (task.isSuccessful()){
+                                            profilePictureFirebasePath = task.getResult().toString();
+                                            Glide.with(PatientEditProfile.this).load(profilePictureFirebasePath).circleCrop().into(profilePicture);
+
+                                        }
+                                    }
+                                });
+                                Toast.makeText(getApplicationContext(),"Image uploaded",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,9 +156,28 @@ public class PatientEditProfile extends AppCompatActivity {
         profilePicture = findViewById(R.id.profile_picture);
         dateText=findViewById(R.id.reg_pat_dob);
         profilePicture.setOnClickListener(v->{
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent,1);
+            Dialog dialog=new Dialog(PatientEditProfile.this);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setContentView(R.layout.camerdialog);
+            dialog.show();
+
+            Button cameraOption= dialog.findViewById(R.id.camera);
+            if(ContextCompat.checkSelfPermission(PatientEditProfile.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(PatientEditProfile.this, new String[]{Manifest.permission.CAMERA}, 101);
+
+            }
+            cameraOption.setOnClickListener(v1->{
+                Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,101);
+                dialog.dismiss();
+            });
+            Button galleryOption = dialog.findViewById(R.id.gallery);
+            galleryOption.setOnClickListener(v2->{
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,1);
+                dialog.dismiss();
+            });
         });
         dateText.setOnClickListener(v->{
             DatePickerDialog datePickerDialog = new DatePickerDialog(PatientEditProfile.this, new DatePickerDialog.OnDateSetListener() {

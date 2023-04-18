@@ -75,27 +75,8 @@ public class Home extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-//        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-//                while (iterator.hasNext()){
-//                    DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
-//                    if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                        welcomeMsg.setText("Welcome "+doctorModel.getName());
-//                        welcomeMsg.setTypeface(null, Typeface.BOLD);
-//                        welcomeMsg.setTextColor(Color.rgb(0,0,0));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
-        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("patients").orderByChild("patientId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
@@ -120,7 +101,6 @@ public class Home extends AppCompatActivity {
             finish();
         }else {
 
-//            welcomeMsg.setText("Welcome "+firebaseAuth.getCurrentUser().getDisplayName());
             logoutButton.setOnClickListener(v->{
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(),Companion.class);
@@ -139,35 +119,8 @@ public class Home extends AppCompatActivity {
         });
         ImageView myProfileButton = findViewById(R.id.profile);
         myProfileButton.setOnClickListener(v->{
-//            databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-//                    while (iterator.hasNext()){
-//                        DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
-//                        if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                            isDoctor = true;
-//                            break;
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            });
-//            if (isDoctor){
-//                Intent intent = new Intent(Home.this, DoctorEditProfile.class);
-//                startActivity(intent);
-//            }
-//            else{
                 Intent intent = new Intent(Home.this, PatientEditProfile.class);
                 startActivity(intent);
-//            }
-
-
-
         });
         databaseReference= FirebaseDatabase.getInstance().getReference();
         databaseReference.child("chats").addValueEventListener(new ValueEventListener() {
@@ -221,7 +174,6 @@ public class Home extends AppCompatActivity {
         builder.setAutoCancel(true);
         builder.setSmallIcon(R.drawable.bob);
         builder.setContentText(msg);
-//        Bitmap largeIcon = null;
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -237,8 +189,6 @@ public class Home extends AppCompatActivity {
         });
 
         thread.start();
-
-
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Home.this);
         managerCompat.notify(1,builder.build());

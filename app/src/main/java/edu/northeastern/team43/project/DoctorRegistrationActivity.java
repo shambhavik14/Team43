@@ -116,7 +116,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         }
         else if(requestCode==101){
             Bitmap bitmap=(Bitmap) data.getExtras().get("data");
-//            profilePicture.setImageBitmap(bitmap);
+            profilePicture.setImageBitmap(bitmap);
             ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
             byte[] bytes = byteArrayOutputStream.toByteArray();
@@ -163,6 +163,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         profilePicture.setOnClickListener(v->{
 
             Dialog dialog=new Dialog(DoctorRegistrationActivity.this);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.setContentView(R.layout.camerdialog);
             dialog.show();
 

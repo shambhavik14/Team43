@@ -4,24 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/error_msg2"
-        android:layout_width="351dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="140dp"
-        android:text="Please choose an option to upload an image"
-        android:textAlignment="center"
-        android:textColor="@color/darkbluelatest"
-        android:textSize="27sp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/banner_background"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="92dp">
+
+        <TextView
+            android:id="@+id/error_msg2"
+            android:layout_width="292dp"
+            android:layout_height="122dp"
+            android:layout_marginTop="140dp"
+            android:text="Please choose an option to upload an image"
+            android:textAlignment="center"
+            android:textColor="@color/darkbluelatest"
+            android:textSize="27sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/gallery"
-        android:layout_width="324dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="#EA4C89"
         android:elevation="@dimen/_90sdp"
         android:text="Choose existing photo"
@@ -32,20 +41,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera" />
 
-    <Button
-        android:id="@+id/camera"
-        android:layout_width="324dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="60dp"
-        android:backgroundTint="#EA4C89"
-        android:elevation="@dimen/_90sdp"
-        android:text="Take Photo"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:cornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/error_msg2" />
+        <Button
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:backgroundTint="#EA4C89"
+            android:elevation="@dimen/_90sdp"
+            android:text="Take Photo"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/error_msg2" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
