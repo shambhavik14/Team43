@@ -53,7 +53,6 @@
                     android:id="@+id/textView14"
                     android:layout_width="341dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/bellota_light"
                     android:padding="10dp"
                     android:text="No matter how hard the past, you can always begin again"
                     android:textColor="#273B69"
