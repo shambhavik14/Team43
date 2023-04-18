@@ -65,7 +65,8 @@
             android:exported="false" />
         <activity
             android:name=".project.Chat"
-            android:exported="false">
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

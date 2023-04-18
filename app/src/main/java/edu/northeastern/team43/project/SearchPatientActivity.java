@@ -1,6 +1,7 @@
 package edu.northeastern.team43.project;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -42,6 +44,7 @@ public class SearchPatientActivity extends AppCompatActivity {
     private ArrayList<PatientModel> patientNamesList;
     private FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+    RecyclerView.LayoutManager linearLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,32 +79,15 @@ public class SearchPatientActivity extends AppCompatActivity {
             }
         });
 
-//        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Iterator<DataSnapshot> iterator=snapshot.getChildren().iterator();
-//                while(iterator.hasNext()){
-//                    PatientModel patientModel=iterator.next().getValue(PatientModel.class);
-//                    if(patientModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                        loggedInUserName.setText(patientModel.getName());
-//                        Glide.with(getApplicationContext()).load(patientModel.getProfilePicture()).circleCrop().into(loggedInUserImage);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
 
         patientNamesList =new ArrayList<>();
 
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("patients").orderByChild("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("patients").orderByChild("patientId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                patientNamesList.clear();
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                 while (iterator.hasNext()){
                     PatientModel patientModel = iterator.next().getValue(PatientModel.class);
@@ -119,7 +105,6 @@ public class SearchPatientActivity extends AppCompatActivity {
 
             }
         });
-
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
         getWindow().setStatusBarColor(ContextCompat.getColor(SearchPatientActivity.this,R.color.darkgreen));
     }
@@ -145,9 +130,9 @@ public class SearchPatientActivity extends AppCompatActivity {
             }
         });
         adapter=new SearchPatientAdapter(patientNamesList, this);
-        RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+        linearLayoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
         adapter.notifyDataSetChanged();
     }
 

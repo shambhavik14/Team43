@@ -43,6 +43,8 @@ public class SearchDoctorActivity extends AppCompatActivity {
     private ArrayList<DoctorModel> doctorNamesList;
     private FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+
+    RecyclerView.LayoutManager linearLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +83,10 @@ public class SearchDoctorActivity extends AppCompatActivity {
         doctorNamesList=new ArrayList<>();
 
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("doctors").orderByChild("doctorId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("doctors").orderByChild("doctorId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                doctorNamesList.clear();
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                 while (iterator.hasNext()){
                     DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
@@ -101,7 +104,6 @@ public class SearchDoctorActivity extends AppCompatActivity {
 
             }
         });
-
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.teal_700)));
         getWindow().setStatusBarColor(ContextCompat.getColor(SearchDoctorActivity.this,R.color.darkgreen));
     }
@@ -126,9 +128,9 @@ public class SearchDoctorActivity extends AppCompatActivity {
             }
         });
         adapter=new SearchDoctorAdapter(doctorNamesList, this);
+        recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
     private LocalDateTime convertToLocalDateTime(String dateToConvert){
