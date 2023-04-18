@@ -196,9 +196,10 @@ public class Chat extends AppCompatActivity {
     private void updateUIForDoctor(DoctorModel doctorModel) {
         chatModelArrayList=new ArrayList<>();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("chats").orderByChild("chatId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("chats").orderByChild("chatId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chatModelArrayList.clear();
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                 while (iterator.hasNext()){
                     ChatModel chatModel = iterator.next().getValue(ChatModel.class);
@@ -221,9 +222,10 @@ public class Chat extends AppCompatActivity {
     private void updateUIForPatient(PatientModel patientModel) {
         chatModelArrayList=new ArrayList<>();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("chats").orderByChild("chatId").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("chats").orderByChild("chatId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chatModelArrayList.clear();
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
                 while (iterator.hasNext()){
                     ChatModel chatModel = iterator.next().getValue(ChatModel.class);
@@ -253,8 +255,8 @@ public class Chat extends AppCompatActivity {
         }
 
         RecyclerView.LayoutManager linearLayoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.scrollToPosition(chatModelArrayList.size() - 1);
         messageAdapter.notifyDataSetChanged();
     }
