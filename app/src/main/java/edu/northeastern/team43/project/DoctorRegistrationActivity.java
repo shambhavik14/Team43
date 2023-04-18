@@ -3,12 +3,15 @@ package edu.northeastern.team43.project;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -42,6 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -110,6 +114,35 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                         }
                     });
         }
+        else if(requestCode==101){
+            Bitmap bitmap=(Bitmap) data.getExtras().get("data");
+//            profilePicture.setImageBitmap(bitmap);
+            ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+
+            FirebaseStorage.getInstance().getReference("images/"+ UUID.randomUUID().toString())
+                    .putBytes(bytes)
+                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()){
+                                task.getResult().getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task) {
+                                        if (task.isSuccessful()){
+                                            profilePictureFirebasePath = task.getResult().toString();
+                                            Glide.with(DoctorRegistrationActivity.this).load(profilePictureFirebasePath).circleCrop().into(profilePicture);
+
+
+                                        }
+                                    }
+                                });
+                                Toast.makeText(getApplicationContext(),"Image uploaded",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,9 +161,30 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         Button submit = findViewById(R.id.reg_submit_button);
         profilePicture = findViewById(R.id.profile_picture);
         profilePicture.setOnClickListener(v->{
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent,1);
+
+            Dialog dialog=new Dialog(DoctorRegistrationActivity.this);
+            dialog.setContentView(R.layout.camerdialog);
+            dialog.show();
+
+           Button cameraOption= dialog.findViewById(R.id.camera);
+           if(ContextCompat.checkSelfPermission(DoctorRegistrationActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+               ActivityCompat.requestPermissions(DoctorRegistrationActivity.this, new String[]{Manifest.permission.CAMERA}, 101);
+
+           }
+           cameraOption.setOnClickListener(v1->{
+               Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+               startActivityForResult(intent,101);
+               dialog.dismiss();
+           });
+            Button galleryOption = dialog.findViewById(R.id.gallery);
+            galleryOption.setOnClickListener(v2->{
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,1);
+                dialog.dismiss();
+            });
+
+
         });
         dateText=findViewById(R.id.reg_doc_date);
         dateText.setOnClickListener(v->{
