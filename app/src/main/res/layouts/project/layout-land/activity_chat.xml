@@ -14,15 +14,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
+            android:layout_width="62dp"
+            android:layout_height="61dp"
             android:layout_marginTop="@dimen/_10sdp"
             app:cardCornerRadius="50dp">
 
             <ImageView
                 android:id="@+id/receiverpic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="65dp"
+                android:layout_height="61dp"
                 app:srcCompat="@drawable/doc" />
         </androidx.cardview.widget.CardView>
 
@@ -41,18 +41,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatadapter"
         android:layout_width="match_parent"
-        android:layout_height="494dp"
+        android:layout_height="195dp"
+        android:paddingBottom="@dimen/_50sdp"
         android:layout_below="@+id/l1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/_2sdp"
+
         android:layout_marginTop="@dimen/_2sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
-        android:layout_marginBottom="@dimen/_2sdp"
-        android:background="#eeeeee"
+
+
+        android:background="#E4E2E2"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -80,9 +81,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/sendbttn"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
             android:layout_margin="@dimen/_3sdp"
+            android:background="@color/white"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/_540sdp">
 
