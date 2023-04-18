@@ -82,7 +82,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         ChatModel chatModel=messagesArrayList.get(position);
         if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
             SenderViewHolder viewHolder=(SenderViewHolder) holder;
-            String text = "<font color=#FFFFFF>"+chatModel.getMessage()+"</font> "+"<br/>"+"<font color=#877F7F>"+chatModel.getDate()+"</font>";
+            String text = "<font color=#FFFFFF>"+chatModel.getMessage()+"</font> "+"<br/>"+"<font color=#aaaaaa style=\"font-size: -10px\">"+chatModel.getDate()+"</font>";
             viewHolder.txtsenderMessage.setText(Html.fromHtml(text));
 
 
