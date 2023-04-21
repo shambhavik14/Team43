@@ -190,7 +190,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:shapeAppearanceOverlay="@style/roundImageView"
-            tools:layout_editor_absoluteY="21dp">
+            tools:layout_editor_absoluteY="21dp"
+            tools:ignore="MissingConstraints">
 
         </com.google.android.material.imageview.ShapeableImageView>
 

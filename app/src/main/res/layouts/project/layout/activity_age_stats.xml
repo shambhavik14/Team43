@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".project.PatientGenderStats">
+    tools:context=".project.AgeStats">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:orientation="horizontal"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pie_pat_gen"
+            android:id="@+id/pie_pat_age"
             android:layout_width="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
@@ -25,23 +25,5 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="340dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout">
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pie_doc_gen"
-            android:layout_width="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"
-            android:layout_height="match_parent" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
