@@ -44,6 +44,7 @@ public class AgeStats extends AppCompatActivity {
         setContentView(R.layout.activity_age_stats);
 
         pieChart_pat = findViewById(R.id.pie_pat_age);
+        pieChart_doc = findViewById(R.id.pie_doc_age);
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -73,10 +74,8 @@ public class AgeStats extends AppCompatActivity {
                         ageRanges[2]++;
                     } else if (age >= 41 && age <= 50) {
                         ageRanges[3]++;
-                    } else if (age >= 51 && age <= 60) {
+                    } else if (age >= 51 && age <= 80) {
                         ageRanges[4]++;
-                    } else if (age >= 61 && age <= 70) {
-                        ageRanges[5]++;
                     }
                 }
                 List<PieEntry> entries = new ArrayList<>();
@@ -84,8 +83,7 @@ public class AgeStats extends AppCompatActivity {
                 entries.add(new PieEntry(ageRanges[1], "21-30"));
                 entries.add(new PieEntry(ageRanges[2], "31-40"));
                 entries.add(new PieEntry(ageRanges[3], "41-50"));
-                entries.add(new PieEntry(ageRanges[4], "51-60"));
-                entries.add(new PieEntry(ageRanges[5], "61-70"));
+                entries.add(new PieEntry(ageRanges[4], "51+"));
 
                 // Create a PieDataSet object from the list of PieEntry objects
                 PieDataSet dataSet = new PieDataSet(entries, "Pie Chart");
@@ -107,6 +105,63 @@ public class AgeStats extends AppCompatActivity {
 
                 // Refresh the chart
                 pieChart_pat.invalidate();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        databaseReference.child("doctors").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                List<Integer> ages = new ArrayList<>();
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    String dob = userSnapshot.child("dob").getValue(String.class);
+                    System.out.println("dob: "+dob);
+                    if (!dob.equals("")) {
+                        int age = getAge(dob);
+                        System.out.println("Age:" + age);
+                        ages.add(age);
+                    }
+                }
+                System.out.println("ages:" + ages);
+                int[] ageRanges = new int[10];
+                for (int age : ages) {
+                    if (age >= 21 && age <= 30) {
+                        ageRanges[0]++;
+                    } else if (age >= 31 && age <= 40) {
+                        ageRanges[1]++;
+                    } else if (age >= 41 && age <= 50) {
+                        ageRanges[2]++;
+                    }
+                }
+                List<PieEntry> entries = new ArrayList<>();
+                entries.add(new PieEntry(ageRanges[0], "21-30"));
+                entries.add(new PieEntry(ageRanges[1], "31-40"));
+                entries.add(new PieEntry(ageRanges[2], "41-50"));
+
+                // Create a PieDataSet object from the list of PieEntry objects
+                PieDataSet dataSet = new PieDataSet(entries, "Pie Chart");
+                pieChart_doc.setDrawEntryLabels(true);
+                pieChart_doc.setUsePercentValues(true);
+                pieChart_doc.setCenterText("Doctor Age Data");
+
+                // Set the colors of the slices in the chart
+                dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+
+                // Create a PieData object from the PieDataSet object
+                PieData data = new PieData(dataSet);
+
+                // Set the data of the PieChart object to the PieData object
+                pieChart_doc.setData(data);
+
+                pieChart_doc.setEntryLabelColor(Color.WHITE);
+
+                // Refresh the chart
+                pieChart_doc.invalidate();
             }
 
             @Override
