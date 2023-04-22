@@ -21,8 +21,6 @@ import edu.northeastern.team43.R;
 
 public class AdminHome extends AppCompatActivity {
 
-    private Button pat_state;
-
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     @SuppressLint("SetTextI18n")
@@ -58,6 +56,7 @@ public class AdminHome extends AppCompatActivity {
 
         Button pat_gender = (Button) findViewById(R.id.pat_gender_stats);
         Button age = (Button) findViewById(R.id.pat_age_stats);
+        Button states = (Button) findViewById(R.id.pat_state_stats);
 
         pat_gender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +74,13 @@ public class AdminHome extends AppCompatActivity {
             }
         });
 
+        states.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), StateStats.class);
+                startActivity(intent);
+            }
+        });
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
         getWindow().setStatusBarColor(ContextCompat.getColor(AdminHome.this,R.color.darkbluelatest));
     }
