@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="280dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.55">
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/adminim"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -47,15 +47,15 @@
                     android:elevation="@dimen/_30sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/welcome_msg" />
+                    app:layout_constraintTop_toBottomOf="@+id/welcome_msg" />-->
 
                 <TextView
                     android:id="@+id/welcome_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/darkbluelatest"
-                    android:textSize="16sp"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,68 +67,59 @@
                 android:id="@+id/logout_button"
                 android:layout_width="76dp"
                 android:layout_height="67dp"
-                android:layout_marginStart="116dp"
+                android:layout_marginStart="170dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
                 app:srcCompat="@drawable/ic_launcher_logout_foreground" />
 
-            <ImageView
-                android:id="@+id/profile"
-                android:layout_width="73dp"
-                android:layout_height="71dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="112dp"
-                android:stateListAnimator="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-                app:srcCompat="@drawable/ic_launcher_profilepic_foreground" />
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="1dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="24dp"
-                android:background="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/profile"
-                app:layout_constraintHorizontal_bias="0.393"
-                app:layout_constraintStart_toEndOf="@+id/logout_button"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pat_gender_stats"
-        android:layout_width="161dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="8dp"
-        android:text="Gender stats"
-        app:layout_constraintBottom_toTopOf="@+id/pat_state_stats"
+        android:layout_width="203dp"
+        android:layout_height="138dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/statspink"
+        android:backgroundTint="#EA4C89"
+        android:text="Gender \n metrics"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.58"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pat_state_stats"
-        android:layout_width="138dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="8dp"
-        android:text="State stats"
-        app:layout_constraintBottom_toTopOf="@+id/pat_age_stats"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="150dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/statspink"
+        android:backgroundTint="#273B69"
+        android:text="State \n metrics"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/pat_age_stats"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pat_gender_stats" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pat_age_stats"
-        android:layout_width="147dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="100dp"
-        android:text="Age stats"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="154dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/statspink"
+        android:backgroundTint="#273B69"
+        android:text="Age \n metrics"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.549"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/pat_gender_stats" />
 </androidx.constraintlayout.widget.ConstraintLayout>

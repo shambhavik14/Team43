@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,11 +26,21 @@ public class AdminHome extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+    ImageView adminImage;
+    @Override
+    public void onBackPressed() {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+    }
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_admin_home);
+
 
         TextView welcomeMsg= findViewById(R.id.welcome_msg);
         welcomeMsg.setText("Welcome Admin!");
@@ -47,11 +60,6 @@ public class AdminHome extends AppCompatActivity {
                 finish();
             });
         }
-        ImageView myProfileButton = findViewById(R.id.profile);
-        myProfileButton.setOnClickListener(v->{
-            Intent intent = new Intent(AdminHome.this, DoctorEditProfile.class);
-            startActivity(intent);
-        });
 
 
         Button pat_gender = (Button) findViewById(R.id.pat_gender_stats);

@@ -2,12 +2,17 @@ package edu.northeastern.team43.project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -41,7 +46,11 @@ public class AgeStats extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_age_stats);
+
 
         pieChart_pat = findViewById(R.id.pie_pat_age);
         pieChart_doc = findViewById(R.id.pie_doc_age);
@@ -86,25 +95,33 @@ public class AgeStats extends AppCompatActivity {
                 entries.add(new PieEntry(ageRanges[4], "51+"));
 
                 // Create a PieDataSet object from the list of PieEntry objects
-                PieDataSet dataSet = new PieDataSet(entries, "Pie Chart");
-                pieChart_pat.setDrawEntryLabels(true);
-                pieChart_pat.setUsePercentValues(true);
-                pieChart_pat.setCenterText("Patient Age Data");
-
+                PieDataSet dataSet = new PieDataSet(entries, "");
                 // Set the colors of the slices in the chart
                 dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                pieChart_pat.setDrawEntryLabels(true);
+                //pieChart_pat.setUsePercentValues(true);
+                pieChart_pat.setCenterText("Patient Age Data");
 
-
-                // Create a PieData object from the PieDataSet object
                 PieData data = new PieData(dataSet);
-
-                // Set the data of the PieChart object to the PieData object
                 pieChart_pat.setData(data);
+                Legend legend = pieChart_pat.getLegend();
+                legend.setTextSize(14f);
 
+                legend.setTextColor(Color.WHITE);
+
+                legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+                legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+
+                pieChart_pat.getDescription().setEnabled(false);
+                pieChart_pat.setExtraOffsets(5, 10, 5, 5);
+                pieChart_pat.setDragDecelerationFrictionCoef(0.95f);
+                pieChart_pat.setDrawHoleEnabled(true);
+                pieChart_pat.setHoleColor(Color.WHITE);
+                pieChart_pat.setTransparentCircleRadius(61f);
                 pieChart_pat.setEntryLabelColor(Color.WHITE);
-
-                // Refresh the chart
+                pieChart_pat.setEntryLabelTextSize(12f);
                 pieChart_pat.invalidate();
+
             }
 
             @Override
@@ -143,24 +160,32 @@ public class AgeStats extends AppCompatActivity {
                 entries.add(new PieEntry(ageRanges[2], "41-50"));
 
                 // Create a PieDataSet object from the list of PieEntry objects
-                PieDataSet dataSet = new PieDataSet(entries, "Pie Chart");
+                PieDataSet dataSet = new PieDataSet(entries, "");
+                // Set the colors of the slices in the chart
+                dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
                 pieChart_doc.setDrawEntryLabels(true);
                 pieChart_doc.setUsePercentValues(true);
                 pieChart_doc.setCenterText("Doctor Age Data");
-
-                // Set the colors of the slices in the chart
-                dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-
-
-                // Create a PieData object from the PieDataSet object
                 PieData data = new PieData(dataSet);
-
-                // Set the data of the PieChart object to the PieData object
                 pieChart_doc.setData(data);
 
-                pieChart_doc.setEntryLabelColor(Color.WHITE);
+                Legend legend = pieChart_doc.getLegend();
 
-                // Refresh the chart
+                legend.setTextSize(14f);
+                legend.setTextColor(Color.WHITE);
+
+                legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+                legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+
+                pieChart_doc.getDescription().setEnabled(false);
+                pieChart_doc.setExtraOffsets(5, 10, 5, 5);
+                pieChart_doc.setDragDecelerationFrictionCoef(0.95f);
+                pieChart_doc.setDrawHoleEnabled(true);
+                pieChart_doc.setHoleColor(Color.WHITE);
+                pieChart_doc.setTransparentCircleRadius(61f);
+                pieChart_doc.setEntryLabelColor(Color.WHITE);
+                pieChart_doc.setEntryLabelTextSize(12f);
+                //pieChart_doc.setDrawEntryLabels(true);
                 pieChart_doc.invalidate();
             }
 
@@ -169,6 +194,8 @@ public class AgeStats extends AppCompatActivity {
 
             }
         });
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.blue)));
+        //getWindow().setStatusBarColor(ContextCompat.getColor(AgeStats.this,R.color.blue));
 
     }
 

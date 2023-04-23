@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#273B69"
+    android:background="@color/white"
     tools:context=".project.Activity_Recommendation">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:backgroundTint="#FFEB3B"
         android:orientation="vertical">
-
 
 
         <TextView
@@ -23,7 +23,7 @@
             android:padding="20dp"
             android:text="Take a step Today..."
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="#06304b"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -32,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="15dp"
-            android:background="@drawable/dochomeback">
+            android:background="@drawable/activityback"
+            android:backgroundTint="#06304b">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,17 +41,18 @@
                 android:onClick="openMusicApp"
                 android:padding="25dp"
                 android:text="Escape with your favorite tracks"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
-            
+                android:textColor="#E9ECED"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Open App"
+                android:layout_alignParentBottom="true"
                 android:background="#00000000"
                 android:padding="20dp"
-                android:textColor="@color/black"
-                android:layout_alignParentBottom="true"/>
+                android:text="Open App"
+                android:textColor="@color/white" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -58,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="15dp"
-            android:background="@drawable/dochomeback">
+            android:background="@drawable/activityback"
+            android:backgroundTint="#63AED6">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,17 +69,18 @@
                 android:onClick="openMediApp"
                 android:padding="25dp"
                 android:text="Take a few minutes to meditate"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textColor="#E3EAEF"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Open App"
+                android:layout_alignParentBottom="true"
                 android:background="#00000000"
-                android:textColor="@color/black"
                 android:padding="20dp"
-                android:layout_alignParentBottom="true"/>
+                android:text="Open App"
+                android:textColor="@color/black" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -84,7 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="15dp"
-            android:background="@drawable/dochomeback">
+            android:background="@drawable/activityback"
+            android:backgroundTint="#DD823C">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,17 +97,18 @@
                 android:onClick="openListApp"
                 android:padding="25dp"
                 android:text="Embrace your day, conquer your to-do list"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textColor="#F6F7F8"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Open App"
+                android:layout_alignParentBottom="true"
                 android:background="#00000000"
-                android:textColor="@color/black"
                 android:padding="20dp"
-                android:layout_alignParentBottom="true"/>
+                android:text="Open App"
+                android:textColor="@color/black" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -110,7 +116,8 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="15dp"
-            android:background="@drawable/dochomeback">
+            android:background="@drawable/activityback"
+            android:backgroundTint="#FFCC32">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,19 +125,19 @@
                 android:onClick="openJournalApp"
                 android:padding="25dp"
                 android:text="Put pen to paper, and let your thoughts fly free."
-                android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textColor="#246293"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Open App"
-                android:textColor="@color/black"
+                android:layout_alignParentBottom="true"
                 android:background="#00000000"
                 android:padding="20dp"
-                android:layout_alignParentBottom="true"/>
+                android:text="Open App"
+                android:textColor="@color/black" />
         </RelativeLayout>
-
 
 
     </LinearLayout>
