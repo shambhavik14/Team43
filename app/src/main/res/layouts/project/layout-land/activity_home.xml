@@ -239,7 +239,7 @@
         android:layout_marginTop="250dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="No matter how hard the past, you can always begin again  \n \n Jack Kornfield"
+        android:text="It is health that is the real wealth, and not pieces of gold and silver.  \n \n Mahatma Gandhi"
         android:textColor="#273B69"
         android:textSize="20sp"
         android:textStyle="bold"
