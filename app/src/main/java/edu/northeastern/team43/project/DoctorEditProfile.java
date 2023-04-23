@@ -370,27 +370,6 @@ public class DoctorEditProfile extends AppCompatActivity {
 
 
     }
-    private boolean validateEmailAndPassword(String email, String password){
-        boolean isValid = true;
-
-        if (password==null || password.isEmpty() || password.length()<6){
-            isValid = false;
-            Dialog dialog = new Dialog(DoctorEditProfile.this);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.setContentView(R.layout.error_dialog);
-            TextView errorTextView = dialog.findViewById(R.id.error_msg);
-            errorTextView.setText("Password is incorrect.\n\n Password should be atleast 8 characters");
-            errorTextView.setTextSize(20);
-            errorTextView.setHeight(190);
-            dialog.show();
-            Button closeButton = dialog.findViewById(R.id.cancel_button);
-            closeButton.setOnClickListener(v1->{
-                dialog.dismiss();
-            });
-        }
-        return isValid;
-
-    }
     private boolean isDigit(String password){
         for (int i=0;i<password.length();i++){
             if (!Character.isDigit(password.charAt(i))){

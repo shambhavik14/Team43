@@ -119,7 +119,6 @@ public class Chat extends AppCompatActivity {
                                     while (iterator.hasNext()){
                                         PatientModel pm = iterator.next().getValue(PatientModel.class);
                                         if (pm.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-//                                            pm.setMostRecentMsgDate(currentDate);
                                             databaseReference.child("patients").child(pm.getPatientId()).child("mostRecentMsgDate").setValue(currentDate);
                                         }
                                     }
@@ -190,7 +189,8 @@ public class Chat extends AppCompatActivity {
             });
         }
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.darkbluelatest)));
+        getSupportActionBar().hide();
+        getWindow().setStatusBarColor(ContextCompat.getColor(Chat.this,R.color.darkbluelatest));
 
     }
 

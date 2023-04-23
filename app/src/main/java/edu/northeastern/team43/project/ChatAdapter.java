@@ -71,13 +71,6 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-//        ChatModel chatModel=messagesArrayList.get(position);
-//        if(holder.getClass()==SenderViewHolder.class){
-//            SenderViewHolder viewHolder= (SenderViewHolder) holder;
-//            viewHolder.txtsenderMessage.setText(chatModel.getMessage());
-//        }
-//        ReceiverViewHolder viewHolder= (ReceiverViewHolder) holder;
-//        viewHolder.txtreceiverMessage.setText(chatModel.getMessage());
 
         ChatModel chatModel=messagesArrayList.get(position);
         if(chatModel.getSenderEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){

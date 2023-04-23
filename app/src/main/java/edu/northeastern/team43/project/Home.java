@@ -47,7 +47,6 @@ public class Home extends AppCompatActivity {
     DatabaseReference databaseReference;
     ImageView patientImage;
 
-    boolean isDoctor = false;
     @Override
     public void onBackPressed() {
         FirebaseAuth.getInstance().signOut();

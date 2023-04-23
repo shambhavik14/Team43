@@ -143,8 +143,6 @@ public class PatientGenderStats extends AppCompatActivity {
                 PieDataSet dataSet = new PieDataSet(entries,"");
                 // Set the colors of the slices in the chart
                 dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-                //pieChart_doc.setDrawEntryLabels(true);
-                //pieChart_doc.setUsePercentValues(true);
 
                 pieChart_doc.setCenterText("Doctor Gender Data");
                 PieData data = new PieData(dataSet);
@@ -165,7 +163,6 @@ public class PatientGenderStats extends AppCompatActivity {
                 pieChart_doc.setTransparentCircleRadius(61f);
                 pieChart_doc.setEntryLabelColor(Color.WHITE);
                 pieChart_doc.setEntryLabelTextSize(12f);
-                //pieChart_doc.setDrawEntryLabels(true);
                 pieChart_doc.invalidate();
             }
 
@@ -174,7 +171,5 @@ public class PatientGenderStats extends AppCompatActivity {
 
             }
         });
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.blue)));
-        //getWindow().setStatusBarColor(ContextCompat.getColor(PatientGenderStats.this,R.color.blue));
     }
 }

@@ -56,16 +56,6 @@ public class Companion extends AppCompatActivity {
         finish();
     }
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_companion);
-        Button loginButton = findViewById(R.id.login_button);
-        TextView registerButton = findViewById(R.id.signupText);
-        loginButton.setOnClickListener(v->{
-            Intent intent = new Intent(getApplicationContext(), Login.class);
-            startActivity(intent);
-        });*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -92,7 +92,6 @@ public class StateStats extends AppCompatActivity {
                 pieChart_pat.setTransparentCircleRadius(61f);
                 pieChart_pat.setEntryLabelColor(Color.WHITE);
                 pieChart_pat.setEntryLabelTextSize(12f);
-                //pieChart_pat.setDrawEntryLabels(true);
                 pieChart_pat.invalidate();
 
             }

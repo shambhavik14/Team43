@@ -161,7 +161,6 @@ public class DoctorHome extends AppCompatActivity {
         builder.setAutoCancel(true);
         builder.setSmallIcon(R.drawable.bob);
         builder.setContentText(msg);
-//        Bitmap largeIcon = null;
         Thread thread = new Thread(new Runnable() {
 
             @Override

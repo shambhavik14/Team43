@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -39,11 +38,6 @@ public class SearchPatientAdapter extends RecyclerView.Adapter<SearchPatientAdap
             name=itemView.findViewById(R.id.doctorName);
             chatButton=itemView.findViewById(R.id.chatButton);
             profilePic = itemView.findViewById(R.id.chat_profile_pic);
-
-
-
-
-
         }
 
     }
@@ -65,7 +59,6 @@ public class SearchPatientAdapter extends RecyclerView.Adapter<SearchPatientAdap
         holder.chatButton.setOnClickListener(v->{
             Intent intent = new Intent(context, Chat.class);
             intent.putExtra("chatwithuser",patObj);
-//            Toast.makeText(context, "" + patObj.getName(), Toast.LENGTH_SHORT).show();
             context.startActivity(intent);
         });
 

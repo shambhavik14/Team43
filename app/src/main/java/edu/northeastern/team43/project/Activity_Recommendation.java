@@ -38,21 +38,17 @@ public class Activity_Recommendation extends AppCompatActivity {
         if(launchIntent != null) {
             startActivity(launchIntent);
         }else {
-            //Toast.makeText(Activity_Recommendation.this, "There is no package", Toast.LENGTH_LONG).show();
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://play.google.com/store/apps/details?id=com.spotify.music&hl=en_US")));
         }
     }
 
     public void openMediApp(View view) {
-        //Intent intent = new Intent(Activity_Recommendation.this, Music_Activity.class);
-        //startActivity(intent);
         Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.getsomeheadspace.android");
 
         if(launchIntent != null) {
             startActivity(launchIntent);
         }else {
-            //Toast.makeText(Activity_Recommendation.this, "There is no package", Toast.LENGTH_LONG).show();
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://play.google.com/store/apps/details?id=com.getsomeheadspace.android&hl=en_US")));
         }
@@ -64,15 +60,12 @@ public class Activity_Recommendation extends AppCompatActivity {
         if(launchIntent != null) {
             startActivity(launchIntent);
         }else {
-            //Toast.makeText(Activity_Recommendation.this, "There is no package", Toast.LENGTH_LONG).show();
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://play.google.com/store/apps/details?id=com.todoist&hl=en_US")));
         }
     }
 
     public void openJournalApp(View view) {
-        //Intent intent = new Intent(Activity_Recommendation.this, Music_Activity.class);
-        //startActivity(intent);
         Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.northstar.gratitude");
 
         if(launchIntent != null) {
@@ -82,26 +75,4 @@ public class Activity_Recommendation extends AppCompatActivity {
                     Uri.parse("https://play.google.com/store/apps/details?id=com.northstar.gratitude&hl=en_US")));
         }
     }
-
-        /*meditatebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Activity_Recommendation.this, Music_Activity.class);
-                startActivity(intent);
-            }
-        });
-        todobtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Activity_Recommendation.this, Music_Activity.class);
-                startActivity(intent);
-            }
-        });
-        chatbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Activity_Recommendation.this, Music_Activity.class);
-                startActivity(intent);
-            }
-        });*/
 }

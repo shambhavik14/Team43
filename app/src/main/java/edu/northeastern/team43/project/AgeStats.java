@@ -99,7 +99,6 @@ public class AgeStats extends AppCompatActivity {
                 // Set the colors of the slices in the chart
                 dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
                 pieChart_pat.setDrawEntryLabels(true);
-                //pieChart_pat.setUsePercentValues(true);
                 pieChart_pat.setCenterText("Patient Age Data");
 
                 PieData data = new PieData(dataSet);
@@ -185,7 +184,6 @@ public class AgeStats extends AppCompatActivity {
                 pieChart_doc.setTransparentCircleRadius(61f);
                 pieChart_doc.setEntryLabelColor(Color.WHITE);
                 pieChart_doc.setEntryLabelTextSize(12f);
-                //pieChart_doc.setDrawEntryLabels(true);
                 pieChart_doc.invalidate();
             }
 
@@ -194,8 +192,6 @@ public class AgeStats extends AppCompatActivity {
 
             }
         });
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.blue)));
-        //getWindow().setStatusBarColor(ContextCompat.getColor(AgeStats.this,R.color.blue));
 
     }
 

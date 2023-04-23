@@ -65,7 +65,11 @@ public class PatientRegistrationActivity extends AppCompatActivity {
     ImageView profilePicture;
 
     String profilePictureFirebasePath = "https://firebasestorage.googleapis.com/v0/b/team43-d5a15.appspot.com/o/images%2Ffda5ec56-55e6-47c3-a463-7f25acba0f1c?alt=media&token=d7f381a7-1628-4cf5-b4ae-aa4e6ed82fd5";
-
+    @Override
+    public void onBackPressed() {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
