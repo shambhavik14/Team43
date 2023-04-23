@@ -65,7 +65,7 @@ public class SearchPatientActivity extends AppCompatActivity {
                 while (iterator.hasNext()){
                     DoctorModel doctorModel = iterator.next().getValue(DoctorModel.class);
                     if (doctorModel.getEmail().equalsIgnoreCase(firebaseAuth.getCurrentUser().getEmail())){
-                        loggedInUserName.setText(doctorModel.getName());
+                        loggedInUserName.setText("Dr. "+doctorModel.getName());
                         Glide.with(getApplicationContext()).load(doctorModel.getProfilePicture()).circleCrop().into(loggedInUserImage);
                     }
                 }

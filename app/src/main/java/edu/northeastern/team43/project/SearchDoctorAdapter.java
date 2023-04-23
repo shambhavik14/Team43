@@ -63,7 +63,7 @@ public class SearchDoctorAdapter extends RecyclerView.Adapter<SearchDoctorAdapte
         DoctorModel docObj= doctorObject.get(position);
         Log.println(Log.DEBUG, "", docObj.getName());
         Glide.with(context).load(docObj.getProfilePicture()).circleCrop().into(holder.profilePic);
-        holder.name.setText(docObj.getName());
+        holder.name.setText("Dr. "+docObj.getName());
         holder.chatButton.setOnClickListener(v->{
             Intent intent = new Intent(context, Chat.class);
             intent.putExtra("chatwithuser",docObj);
