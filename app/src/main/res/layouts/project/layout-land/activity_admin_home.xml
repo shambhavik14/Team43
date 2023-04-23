@@ -100,7 +100,9 @@
             android:id="@+id/pat_state_stats"
             android:layout_width="150dp"
             android:layout_height="190dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="40dp"
             android:background="@drawable/statspink"
             android:backgroundTint="#273B69"
             android:text="State \n metrics"
@@ -108,7 +110,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/pat_age_stats"
-            app:layout_constraintHorizontal_bias="0.254"
+            app:layout_constraintHorizontal_bias="0.168"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pat_gender_stats" />
 
@@ -116,8 +118,9 @@
             android:id="@+id/pat_age_stats"
             android:layout_width="150dp"
             android:layout_height="190dp"
+            android:layout_marginStart="100dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="68dp"
+            android:layout_marginEnd="40dp"
             android:background="@drawable/statspink"
             android:backgroundTint="#273B69"
             android:text="Age \n metrics"
@@ -125,6 +128,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pat_state_stats"
             app:layout_constraintTop_toBottomOf="@+id/pat_gender_stats" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
